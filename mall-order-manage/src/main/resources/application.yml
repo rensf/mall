@@ -1,0 +1,36 @@
+server:
+  port: 8821
+
+spring:
+  application:
+    name: mall-order-manage
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+  devtools:
+    livereload:
+      port: 35741
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/mall?serverTimezone=GMT%2B8&characterEncoding=utf-8
+    username: root
+    password: '263661'
+
+eureka:
+  client:
+    enabled: true
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8810/eureka/
+    instance:
+      prefer-ip-address: true
+      lease-renewal-interval-in-seconds: 10
+      lease-expiration-duration-in-seconds: 30
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com.sys.mall_product_manage: debug
