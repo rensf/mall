@@ -1,9 +1,13 @@
-package com.sys.mall_product_manage.common;
+package com.sys.product.common;
 
 import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * @author rensf
+ * @param <T>
+ */
 @Data
 public class Result<T> implements Serializable {
 

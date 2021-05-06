@@ -1,4 +1,4 @@
-package com.sys.mall_product_manage.config;
+package com.sys.product.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
@@ -7,8 +7,10 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * @author rensf
+ */
 @Configuration
-@MapperScan("com.sys.mall_product_manage.mapper")
 public class MybatisPlusConfig {
 
     @Bean

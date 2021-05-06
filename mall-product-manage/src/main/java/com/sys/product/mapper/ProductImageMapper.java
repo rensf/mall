@@ -1,12 +1,15 @@
-package com.sys.mall_product_manage.mapper;
+package com.sys.product.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.sys.mall_product_manage.entity.ProductImage;
+import com.sys.product.entity.ProductImage;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
+/**
+ * @author rensf
+ */
 @Mapper
+@Repository
 public interface ProductImageMapper extends BaseMapper<ProductImage> {
-
-
 
 }

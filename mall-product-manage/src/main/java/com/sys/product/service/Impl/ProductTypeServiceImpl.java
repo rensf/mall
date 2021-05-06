@@ -1,12 +1,13 @@
-package com.sys.mall_product_manage.service.Impl;
+package com.sys.product.service.Impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.sys.mall_product_manage.entity.ProductType;
-import com.sys.mall_product_manage.mapper.ProductTypeMapper;
-import com.sys.mall_product_manage.service.IProductTypeService;
-import com.sys.mall_product_manage.util.GenerateID;
+import com.sys.product.entity.ProductType;
+import com.sys.product.mapper.ProductTypeMapper;
+import com.sys.product.service.IProductTypeService;
+import com.sys.product.util.GenerateID;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,12 +16,19 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author rensf
+ */
 @Service
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, ProductType> implements IProductTypeService {
 
-    @Resource
     private ProductTypeMapper typeMapper;
+
+    @Autowired
+    public ProductTypeServiceImpl(ProductTypeMapper typeMapper) {
+        this.typeMapper = typeMapper;
+    }
 
     @Override
     public List<Map> queryProductTypeList(JSONObject param) {

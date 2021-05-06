@@ -1,4 +1,4 @@
-package com.sys.mall_product_manage.util;
+package com.sys.product.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -6,9 +6,12 @@ import com.alibaba.fastjson.JSONObject;
 import java.util.Iterator;
 import java.util.Map;
 
-public class ToJO {
+/**
+ * @author rensf
+ */
+public class ToJson {
 
-    public static JSONObject toJO(Map map) {
+    public static JSONObject toJson(Map map) {
         if (map.isEmpty()) {
             return JSON.parseObject(map.toString());
         }

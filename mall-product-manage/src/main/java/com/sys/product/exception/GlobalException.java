@@ -1,7 +1,10 @@
-package com.sys.mall_product_manage.exception;
+package com.sys.product.exception;
 
 import lombok.Data;
 
+/**
+ * @author rensf
+ */
 @Data
 public class GlobalException extends Exception {
 

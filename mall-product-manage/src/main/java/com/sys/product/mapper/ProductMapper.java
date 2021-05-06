@@ -1,15 +1,25 @@
-package com.sys.mall_product_manage.mapper;
+package com.sys.product.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.sys.mall_product_manage.entity.Product;
+import com.sys.product.entity.Product;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
+/**
+ * @author rensf
+ */
 @Mapper
+@Repository
 public interface ProductMapper extends BaseMapper<Product> {
 
+    /**
+     * @options 分页查询产品列表
+     * @param page
+     * @return
+     */
     @Select("SELECT \n" +
             "  a.*,\n" +
             "  GROUP_CONCAT(c.`product_type_id`) AS `typeId`,\n" +

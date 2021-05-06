@@ -1,45 +1,50 @@
-package com.sys.mall_product_manage.service.Impl;
+package com.sys.product.service.Impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.sys.mall_product_manage.config.MyPropsConfig;
-import com.sys.mall_product_manage.entity.Product;
-import com.sys.mall_product_manage.entity.ProductImage;
-import com.sys.mall_product_manage.entity.RProductType;
-import com.sys.mall_product_manage.mapper.ProductImageMapper;
-import com.sys.mall_product_manage.mapper.ProductMapper;
-import com.sys.mall_product_manage.mapper.RProductTypeMapper;
-import com.sys.mall_product_manage.service.IProductService;
-import com.sys.mall_product_manage.util.GenerateID;
+import com.sys.product.config.MyPropsConfig;
+import com.sys.product.entity.Product;
+import com.sys.product.entity.ProductImage;
+import com.sys.product.entity.BrProductType;
+import com.sys.product.mapper.ProductImageMapper;
+import com.sys.product.mapper.ProductMapper;
+import com.sys.product.mapper.BrProductTypeMapper;
+import com.sys.product.service.IProductService;
+import com.sys.product.util.GenerateID;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author rensf
+ */
 @Service
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements IProductService {
 
-    @Resource
     private ProductMapper productMapper;
-
-    @Resource
-    private RProductTypeMapper rProductTypeMapper;
-
-    @Resource
+    private BrProductTypeMapper brProductTypeMapper;
     private ProductImageMapper productImageMapper;
-
-    @Resource
     private MyPropsConfig props;
+
+    @Autowired
+    public ProductServiceImpl(ProductMapper productMapper, BrProductTypeMapper brProductTypeMapper, ProductImageMapper productImageMapper, MyPropsConfig props) {
+        this.productMapper = productMapper;
+        this.brProductTypeMapper = brProductTypeMapper;
+        this.productImageMapper = productImageMapper;
+        this.props = props;
+    }
 
     @Override
     public IPage<Product> queryProductListByPage(Page page) {
@@ -86,23 +91,34 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         if (!newFile.exists()) {
             newFile.mkdir();
         }
-        FileOutputStream fileOutputStream = new FileOutputStream(newFile + "/" + newName );
+        FileOutputStream fileOutputStream = new FileOutputStream(newFile + "/" + newName);
         fileOutputStream.write(image.getBytes());
         fileOutputStream.close();
         return newName;
     }
 
+    @Override
+    public Integer deleteProductImage(String imageName) {
+        File file = new File(props.getFilepath() + imageName);
+        file.delete();
+        UpdateWrapper<ProductImage> uw = new UpdateWrapper<>();
+        uw.eq("product_image", imageName);
+        ProductImage productImage = new ProductImage();
+        productImage.setFlag(0);
+        return productImageMapper.update(productImage, uw);
+    }
+
     private void insertRProductType(Product product) {
         Map cond = new HashMap();
         cond.put("product_id", product.getProductId());
-        rProductTypeMapper.deleteByMap(cond);
+        brProductTypeMapper.deleteByMap(cond);
         String[] typeIds = product.getTypeIds();
         for (String typeId : typeIds) {
-            RProductType rProductType = new RProductType();
-            rProductType.setProductTypeId(GenerateID.generateID());
-            rProductType.setProductId(product.getProductId());
-            rProductType.setProductTypeId(typeId);
-            rProductTypeMapper.insert(rProductType);
+            BrProductType brProductType = new BrProductType();
+            brProductType.setProductTypeId(GenerateID.generateID());
+            brProductType.setProductId(product.getProductId());
+            brProductType.setProductTypeId(typeId);
+            brProductTypeMapper.insert(brProductType);
         }
     }
 

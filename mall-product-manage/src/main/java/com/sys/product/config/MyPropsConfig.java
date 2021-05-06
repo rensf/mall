@@ -1,4 +1,4 @@
-package com.sys.mall_product_manage.config;
+package com.sys.product.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

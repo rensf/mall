@@ -1,4 +1,4 @@
-package com.sys.mall_product_manage.util;
+package com.sys.product.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
