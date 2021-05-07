@@ -33,3 +33,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### 文件目录 ###
+./file
