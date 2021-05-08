@@ -4,6 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
+/**
+ * @author rensf
+ */
 public class GenerateID {
 
     public synchronized static String generateID() {

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +41,17 @@ public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, Produ
     public Integer addProductType(ProductType type) {
         type.setProductTypeId(GenerateID.generateID());
         return typeMapper.insert(type);
+    }
+
+    @Override
+    public Integer updateProductType(ProductType type) {
+        return typeMapper.updateById(type);
+    }
+
+    @Override
+    public Integer deleteProductType(ProductType type) {
+        type.setFlag(0);
+        return typeMapper.updateById(type);
     }
 
 }

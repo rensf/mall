@@ -1,10 +1,12 @@
 package com.sys.product.mapper;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sys.product.entity.Product;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -16,11 +18,14 @@ import org.springframework.stereotype.Repository;
 public interface ProductMapper extends BaseMapper<Product> {
 
     /**
-     * @options 分页查询产品列表
+     * 分页查询产品列表
+     *
      * @param page
+     * @param param
      * @return
      */
-    @Select("SELECT \n" +
+    @Select("<script>" +
+            "SELECT \n" +
             "  a.*,\n" +
             "  GROUP_CONCAT(c.`product_type_id`) AS `typeId`,\n" +
             "  GROUP_CONCAT(c.`type_name`) AS `typeName`,\n" +
@@ -43,7 +48,12 @@ public interface ProductMapper extends BaseMapper<Product> {
             "    AND e.`flag` = 1 \n" +
             "    AND e.`image_position` IS NULL \n" +
             "WHERE a.`flag` = 1 \n" +
-            "GROUP BY a.`product_id`")
-    IPage<Product> queryProductListByPage(Page page);
+            "<if test='param.productName != null'> \n" +
+            "    AND a.`product_name` LIKE CONCAT('%', #{param.productName}, '%') \n" +
+            "</if> \n" +
+            "GROUP BY a.`product_id` \n" +
+            "ORDER BY a.`product_first` DESC \n" +
+            "</script>")
+    IPage<Product> queryProductListByPage(Page page, @Param("param") JSONObject param);
 
 }

@@ -7,7 +7,7 @@ import com.sys.product.entity.Product;
 import com.sys.product.entity.ProductType;
 import com.sys.product.service.IProductService;
 import com.sys.product.service.IProductTypeService;
-import com.sys.product.util.ToJO;
+import com.sys.product.util.ToJson;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,13 +39,8 @@ public class ProductController {
     @GetMapping("/queryProductList")
     @ApiOperation("查询产品列表")
     public Result queryProductList(@RequestParam Map param) {
-        JSONObject jsonParam = ToJO.toJO(param);
-        Page page = new Page();
-        page.setCurrent(jsonParam.getLong("current"));
-        page.setTotal(jsonParam.getLong("total"));
-        page.setSize(jsonParam.getLong("size"));
         Result result = new Result();
-        result.setResult(productService.queryProductListByPage(page));
+        result.setResult(productService.queryProductListByPage(param));
         return result;
     }
 
@@ -69,7 +64,7 @@ public class ProductController {
     @ApiOperation("查询产品类型列表")
     public Result queryProductTypeList(@RequestParam Map param) {
         Result result = new Result();
-        result.setResult(productTypeService.queryProductTypeList(ToJO.toJO(param)));
+        result.setResult(productTypeService.queryProductTypeList(ToJson.toJson(param)));
         return result;
     }
 
@@ -78,6 +73,22 @@ public class ProductController {
     public Result addProductType(@RequestBody ProductType type) {
         Result result = new Result();
         result.setResult(productTypeService.addProductType(type));
+        return result;
+    }
+
+    @PutMapping("/updateProductType")
+    @ApiOperation("更新产品类型")
+    public Result updateProductType(@RequestBody ProductType type) {
+        Result result = new Result();
+        result.setResult(productTypeService.updateProductType(type));
+        return result;
+    }
+
+    @DeleteMapping("/deleteProductType")
+    @ApiOperation("删除产品类型")
+    public Result deleteProductType(@RequestBody ProductType type) {
+        Result result = new Result();
+        result.setResult(productTypeService.deleteProductType(type));
         return result;
     }
 
@@ -102,4 +113,5 @@ public class ProductController {
         result.setResult(productService.deleteProductImage(imageName));
         return result;
     }
+
 }

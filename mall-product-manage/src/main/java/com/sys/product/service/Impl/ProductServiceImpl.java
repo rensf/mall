@@ -1,5 +1,7 @@
 package com.sys.product.service.Impl;
 
+import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -13,6 +15,7 @@ import com.sys.product.mapper.ProductMapper;
 import com.sys.product.mapper.BrProductTypeMapper;
 import com.sys.product.service.IProductService;
 import com.sys.product.util.GenerateID;
+import com.sys.product.util.ToJson;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,8 +50,13 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     @Override
-    public IPage<Product> queryProductListByPage(Page page) {
-        IPage<Product> products = productMapper.queryProductListByPage(page);
+    public IPage<Product> queryProductListByPage(Map param) {
+        JSONObject jsonParam = ToJson.toJson(param);
+        Page page = new Page();
+        page.setCurrent(jsonParam.getLong("current"));
+        page.setTotal(jsonParam.getLong("total"));
+        page.setSize(jsonParam.getLong("size"));
+        IPage<Product> products = productMapper.queryProductListByPage(page, jsonParam);
         return products;
     }
 

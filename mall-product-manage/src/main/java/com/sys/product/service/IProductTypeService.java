@@ -27,4 +27,18 @@ public interface IProductTypeService extends IService<ProductType> {
      */
     Integer addProductType(ProductType type);
 
+    /**
+     * 更新产品类型
+     * @param type
+     * @return
+     */
+    Integer updateProductType(ProductType type);
+
+    /**
+     * 删除产品类型
+     * @param type
+     * @return
+     */
+    Integer deleteProductType(ProductType type);
+
 }
