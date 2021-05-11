@@ -8,10 +8,11 @@
         <groupId>com.sys</groupId>
         <version>0.0.1</version>
     </parent>
-    <artifactId>mall-order-manage</artifactId>
+    <groupId>com.sys</groupId>
+    <artifactId>mall-user-manage</artifactId>
     <version>0.0.1</version>
-    <name>mall-order-manage</name>
-    <description>mall-order-manage</description>
+    <name>mall-user-manage</name>
+    <description>mall-user-manage</description>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

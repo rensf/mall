@@ -1,13 +1,17 @@
-package com.sys.mall_order_manage.common;
+package com.sys.user.common;
 
 import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * @author rensf
+ * @date 2021/5/10 15:05
+ */
 @Data
 public class Result<T> implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -2745446929478111425L;
 
     private String code = "0";
 
@@ -23,5 +27,5 @@ public class Result<T> implements Serializable {
         result.setMsg(msg);
         return result;
     }
-
+    
 }

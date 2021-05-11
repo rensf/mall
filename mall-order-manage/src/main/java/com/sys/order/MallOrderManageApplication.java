@@ -1,13 +1,16 @@
-package com.sys.mall_order_manage;
+package com.sys.order;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 
+/**
+ * @author rensf
+ */
 @SpringBootApplication
 @EnableEurekaClient
-@MapperScan("com.sys.mall_order_manage.mapper")
+@EnableOpenApi
 public class MallOrderManageApplication {
 
     public static void main(String[] args) {

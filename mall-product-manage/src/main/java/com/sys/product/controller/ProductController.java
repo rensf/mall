@@ -1,7 +1,5 @@
 package com.sys.product.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sys.product.common.Result;
 import com.sys.product.entity.Product;
 import com.sys.product.entity.ProductType;
