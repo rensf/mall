@@ -24,6 +24,7 @@ spring:
       pool-name: UserHikariCP
       max-lifetime: 1800000
       connection-timeout: 30000
+      
 eureka:
   client:
     enabled: true

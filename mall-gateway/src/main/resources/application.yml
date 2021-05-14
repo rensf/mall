@@ -14,10 +14,26 @@ spring:
   cloud:
     gateway:
       routes:
+        - id: config
+          uri: http://127.0.0.1:8812
+          predicates:
+            - Path=/config/**
         - id: product
           uri: http://127.0.0.1:8820
           predicates:
             - Path=/product/**
+        - id: order
+          uri: http://127.0.0.1:8821
+          predicates:
+            - Path=/order/**
+        - id: user
+          uri: http://127.0.0.1:8822
+          predicates:
+            - Path=/user/**
+        - id: stock
+          uri: http://127.0.0.1:8823
+          predicates:
+            - Path=/stock/**
 
 eureka:
   client:

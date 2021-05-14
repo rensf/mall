@@ -1,4 +1,4 @@
-package com.sys.product.config;
+package com.sys.config.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,21 +13,21 @@ import springfox.documentation.swagger.web.UiConfigurationBuilder;
 
 /**
  * @author rensf
- * @date 2021/4/30 11:20
+ * @date 2021/5/12 18:04
  */
 @Configuration
 public class SwaggerConfig {
     @Bean
     public Docket getDocket() {
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("产品管理")
-                .description("产品管理相关接口描述")
+                .title("配置管理")
+                .description("配置管理相关接口描述")
                 .version("0.0.1")
                 .build();
         return new Docket(DocumentationType.OAS_30)
                 .apiInfo(apiInfo)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.sys.product.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.sys.config.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

@@ -1,18 +1,17 @@
 package com.sys.product.service.Impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sys.product.config.MyPropsConfig;
+import com.sys.product.entity.BrProductType;
 import com.sys.product.entity.Product;
 import com.sys.product.entity.ProductImage;
-import com.sys.product.entity.BrProductType;
+import com.sys.product.mapper.BrProductTypeMapper;
 import com.sys.product.mapper.ProductImageMapper;
 import com.sys.product.mapper.ProductMapper;
-import com.sys.product.mapper.BrProductTypeMapper;
 import com.sys.product.service.IProductService;
 import com.sys.product.util.GenerateID;
 import com.sys.product.util.ToJson;
@@ -52,12 +51,11 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     @Override
     public IPage<Product> queryProductListByPage(Map param) {
         JSONObject jsonParam = ToJson.toJson(param);
-        Page page = new Page();
+        Page<Product> page = new Page<>();
         page.setCurrent(jsonParam.getLong("current"));
         page.setTotal(jsonParam.getLong("total"));
         page.setSize(jsonParam.getLong("size"));
-        IPage<Product> products = productMapper.queryProductListByPage(page, jsonParam);
-        return products;
+        return productMapper.queryProductListByPage(page, jsonParam);
     }
 
     @Override
@@ -68,14 +66,14 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     @Override
     public Integer addProduct(Product product) {
         product.setProductId(GenerateID.generateID());
-        insertRProductType(product);
+        insertBrProductType(product);
         insertProductImage(product);
         return productMapper.insert(product);
     }
 
     @Override
     public Integer updateProduct(Product product) {
-        insertRProductType(product);
+        insertBrProductType(product);
         insertProductImage(product);
         return productMapper.updateById(product);
     }
@@ -116,7 +114,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         return productImageMapper.update(productImage, uw);
     }
 
-    private void insertRProductType(Product product) {
+    private void insertBrProductType(Product product) {
         Map cond = new HashMap();
         cond.put("product_id", product.getProductId());
         brProductTypeMapper.deleteByMap(cond);

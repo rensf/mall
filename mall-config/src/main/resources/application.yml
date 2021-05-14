@@ -11,6 +11,18 @@ spring:
   devtools:
     livereload:
       port: 35732
+  profiles:
+    active: jdbc
+  cloud:
+    config:
+      server:
+        jdbc:
+          sql: SELECT `key`, `value` FROM td_sys_config WHERE `flag` = 1 AND `application` = ? AND `profile` = ? AND `label` = ?
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/mall?serverTimezone=GMT%2B8&characterEncoding=utf-8
+    username: root
+    password: '263661'
 
 eureka:
   client:
@@ -21,3 +33,8 @@ eureka:
       prefer-ip-address: true
       lease-renewal-interval-in-seconds: 10
       lease-expiration-duration-in-seconds: 30
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
