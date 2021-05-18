@@ -1,2 +1,60 @@
 server:
   port: 8823
+
+spring:
+  application:
+    name: mall-stock-manage
+  redis:
+    host: 127.0.0.1
+    prot: 6379
+    password: 123456
+  devtools:
+    livereload:
+      port: 35743
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${mysql-url}/mall?serverTimezone=GMT%2B8&characterEncoding=utf-8
+    username: root
+    password: 263661
+    hikari:
+      # 最小空闲连接数
+      minimum-idle: 5
+      # 连接允许空闲最大时间
+      idle-timeout: 180000
+      # 连接池最大连接数，包括使用和空闲
+      maximum-pool-size: 10
+      # 连接自动提交
+      auto-commit: true
+      # 连接池名称
+      pool-name: ProductHikariCP
+      # 池中连接最长生命周期
+      max-lifetime: 1800000
+      # 数据库连接超时时间
+      connection-timeout: 30000
+  # springboot2.4版本配置文件加载升级，传统方法引入 spring-cloud-starter-bootstrap，
+  # 在 bootstrap.yml文件中加载 spring-cloud-config 配置，以下为
+  config:
+    import: optional:configserver:http://localhost:8812/
+  cloud:
+    config:
+      profile: dev
+      label: master
+
+eureka:
+  client:
+    enabled: true
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8810/eureka/
+      instance:
+        prefer-ip-address: true
+        lease-renewal-interval-in-seconds: 10
+        lease-expiration-duration-in-seconds: 30
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
+
+logging:
+  level:
+    com.sys.mall_product_manage: debug
