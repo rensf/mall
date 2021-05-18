@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: mall-stock-manage
+  profiles:
+    active: dev
   redis:
     host: 127.0.0.1
     prot: 6379
@@ -34,11 +36,17 @@ spring:
   # springboot2.4版本配置文件加载升级，传统方法引入 spring-cloud-starter-bootstrap，
   # 在 bootstrap.yml文件中加载 spring-cloud-config 配置，以下为
   config:
-    import: optional:configserver:http://localhost:8812/
+    import: optional:configserver:http://127.0.0.1:8812/
   cloud:
     config:
       profile: dev
       label: master
+    bus:
+      trace:
+        enabled: true
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
 
 eureka:
   client:

@@ -23,6 +23,9 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/mall?serverTimezone=GMT%2B8&characterEncoding=utf-8
     username: root
     password: '263661'
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
 
 eureka:
   client:
@@ -38,3 +41,9 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: busrefresh
