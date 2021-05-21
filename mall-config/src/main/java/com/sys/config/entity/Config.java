@@ -27,12 +27,12 @@ public class Config implements Serializable {
     /**
      * 键
      */
-    private String config_key;
+    private String configKey;
 
     /**
      * 值
      */
-    private String config_value;
+    private String configValue;
 
     /**
      * 系统名称

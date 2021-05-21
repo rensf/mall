@@ -46,7 +46,6 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigMapper, Config> impleme
         page.setTotal(jsonParam.getLong("total"));
         page.setCurrent(jsonParam.getLong("current"));
         QueryWrapper<Config> qw = new QueryWrapper<>();
-        qw.select("id", "config_key", "config_value", "application", "profile", "label", "flag");
         qw.eq("flag", 1);
         qw.like(jsonParam.getString("application") != null, "application", jsonParam.getString("application"));
         return configMapper.selectPage(page, qw);
