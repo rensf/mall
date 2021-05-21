@@ -1,4 +1,4 @@
-package com.sys.product.service.Impl;
+package com.sys.product.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;

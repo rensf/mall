@@ -17,7 +17,7 @@ spring:
     config:
       server:
         jdbc:
-          sql: SELECT `key`, `value` FROM td_sys_config WHERE `flag` = 1 AND `application` = ? AND `profile` = ? AND `label` = ?
+          sql: SELECT `config_key`, `config_value` FROM td_sys_config WHERE `flag` = 1 AND `application` = ? AND `profile` = ? AND `label` = ?
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/mall?serverTimezone=GMT%2B8&characterEncoding=utf-8
@@ -40,7 +40,10 @@ eureka:
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
+
+logging:
+  level:
+    com.sys.config: debug
 
 management:
   endpoints:

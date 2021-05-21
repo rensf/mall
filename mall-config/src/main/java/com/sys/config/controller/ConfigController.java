@@ -35,6 +35,14 @@ public class ConfigController {
         return result;
     }
 
+    @PostMapping("/addConfig")
+    @ApiOperation("添加配置")
+    public Result<Integer> addConfig(@RequestBody Config config) {
+        Result<Integer> result = new Result<>();
+        result.setResult(configService.addConfig(config));
+        return result;
+    }
+
     @PutMapping("/updateConfig")
     @ApiOperation("更新配置信息")
     public Result<Integer> updateConfig(@RequestBody Config config) {
@@ -48,6 +56,14 @@ public class ConfigController {
     public Result<Integer> deleteConfig(@RequestBody Config config) {
         Result<Integer> result = new Result<>();
         result.setResult(configService.deleteConfig(config));
+        return result;
+    }
+
+    @GetMapping("/refreshConfig")
+    @ApiOperation("刷新配置信息")
+    public Result<Integer> refreshConfig() {
+        Result<Integer> result = new Result<>();
+        result.setResult(configService.refreshConfig(null));
         return result;
     }
 

@@ -20,6 +20,13 @@ public interface IConfigService extends IService<Config> {
     IPage<Config> queryConfigListByPage(Map param);
 
     /**
+     * 添加配置
+     * @param config
+     * @return
+     */
+    Integer addConfig(Config config);
+
+    /**
      * 更新配置信息
      * @param config
      * @return
@@ -32,5 +39,12 @@ public interface IConfigService extends IService<Config> {
      * @return
      */
     Integer deleteConfig(Config config);
+
+    /**
+     * 刷新配置信息
+     * @param application
+     * @return
+     */
+    Integer refreshConfig(String application);
 
 }
