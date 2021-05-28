@@ -69,7 +69,7 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigMapper, Config> impleme
 
     @Override
     public Integer refreshConfig(String application) {
-        StringBuffer url = new StringBuffer("http://127.0.0.1:8812/actuator/busrefresh/");
+        StringBuilder url = new StringBuilder("http://127.0.0.1:8812/actuator/busrefresh/");
         if (null != application && !application.isEmpty()) {
             url.append(application);
         }

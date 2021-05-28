@@ -17,6 +17,7 @@
         <module>mall-order-manage</module>
         <module>mall-user-manage</module>
         <module>mall-stock-manage</module>
+        <module>mall-system-manage</module>
     </modules>
     <groupId>com.sys</groupId>
     <artifactId>mall</artifactId>

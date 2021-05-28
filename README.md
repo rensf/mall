@@ -1,6 +1,12 @@
 _求职_
-# 后台项目架构
-## 注册中心（Eureka） 
-## 配置中心（SpringCloudConfig）
-## 网关（SpringCloudGateway）
-## 数据库（MySQL）
+
+## 系统模块
+#### 系统管理（8824）
+#### 用户管理（8822）
+#### 产品管理（8820）
+#### 订单管理（8821）
+#### 库存管理（8823）
+#### 注册中心（Eureka）（8810）
+#### 配置中心（SpringCloudConfig）（8812）
+#### 网关（SpringCloudGateway）（8811）
+--ps：系统使用lombok简化代码
