@@ -19,4 +19,10 @@ public interface IOrderService extends IService<Order> {
      */
     IPage<Order> queryOrderListByPage(Map param);
 
+    /**
+     * 添加订单
+     * @param order
+     * @return
+     */
+    Integer addOrder(Order order);
 }

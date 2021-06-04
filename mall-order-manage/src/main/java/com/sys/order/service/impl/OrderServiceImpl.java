@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sys.order.entity.Order;
 import com.sys.order.mapper.OrderMapper;
 import com.sys.order.service.IOrderService;
+import com.sys.order.util.GenerateID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -30,6 +31,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Override
     public IPage<Order> queryOrderListByPage(Map param) {
         return null;
+    }
+
+    @Override
+    public Integer addOrder(Order order) {
+        order.setOrderId(GenerateID.generateID());
+        return orderMapper.insert(order);
     }
 
 }

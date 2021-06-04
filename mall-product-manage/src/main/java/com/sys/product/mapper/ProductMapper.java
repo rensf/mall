@@ -29,8 +29,8 @@ public interface ProductMapper extends BaseMapper<Product> {
             "  a.*,\n" +
             "  GROUP_CONCAT(c.`product_type_id`) AS `typeId`,\n" +
             "  GROUP_CONCAT(c.`type_name`) AS `typeName`,\n" +
-            "  GROUP_CONCAT(d.`product_image`) AS `homeImage`,\n" +
-            "  GROUP_CONCAT(e.`product_image`) AS `image`\n" +
+            "  GROUP_CONCAT(DISTINCT d.`product_image`) AS `homeImage`,\n" +
+            "  GROUP_CONCAT(DISTINCT e.`product_image`) AS `image`\n" +
             "FROM\n" +
             "  td_b_product a \n" +
             "  LEFT JOIN tr_b_product_type b \n" +
