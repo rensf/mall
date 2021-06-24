@@ -1,6 +1,6 @@
 package com.sys.user.controller;
 
-import com.sys.user.common.Result;
+import com.sys.common.vo.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -18,6 +18,7 @@
         <module>mall-user-manage</module>
         <module>mall-stock-manage</module>
         <module>mall-system-manage</module>
+        <module>mall-common</module>
     </modules>
     <groupId>com.sys</groupId>
     <artifactId>mall</artifactId>
@@ -72,6 +73,11 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
             <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sys</groupId>
+            <artifactId>mall-common</artifactId>
+            <version>0.0.1</version>
         </dependency>
     </dependencies>
     <dependencyManagement>

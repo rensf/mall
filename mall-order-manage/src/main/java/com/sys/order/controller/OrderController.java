@@ -1,6 +1,6 @@
 package com.sys.order.controller;
 
-import com.sys.order.common.Result;
+import com.sys.common.vo.Result;
 import com.sys.order.service.IOrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

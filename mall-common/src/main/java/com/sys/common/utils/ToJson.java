@@ -1,4 +1,4 @@
-package com.sys.product.util;
+package com.sys.common.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -8,6 +8,7 @@ import java.util.Map;
 
 /**
  * @author rensf
+ * @date 2021/6/24 17:55
  */
 public class ToJson {
 

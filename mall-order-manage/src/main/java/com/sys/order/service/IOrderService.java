@@ -3,7 +3,9 @@ package com.sys.order.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sys.order.entity.Order;
+import com.sys.order.entity.OrderProduct;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,9 +22,23 @@ public interface IOrderService extends IService<Order> {
     IPage<Order> queryOrderListByPage(Map param);
 
     /**
+     * 根据订单 Id查询订单详情
+     * @return
+     */
+    List<OrderProduct> queryOrderProductByOrderId();
+
+    /**
      * 添加订单
      * @param order
      * @return
      */
     Integer addOrder(Order order);
+
+    /**
+     * 修改订单状态
+     * @param status
+     * @return
+     */
+    Integer updateOrderStatus(Integer status);
+
 }

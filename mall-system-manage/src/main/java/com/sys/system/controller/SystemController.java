@@ -1,6 +1,6 @@
 package com.sys.system.controller;
 
-import com.sys.system.common.Result;
+import com.sys.common.vo.Result;
 import com.sys.system.entity.Admin;
 import com.sys.system.service.IAdminService;
 import io.swagger.annotations.Api;

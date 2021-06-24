@@ -1,4 +1,4 @@
-package com.sys.user.util;
+package com.sys.common.utils;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
@@ -6,11 +6,11 @@ import java.security.MessageDigest;
 
 /**
  * @author rensf
- * @date 2021/6/4 10:46
+ * @date 2021/5/21 16:30
  */
 public class Md5Encode {
 
-    private static final String SECRET_KEY = "user";
+    private static final String SECRET_KEY = "system";
 
     private static String encryption(String str) throws Exception {
         MessageDigest md = MessageDigest.getInstance("MD5");

@@ -1,4 +1,4 @@
-package com.sys.product.util;
+package com.sys.common.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -6,6 +6,7 @@ import java.util.Random;
 
 /**
  * @author rensf
+ * @date 2021/5/10 9:23
  */
 public class GenerateID {
 

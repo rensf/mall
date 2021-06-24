@@ -1,4 +1,4 @@
-package com.sys.user.service.impl;
+package com.sys.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sys.user.entity.User;
@@ -11,6 +11,10 @@ import java.util.List;
  */
 public interface IUserService extends IService<User> {
 
+    /**
+     * 查询详细地址通过用户ID
+     * @return
+     */
     List queryAddressByUserId();
 
 }

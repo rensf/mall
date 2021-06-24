@@ -2,12 +2,12 @@ package com.sys.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.sys.common.utils.GenerateID;
+import com.sys.common.utils.Md5Encode;
 import com.sys.system.entity.Admin;
 import com.sys.system.exception.GlobalException;
 import com.sys.system.mapper.AdminMapper;
 import com.sys.system.service.IAdminService;
-import com.sys.system.util.GenerateID;
-import com.sys.system.util.Md5Encode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

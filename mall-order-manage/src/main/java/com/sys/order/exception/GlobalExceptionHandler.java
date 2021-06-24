@@ -1,6 +1,6 @@
 package com.sys.order.exception;
 
-import com.sys.order.common.Result;
+import com.sys.common.vo.Result;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;

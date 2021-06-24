@@ -1,6 +1,6 @@
 package com.sys.product.controller;
 
-import com.sys.product.common.Result;
+import com.sys.common.vo.Result;
 import com.sys.product.entity.Product;
 import com.sys.product.entity.ProductType;
 import com.sys.product.service.IProductService;
