@@ -27,6 +27,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author rensf
@@ -49,12 +50,14 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     @Override
-    public IPage<Product> queryProductListByPage(Map param) {
+    public IPage<Product> queryProductListByPage(Map<String, Object> param) {
         JSONObject jsonParam = ToJson.toJson(param);
         Page<Product> page = new Page<>();
-        page.setCurrent(jsonParam.getLong("current"));
-        page.setTotal(jsonParam.getLong("total"));
-        page.setSize(jsonParam.getLong("size"));
+        if (Objects.nonNull(jsonParam.getLong("current")) && Objects.nonNull(jsonParam.getLong("total")) && Objects.nonNull(jsonParam.getLong("size"))) {
+            page.setCurrent(jsonParam.getLong("current"));
+            page.setTotal(jsonParam.getLong("total"));
+            page.setSize(jsonParam.getLong("size"));
+        }
         return productMapper.queryProductListByPage(page, jsonParam);
     }
 

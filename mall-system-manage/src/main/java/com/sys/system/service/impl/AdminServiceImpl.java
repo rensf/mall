@@ -2,10 +2,10 @@ package com.sys.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.sys.common.exception.GlobalException;
 import com.sys.common.utils.GenerateID;
 import com.sys.common.utils.Md5Encode;
 import com.sys.system.entity.Admin;
-import com.sys.system.exception.GlobalException;
 import com.sys.system.mapper.AdminMapper;
 import com.sys.system.service.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
             admin.setPassword("");
             return admin;
         } else {
-            throw new GlobalException("10001", "密码错误！");
+            throw new GlobalException("10001", "用户名或密码错误！");
         }
     }
 

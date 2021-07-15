@@ -11,6 +11,8 @@ spring:
   devtools:
     livereload:
       port: 35740
+    restart:
+      enabled: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/mall?serverTimezone=GMT%2B8&characterEncoding=utf-8

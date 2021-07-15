@@ -1,11 +1,12 @@
 package com.sys.product.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.sys.common.utils.ToJson;
 import com.sys.common.vo.Result;
 import com.sys.product.entity.Product;
 import com.sys.product.entity.ProductType;
 import com.sys.product.service.IProductService;
 import com.sys.product.service.IProductTypeService;
-import com.sys.product.util.ToJson;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,24 +37,24 @@ public class ProductController {
 
     @GetMapping("/queryProductList")
     @ApiOperation("查询产品列表")
-    public Result queryProductList(@RequestParam Map param) {
-        Result result = new Result();
+    public Result<?> queryProductList(@RequestParam Map<String, Object> param) throws Exception {
+        Result<IPage<Product>> result = new Result<>();
         result.setResult(productService.queryProductListByPage(param));
         return result;
     }
 
     @PostMapping("/addProduct")
     @ApiOperation("添加产品")
-    public Result addProduct(@RequestBody Product product) {
-        Result result = new Result();
+    public Result<Integer> addProduct(@RequestBody Product product) {
+        Result<Integer> result = new Result<>();
         result.setResult(productService.addProduct(product));
         return result;
     }
 
     @PutMapping("/updateProduct")
     @ApiOperation("更新产品信息")
-    public Result updateProduct(@RequestBody Product product) {
-        Result result = new Result();
+    public Result<Integer> updateProduct(@RequestBody Product product) {
+        Result<Integer> result = new Result<>();
         result.setResult(productService.updateProduct(product));
         return result;
     }

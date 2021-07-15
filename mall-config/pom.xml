@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.sys</groupId>
     <artifactId>mall-config</artifactId>
-    <version>1.0.0</version>
+    <version>0.0.1</version>
     <name>mall-config</name>
     <description>mall-config</description>
     <dependencies>
@@ -38,6 +38,11 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sys</groupId>
+            <artifactId>mall-common</artifactId>
+            <version>0.0.1</version>
         </dependency>
     </dependencies>
 

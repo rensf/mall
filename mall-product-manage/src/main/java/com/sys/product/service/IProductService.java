@@ -22,7 +22,7 @@ public interface IProductService extends IService<Product> {
      * @param param
      * @return
      */
-    IPage<Product> queryProductListByPage(Map param);
+    IPage<Product> queryProductListByPage(Map<String, Object> param);
 
     /**
      * 查询产品列表
