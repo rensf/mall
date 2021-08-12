@@ -1,6 +1,7 @@
 package com.sys.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.sys.common.exception.GlobalException;
 import com.sys.user.entity.Address;
 import com.sys.user.entity.User;
 
@@ -23,10 +24,20 @@ public interface IUserService extends IService<User> {
 
     /**
      * 二维码扫描登录
-     * @param response
+     * @param qrcodeId
+     * @param userId
      * @return
      */
-    User loginByQrcode(HttpServletResponse response);
+    String loginByQrcode(String qrcodeId, String userId);
+
+    /**
+     * 用户名密码登录
+     * @param userName
+     * @param password
+     * @return
+     * @throws GlobalException
+     */
+    User loginByNormal(String userName, String password) throws GlobalException;
 
     /**
      * 分页查询用户列表

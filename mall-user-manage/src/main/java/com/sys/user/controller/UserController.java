@@ -1,6 +1,10 @@
 package com.sys.user.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.sys.common.exception.GlobalException;
+import com.sys.common.utils.OperateToken;
 import com.sys.common.vo.Result;
+import com.sys.user.entity.User;
 import com.sys.user.service.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,17 +34,23 @@ public class UserController {
 
     @GetMapping("/loginByNormal")
     @ApiOperation("用户名密码登录")
-    public Result loginByNormal() {
-        Result result = new Result();
-        return result;
+    public Result<Object> loginByNormal(String userName, String password) throws GlobalException {
+        User user = userService.loginByNormal(userName, password);
+        // 将用户信息放入json对象中
+        JSONObject object = new JSONObject();
+        object.put("token", OperateToken.generateToken(user.getUserId()));
+        object.put("userId", user.getUserId());
+        object.put("userName", user.getUserName());
+        object.put("userSex", user.getUserSex());
+        object.put("userTel", user.getUserTel());
+        object.put("userEmail", user.getUserEmail());
+        return Result.success(object);
     }
 
     @GetMapping("/generateQrcode")
     @ApiOperation("生成二维码")
-    public Result<String> generateQrcode() throws IOException {
-        Result<String> result = new Result<>();
-        result.setResult(userService.generateQrcode());
-        return result;
+    public Result<Object> generateQrcode() throws IOException {
+        return Result.success(userService.generateQrcode());
     }
 
     @GetMapping("/loginByQrcode")

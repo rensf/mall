@@ -4,7 +4,10 @@ import cn.hutool.core.codec.Base64;
 import cn.hutool.extra.qrcode.QrCodeUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.sys.common.exception.GlobalException;
 import com.sys.common.utils.GenerateID;
+import com.sys.common.utils.Md5Encode;
+import com.sys.common.utils.OperateToken;
 import com.sys.user.entity.Address;
 import com.sys.user.entity.User;
 import com.sys.user.mapper.AddressMapper;
@@ -22,6 +25,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -35,6 +40,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     private UserMapper userMapper;
     private AddressMapper addressMapper;
     private RedisTemplate redisTemplate;
+    /**
+     * 定时任务线程池，校验二维码是否过期
+     */
+    private static ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(5);
 
     @Autowired
     public UserServiceImpl(UserMapper userMapper, AddressMapper addressMapper, RedisTemplate redisTemplate) {
@@ -47,7 +56,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public String generateQrcode() throws IOException {
         String qrcodeId = GenerateID.generateID();
         // redis设置二维码过期时间
-        redisTemplate.expire(qrcodeId, 10 , TimeUnit.MINUTES);
+        redisTemplate.expire(qrcodeId, 10, TimeUnit.MINUTES);
         BufferedImage bufferedImage = QrCodeUtil.generate(qrcodeId, 100, 100);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         ImageIO.write(bufferedImage, "png", stream);
@@ -57,13 +66,41 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public User loginByQrcode(HttpServletResponse response) {
-        // 生成二维码id，根据二维码id生成二维码
-        // 传到前台展示
-        // 用户扫码，将用户id和二维码id绑定，用户登录成功
-        // 生成token，token保存入redis
-        // 将token回传到前台
+    public String loginByQrcode(String qrcodeId, String userId) {
+        // 用户扫码，将userId和qrcodeId传入后台，判断qrcodeId是否过期
+        boolean isExpire = redisTemplate.hasKey(qrcodeId);
+        if (isExpire) {
+            // 查询user表是否有记录
+            QueryWrapper<User> qw = new QueryWrapper<>();
+            qw.eq("userId", userId);
+            qw.eq("flag", 1);
+            User user = userMapper.selectOne(qw);
+            if (Objects.nonNull(user)) {
+
+            } else {
+
+            }
+            // 生成token，存入redis
+            String token = OperateToken.generateToken(userId);
+            // 将token和user传回前台，并进行页面跳转
+            return null;
+        } else {
+
+        }
         return null;
+    }
+
+    @Override
+    public User loginByNormal(String userName, String password) throws GlobalException {
+        QueryWrapper<User> qw = new QueryWrapper<>();
+        qw.eq("userName", userName);
+        qw.eq("flag", 1);
+        User user = userMapper.selectOne(qw);
+        if (Md5Encode.makePwd(userName, password).equals(user.getPassword())) {
+            return user;
+        } else {
+            throw new GlobalException("10000", "用户名或密码输入错误");
+        }
     }
 
     @Override

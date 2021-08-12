@@ -29,4 +29,9 @@ public class Result<T> implements Serializable {
         return result;
     }
 
+    public static Result<Object> success(Object o) {
+        Result<Object> result = new Result<>();
+        result.setResult(o);
+        return result;
+    }
 }
