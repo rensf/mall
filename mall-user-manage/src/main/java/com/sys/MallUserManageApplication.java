@@ -1,4 +1,4 @@
-package com.sys.system;
+package com.sys;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,15 +7,15 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 
 /**
  * @author rensf
- * @date 2021/5/21 11:24
+ * @date 2021/5/10 14:09
  */
 @SpringBootApplication
 @EnableEurekaClient
 @EnableOpenApi
-public class MallSystemManageApplication {
+public class MallUserManageApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MallSystemManageApplication.class, args);
+        SpringApplication.run(MallUserManageApplication.class, args);
     }
 
 }

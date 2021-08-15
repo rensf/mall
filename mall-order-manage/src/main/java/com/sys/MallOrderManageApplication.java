@@ -1,19 +1,20 @@
-package com.sys.common;
+package com.sys;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 
 /**
  * @author rensf
- * @date 2021/6/24 15:48
  */
 @SpringBootApplication
 @EnableEurekaClient
-public class MallCommonApplication {
+@EnableOpenApi
+public class MallOrderManageApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MallCommonApplication.class, args);
+        SpringApplication.run(MallOrderManageApplication.class, args);
     }
 
 }
