@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -93,13 +92,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public User loginByNormal(String userName, String password) throws GlobalException {
         QueryWrapper<User> qw = new QueryWrapper<>();
-        qw.eq("userName", userName);
+        qw.eq("user_name", userName);
         qw.eq("flag", 1);
         User user = userMapper.selectOne(qw);
-        if (Md5Encode.makePwd(userName, password).equals(user.getPassword())) {
-            return user;
+        if (Objects.isNull(user)) {
+            throw new GlobalException("10001", "用户不存在！");
         } else {
-            throw new GlobalException("10000", "用户名或密码输入错误");
+            if (Md5Encode.makePwd(userName, password).equals(user.getPassword())) {
+                return user;
+            } else {
+                throw new GlobalException("10000", "用户名或密码输入错误！");
+            }
         }
     }
 
