@@ -8,14 +8,16 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 
 /**
+ * 产品类型
  * @author rensf
+ * @date 2022/1/26 16:03
  */
 @Data
 @Component
 @TableName("td_b_product_type")
 public class ProductType implements Serializable {
 
-    private static final long serialVersionUID = 3132001759810561856L;
+    private static final long serialVersionUID = 3562971410681356941L;
 
     /**
      * ID
@@ -24,24 +26,24 @@ public class ProductType implements Serializable {
     private String productTypeId;
 
     /**
-     * 名称
+     * 产品类型名称
      */
-    private String typeName;
+    private String productTypeName;
 
     /**
-     * 详述
+     * 产品类型描述
      */
-    private String typeDetail;
+    private String productTypeDetail;
 
     /**
-     * 等级
+     *产品类型等级
      */
-    private String typeLevel;
+    private Integer productTypeLevel;
 
     /**
-     * 父级
+     * 父级产品类型ID
      */
-    private String typeParent;
+    private String productParentTypeId;
 
     /**
      * 生效标志

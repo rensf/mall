@@ -18,7 +18,7 @@ public interface IProductTypeService extends IService<ProductType> {
      * @param param
      * @return
      */
-    List<Map> queryProductTypeList(JSONObject param);
+    List<ProductType> queryProductTypeList(JSONObject param);
 
     /**
      * 添加产品类型

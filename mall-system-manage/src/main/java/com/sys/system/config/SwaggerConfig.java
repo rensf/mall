@@ -1,4 +1,4 @@
-package com.sys.order.config;
+package com.sys.system.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +11,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 /**
  * @author rensf
- * @date 2021/5/8 16:48
+ * @date 2022/3/23 17:09
  */
 @Configuration
 public class SwaggerConfig {
@@ -19,14 +19,14 @@ public class SwaggerConfig {
     @Bean
     public Docket getDocket() {
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("订单管理")
-                .description("订单管理相关接口描述")
+                .title("系统管理")
+                .description("系统管理相关接口描述")
                 .version("0.0.1")
                 .build();
         return new Docket(DocumentationType.OAS_30)
                 .apiInfo(apiInfo)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.sys.order.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.sys.system.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

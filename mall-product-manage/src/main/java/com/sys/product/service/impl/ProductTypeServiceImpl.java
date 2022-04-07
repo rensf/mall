@@ -30,8 +30,8 @@ public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, Produ
     }
 
     @Override
-    public List<Map> queryProductTypeList(JSONObject param) {
-        QueryWrapper qw = new QueryWrapper();
+    public List<ProductType> queryProductTypeList(JSONObject param) {
+        QueryWrapper<ProductType> qw = new QueryWrapper<>();
         qw.eq("flag", 1);
         qw.eq(param.getString("typeLevel") != null, "type_level", param.getString("typeLevel"));
         return typeMapper.selectList(qw);

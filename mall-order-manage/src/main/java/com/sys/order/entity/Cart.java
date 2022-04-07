@@ -2,7 +2,6 @@ package com.sys.order.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.sys.product.entity.Product;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +14,6 @@ import java.util.List;
  */
 @Data
 @Component
-@TableName("td_b_cart")
 public class Cart implements Serializable {
 
     private static final long serialVersionUID = 8191680091595709705L;
@@ -26,19 +24,8 @@ public class Cart implements Serializable {
     private String cartId;
 
     /**
-     * 用户ID
-     */
-    private String userId;
-
-    /**
-     * 生效标志
-     */
-    private Integer flag = 1;
-
-    /**
      * 购物车产品列表
      */
-    @TableField(exist = false)
-    private List<Product> productList;
+    private List<CartProduct> productList;
 
 }

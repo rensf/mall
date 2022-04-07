@@ -16,9 +16,14 @@ public class OperateToken {
      */
     private static final long EXPIRE_TIME = 30 * 60 * 1000;
 
-    public static synchronized String generateToken(String userId) {
+    /**
+     * 生成Token
+     * @param id
+     * @return
+     */
+    public static synchronized String generateToken(String id) {
         Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
-        return JWT.create().withExpiresAt(date).sign(Algorithm.HMAC256(userId));
+        return JWT.create().withExpiresAt(date).sign(Algorithm.HMAC256(id));
     }
 
     public static String refreshToken() {

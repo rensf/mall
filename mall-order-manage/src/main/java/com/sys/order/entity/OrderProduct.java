@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 @Data
 @Component
-@TableName("td_b_order_product")
+@TableName("tr_b_order_product")
 public class OrderProduct implements Serializable {
 
     private static final long serialVersionUID = -6143703231552744819L;

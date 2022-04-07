@@ -25,35 +25,39 @@ public interface ProductMapper extends BaseMapper<Product> {
      * @return
      */
     @Select("<script>" +
-            "SELECT \n" +
-            "  a.*,\n" +
-            "  GROUP_CONCAT(c.`product_type_id`) AS `typeId`,\n" +
-            "  GROUP_CONCAT(c.`type_name`) AS `typeName`,\n" +
-            "  GROUP_CONCAT(DISTINCT d.`product_image`) AS `homeImage`,\n" +
-            "  GROUP_CONCAT(DISTINCT e.`product_image`) AS `image`\n" +
-            "FROM\n" +
-            "  td_b_product a \n" +
-            "  LEFT JOIN tr_b_product_type b \n" +
-            "    ON a.`product_id` = b.`product_id` \n" +
-            "    AND b.`flag` = 1 \n" +
-            "  LEFT JOIN td_b_product_type c \n" +
-            "    ON b.`product_type_id` = c.`product_type_id` \n" +
-            "    AND c.`flag` = 1 \n" +
-            "  LEFT JOIN td_b_product_image d \n" +
-            "    ON a.`product_id` = d.`product_id` \n" +
-            "    AND d.`flag` = 1 \n" +
-            "    AND d.`image_position` = 'home' \n" +
-            "  LEFT JOIN td_b_product_image e \n" +
-            "    ON a.`product_id` = e.`product_id` \n" +
-            "    AND e.`flag` = 1 \n" +
-            "    AND e.`image_position` IS NULL \n" +
-            "WHERE a.`flag` = 1 \n" +
-            "<if test='param.productName != null'> \n" +
-            "    AND a.`product_name` LIKE CONCAT('%', #{param.productName}, '%') \n" +
-            "</if> \n" +
-            "GROUP BY a.`product_id` \n" +
-            "ORDER BY a.`product_first` DESC \n" +
+            "select " +
+            "a.*, " +
+            "group_concat(c.product_type_id) as typeId, " +
+            "group_concat(c.product_type_name) as typeName, " +
+            "group_concat(distinct d.product_image) as homeImage, " +
+            "group_concat(distinct e.product_image) as image " +
+            "from " +
+            "td_b_product a " +
+            "left join tr_b_product_product_type b " +
+            "on " +
+            "a.product_id = b.product_id " +
+            "and b.flag = 1 " +
+            "left join td_b_product_type c " +
+            "on " +
+            "b.product_type_id = c.product_type_id " +
+            "and c.flag = 1 " +
+            "left join td_b_product_image d " +
+            "on " +
+            "a.product_id = d.product_id " +
+            "and d.flag = 1 " +
+            "and d.image_position = 'home' " +
+            "left join td_b_product_image e " +
+            "on " +
+            "a.product_id = e.product_id " +
+            "and e.flag = 1 " +
+            "and e.image_position is null " +
+            "where " +
+            "a.flag = 1 " +
+            "group by " +
+            "a.product_id " +
+            "order by " +
+            "a.product_id desc " +
             "</script>")
-    IPage<Product> queryProductListByPage(Page page, @Param("param") JSONObject param);
+    IPage<Product> queryProductListByPage(Page<Product> page, @Param("param") JSONObject param);
 
 }

@@ -51,4 +51,10 @@ public interface IUserService extends IService<User> {
      */
     List<Address> queryAddressByUserId(User user);
 
+    /**
+     * 新建用户
+     * @param user
+     * @return
+     */
+    Integer addUser(User user);
 }

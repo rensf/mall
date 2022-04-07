@@ -1,15 +1,18 @@
 package com.sys.system.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 /**
  * @author rensf
  * @date 2021/5/21 11:51
  */
 @Data
-@TableName("td_b_admin")
+@Component
+@TableName("td_sys_admin")
 public class Admin {
 
     /**
@@ -18,14 +21,34 @@ public class Admin {
     @TableId
     private String adminId;
 
+    /**
+     * 管理员姓名
+     */
     private String adminName;
 
+    /**
+     * 密码
+     */
     private String password;
 
+    /**
+     * 管理员手机号
+     */
     private String adminTel;
 
+    /**
+     * 管理员邮箱
+     */
     private String adminEmail;
 
+    /**
+     * 生效标志
+     */
     private Integer flag = 1;
 
+    /**
+     * token
+     */
+    @TableField(exist = false)
+    private String token;
 }

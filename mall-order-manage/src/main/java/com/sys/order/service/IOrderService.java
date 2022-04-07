@@ -41,4 +41,11 @@ public interface IOrderService extends IService<Order> {
      */
     Integer updateOrderStatus(Integer status);
 
+    /**
+     * 抢购订单
+     * @param order
+     * @return
+     */
+    Integer grabOrder(Order order);
+
 }

@@ -22,7 +22,7 @@ public class Config implements Serializable {
      * ID
      */
     @TableId
-    private String id;
+    private String configId;
 
     /**
      * 键

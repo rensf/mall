@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -61,32 +62,32 @@ public class ProductController {
 
     @GetMapping("/queryProductTypeList")
     @ApiOperation("查询产品类型列表")
-    public Result queryProductTypeList(@RequestParam Map param) {
-        Result result = new Result();
-        result.setResult(productTypeService.queryProductTypeList(ToJson.toJson(param)));
+    public Result<List<ProductType>> queryProductTypeList(@RequestParam Map<String, Object> param) {
+        Result<List<ProductType>> result = new Result<>();
+        result.setResult(productTypeService.queryProductTypeList(ToJson.mapToJson(param)));
         return result;
     }
 
     @PostMapping("/addProductType")
     @ApiOperation("添加产品类型")
-    public Result addProductType(@RequestBody ProductType type) {
-        Result result = new Result();
+    public Result<Integer> addProductType(@RequestBody ProductType type) {
+        Result<Integer> result = new Result<>();
         result.setResult(productTypeService.addProductType(type));
         return result;
     }
 
     @PutMapping("/updateProductType")
     @ApiOperation("更新产品类型")
-    public Result updateProductType(@RequestBody ProductType type) {
-        Result result = new Result();
+    public Result<Integer> updateProductType(@RequestBody ProductType type) {
+        Result<Integer> result = new Result<>();
         result.setResult(productTypeService.updateProductType(type));
         return result;
     }
 
     @DeleteMapping("/deleteProductType")
     @ApiOperation("删除产品类型")
-    public Result deleteProductType(@RequestBody ProductType type) {
-        Result result = new Result();
+    public Result<Integer> deleteProductType(@RequestBody ProductType type) {
+        Result<Integer> result = new Result<>();
         result.setResult(productTypeService.deleteProductType(type));
         return result;
     }

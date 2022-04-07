@@ -12,15 +12,19 @@ import java.util.Map;
  */
 public class ToJson {
 
-    public static JSONObject toJson(Map map) {
+    /**
+     * Map转换JSONObject
+     * [Key必须是String或其子类]
+     * @param map
+     * @return
+     */
+    public static JSONObject mapToJson(Map<String, Object> map) {
         if (map.isEmpty()) {
             return JSON.parseObject(map.toString());
         }
         JSONObject json = new JSONObject();
-        Iterator it = map.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry entry = (Map.Entry) it.next();
-            json.put(entry.getKey().toString(), entry.getValue());
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            json.put(entry.getKey(), entry.getValue());
         }
         return json;
     }

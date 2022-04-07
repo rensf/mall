@@ -36,5 +36,9 @@ public class OrderController {
     public Result queryOrder() {
         return null;
     }
+
+    @PostMapping("/grabOrder")
+    @ApiOperation("抢购订单")
+    public Result grabOrder() { return null; }
     
 }

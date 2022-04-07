@@ -8,12 +8,14 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sys.common.utils.GenerateID;
 import com.sys.common.utils.ToJson;
 import com.sys.product.config.MyPropsConfig;
-import com.sys.product.entity.BrProductType;
 import com.sys.product.entity.Product;
 import com.sys.product.entity.ProductImage;
-import com.sys.product.mapper.BrProductTypeMapper;
+import com.sys.product.entity.ProductProductType;
+import com.sys.product.entity.ProductType;
 import com.sys.product.mapper.ProductImageMapper;
 import com.sys.product.mapper.ProductMapper;
+import com.sys.product.mapper.ProductProductTypeMapper;
+import com.sys.product.mapper.ProductTypeMapper;
 import com.sys.product.service.IProductService;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,21 +39,21 @@ import java.util.Objects;
 public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements IProductService {
 
     private ProductMapper productMapper;
-    private BrProductTypeMapper brProductTypeMapper;
+    private ProductProductTypeMapper productProductTypeMapper;
     private ProductImageMapper productImageMapper;
     private MyPropsConfig props;
 
     @Autowired
-    public ProductServiceImpl(ProductMapper productMapper, BrProductTypeMapper brProductTypeMapper, ProductImageMapper productImageMapper, MyPropsConfig props) {
+    public ProductServiceImpl(ProductMapper productMapper, ProductProductTypeMapper productProductTypeMapper, ProductImageMapper productImageMapper, MyPropsConfig props) {
         this.productMapper = productMapper;
-        this.brProductTypeMapper = brProductTypeMapper;
+        this.productProductTypeMapper = productProductTypeMapper;
         this.productImageMapper = productImageMapper;
         this.props = props;
     }
 
     @Override
     public IPage<Product> queryProductListByPage(Map<String, Object> param) {
-        JSONObject jsonParam = ToJson.toJson(param);
+        JSONObject jsonParam = ToJson.mapToJson(param);
         Page<Product> page = new Page<>();
         if (Objects.nonNull(jsonParam.getLong("current")) && Objects.nonNull(jsonParam.getLong("total")) && Objects.nonNull(jsonParam.getLong("size"))) {
             page.setCurrent(jsonParam.getLong("current"));
@@ -69,14 +71,14 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     @Override
     public Integer addProduct(Product product) {
         product.setProductId(GenerateID.generateID());
-        insertBrProductType(product);
+        insertProductProductType(product);
         insertProductImage(product);
         return productMapper.insert(product);
     }
 
     @Override
     public Integer updateProduct(Product product) {
-        insertBrProductType(product);
+        insertProductProductType(product);
         insertProductImage(product);
         return productMapper.updateById(product);
     }
@@ -117,22 +119,22 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         return productImageMapper.update(productImage, uw);
     }
 
-    private void insertBrProductType(Product product) {
-        Map cond = new HashMap();
+    private void insertProductProductType(Product product) {
+        Map<String, Object> cond = new HashMap<>();
         cond.put("product_id", product.getProductId());
-        brProductTypeMapper.deleteByMap(cond);
+        productProductTypeMapper.deleteByMap(cond);
         String[] typeIds = product.getTypeIds();
         for (String typeId : typeIds) {
-            BrProductType brProductType = new BrProductType();
-            brProductType.setProductTypeId(GenerateID.generateID());
-            brProductType.setProductId(product.getProductId());
-            brProductType.setProductTypeId(typeId);
-            brProductTypeMapper.insert(brProductType);
+            ProductProductType productProductType = new ProductProductType();
+            productProductType.setProductTypeId(GenerateID.generateID());
+            productProductType.setProductId(product.getProductId());
+            productProductType.setProductTypeId(typeId);
+            productProductTypeMapper.insert(productProductType);
         }
     }
 
     private void insertProductImage(Product product) {
-        Map cond = new HashMap();
+        Map<String, Object> cond = new HashMap<>();
         cond.put("product_id", product.getProductId());
         productImageMapper.deleteByMap(cond);
         String[] images = product.getImages();

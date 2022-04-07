@@ -46,6 +46,11 @@ public class User {
     private Integer userSex;
 
     /**
+     * 购物车ID
+     */
+    private String cartId;
+
+    /**
      * 生效标志
      */
     private Integer flag = 1;

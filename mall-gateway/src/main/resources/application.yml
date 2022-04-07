@@ -34,6 +34,12 @@ spring:
           uri: http://127.0.0.1:8823
           predicates:
             - Path=/stock/**
+        - id: system
+          uri: http://127.0.0.1:8824
+          predicates:
+            - Path=/system/**
+      default-filters:
+        - StripPrefix=1
 
 eureka:
   client:

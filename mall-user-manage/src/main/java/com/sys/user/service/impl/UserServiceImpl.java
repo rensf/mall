@@ -121,4 +121,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return addressMapper.selectList(qw);
     }
 
+    @Override
+    public Integer addUser(User user) {
+        user.setUserId(GenerateID.generateID());
+        return userMapper.insert(user);
+    }
+
 }

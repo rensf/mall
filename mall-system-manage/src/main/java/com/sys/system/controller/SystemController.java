@@ -5,11 +5,9 @@ import com.sys.system.entity.Admin;
 import com.sys.system.service.IAdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author rensf
@@ -27,11 +25,14 @@ public class SystemController {
         this.adminService = adminService;
     }
 
-    @PostMapping("/loginByNormal")
+    @GetMapping("/loginByNormal")
     @ApiOperation("用户名密码登录")
-    public Result<Admin> loginByNormal(@RequestBody Admin loginInfo) throws Exception {
+    public Result<Admin> loginByNormal(@ApiParam("用户名") @RequestParam String adminName, @ApiParam("密码") @RequestParam String password) throws Exception {
         Result<Admin> result = new Result<>();
-        result.setResult(adminService.loginByNormal(loginInfo));
+        Admin loginAdmin = new Admin();
+        loginAdmin.setAdminName(adminName);
+        loginAdmin.setPassword(password);
+        result.setResult(adminService.loginByNormal(loginAdmin));
         return result;
     }
 

@@ -8,8 +8,6 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger.web.UiConfiguration;
-import springfox.documentation.swagger.web.UiConfigurationBuilder;
 
 /**
  * @author rensf
@@ -17,6 +15,7 @@ import springfox.documentation.swagger.web.UiConfigurationBuilder;
  */
 @Configuration
 public class SwaggerConfig {
+
     @Bean
     public Docket getDocket() {
         ApiInfo apiInfo = new ApiInfoBuilder()
@@ -29,14 +28,6 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.sys.product.controller"))
                 .paths(PathSelectors.any())
-                .build();
-    }
-
-    @Bean
-    public UiConfiguration uiConfiguration() {
-        // 隐藏UI上的Models模块
-        return UiConfigurationBuilder.builder()
-                .defaultModelsExpandDepth(-1)
                 .build();
     }
 }

@@ -40,7 +40,7 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigMapper, Config> impleme
 
     @Override
     public IPage<Config> queryConfigListByPage(Map param) {
-        JSONObject jsonParam = ToJson.toJson(param);
+        JSONObject jsonParam = ToJson.mapToJson(param);
         Page<Config> page = new Page<>();
         page.setSize(jsonParam.getLong("size"));
         page.setTotal(jsonParam.getLong("total"));

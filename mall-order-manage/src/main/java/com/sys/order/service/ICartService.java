@@ -1,28 +1,27 @@
 package com.sys.order.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sys.order.entity.Cart;
-import com.sys.product.entity.Product;
+import com.sys.order.entity.CartProduct;
 
 /**
  * @author rensf
  * @date 2021/6/8 20:18
  */
-public interface ICartService extends IService<Cart> {
+public interface ICartService extends IService<CartProduct> {
 
     /**
-     * 分页查询购物车列表
-     * @param userId
+     * 查询购物车
+     * @param cartId
      * @return
      */
-    IPage<Cart> queryCartListByPage(String userId);
+    Cart queryCart(String cartId);
 
     /**
      * 产品加入购物车
-     * @param product
+     * @param cartProduct
      * @return
      */
-    Integer addCart(Product product);
+    Integer addCart(CartProduct cartProduct);
 
 }

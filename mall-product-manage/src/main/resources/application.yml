@@ -56,6 +56,7 @@ mybatis-plus:
 logging:
   level:
     com.sys.product: debug
+    com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver: WARN
 
 props:
   filepath: ./file/

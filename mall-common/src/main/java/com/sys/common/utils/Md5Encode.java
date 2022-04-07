@@ -11,7 +11,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public class Md5Encode {
 
-    private static final String SECRET_KEY = "system";
+    private static final String SECRET_KEY = "mall";
 
     private static String encryption(String str) {
         try {

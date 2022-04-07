@@ -8,6 +8,7 @@ import com.sys.order.entity.OrderProduct;
 import com.sys.order.mapper.OrderMapper;
 import com.sys.order.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,7 @@ import java.util.Map;
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements IOrderService {
 
     private OrderMapper orderMapper;
+    private RedisTemplate redisTemplate;
 
     @Autowired
     public OrderServiceImpl(OrderMapper orderMapper) {
@@ -48,6 +50,13 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Override
     public Integer updateOrderStatus(Integer status) {
+        return null;
+    }
+
+    @Override
+
+    public Integer grabOrder(Order order) {
+        redisTemplate.opsForValue().setIfAbsent("", "");
         return null;
     }
 

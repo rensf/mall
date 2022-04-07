@@ -12,18 +12,30 @@ import java.io.Serializable;
  */
 @Data
 @Component
-@TableName("tr_b_product_type")
-public class BrProductType implements Serializable {
+@TableName("tr_b_product_product_type")
+public class ProductProductType implements Serializable {
 
     private static final long serialVersionUID = -5572948018211951593L;
 
+    /**
+     * ID
+     */
     @TableId
-    private String id;
+    private String productProductTypeId;
 
+    /**
+     * 产品ID
+     */
     private String productId;
 
+    /**
+     * 产品类别ID
+     */
     private String productTypeId;
 
+    /**
+     * 生效标志
+     */
     private Integer flag = 1;
 
 }

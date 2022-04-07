@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 
 /**
+ * 产品
  * @author rensf
  */
 @Data
@@ -49,7 +50,7 @@ public class Product implements Serializable {
     /**
      * 优惠价格
      */
-    private String productFPrice;
+    private String productDiscountPrice;
 
     /**
      * 详述
@@ -107,5 +108,11 @@ public class Product implements Serializable {
      */
     @TableField(exist = false)
     private String[] homeImages;
+
+    /**
+     * 购买数量
+     */
+    @TableField(exist = false)
+    private int nums;
 
 }

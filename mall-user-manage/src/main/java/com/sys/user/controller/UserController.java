@@ -67,6 +67,12 @@ public class UserController {
         return result;
     }
 
+    @PostMapping("/addUser")
+    @ApiOperation("新增用户")
+    public Result<Object> addUser(User user) {
+        return Result.success(userService.addUser(user));
+    }
+
     @PostMapping("/updateUser")
     @ApiOperation("更新用户信息")
     public Result updateUser() {
