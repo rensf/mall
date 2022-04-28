@@ -10,20 +10,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+
 /**
  * @author rensf
  */
 @RestController
 @RequestMapping("/order")
-@Api("订单管理")
+@Api(tags = "订单管理")
 public class OrderController {
 
+    @Resource
     private IOrderService orderService;
-
-    @Autowired
-    public OrderController(IOrderService orderService) {
-        this.orderService = orderService;
-    }
 
     @PostMapping("/addOrder")
     @ApiOperation("添加订单")

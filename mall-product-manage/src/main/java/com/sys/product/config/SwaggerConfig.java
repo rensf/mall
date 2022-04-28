@@ -28,6 +28,8 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.sys.product.controller"))
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                .pathMapping("/product");
     }
+
 }

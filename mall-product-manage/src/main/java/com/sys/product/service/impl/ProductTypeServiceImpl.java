@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -22,12 +23,8 @@ import java.util.Map;
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, ProductType> implements IProductTypeService {
 
+    @Resource
     private ProductTypeMapper typeMapper;
-
-    @Autowired
-    public ProductTypeServiceImpl(ProductTypeMapper typeMapper) {
-        this.typeMapper = typeMapper;
-    }
 
     @Override
     public List<ProductType> queryProductTypeList(JSONObject param) {

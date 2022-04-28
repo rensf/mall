@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sys.common.exception.GlobalException;
 import com.sys.common.utils.GenerateID;
-import com.sys.common.utils.Md5Encode;
-import com.sys.common.utils.OperateToken;
+import com.sys.common.utils.Md5Utils;
+import com.sys.common.utils.TokenUtils;
 import com.sys.user.entity.Address;
 import com.sys.user.entity.User;
 import com.sys.user.mapper.AddressMapper;
@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -36,20 +37,17 @@ import java.util.concurrent.TimeUnit;
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
+    @Resource
     private UserMapper userMapper;
+    @Resource
     private AddressMapper addressMapper;
+    @Resource
     private RedisTemplate redisTemplate;
+
     /**
      * 定时任务线程池，校验二维码是否过期
      */
     private static ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(5);
-
-    @Autowired
-    public UserServiceImpl(UserMapper userMapper, AddressMapper addressMapper, RedisTemplate redisTemplate) {
-        this.userMapper = userMapper;
-        this.addressMapper = addressMapper;
-        this.redisTemplate = redisTemplate;
-    }
 
     @Override
     public String generateQrcode() throws IOException {
@@ -80,7 +78,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
             }
             // 生成token，存入redis
-            String token = OperateToken.generateToken(userId);
+            String token = TokenUtils.generateToken(userId);
             // 将token和user传回前台，并进行页面跳转
             return null;
         } else {
@@ -98,7 +96,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if (Objects.isNull(user)) {
             throw new GlobalException("10001", "用户不存在！");
         } else {
-            if (Md5Encode.makePwd(userName, password).equals(user.getPassword())) {
+            if (Md5Utils.makePwd(userName, password).equals(user.getPassword())) {
                 return user;
             } else {
                 throw new GlobalException("10000", "用户名或密码输入错误！");

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.sys.common.utils.ToJson;
+import com.sys.common.utils.JsonUtils;
 import com.sys.config.entity.Config;
 import com.sys.config.mapper.ConfigMapper;
 import com.sys.config.service.IConfigService;
@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -31,16 +32,12 @@ import java.util.Map;
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class ConfigServiceImpl extends ServiceImpl<ConfigMapper, Config> implements IConfigService {
 
+    @Resource
     private ConfigMapper configMapper;
-
-    @Autowired
-    public ConfigServiceImpl(ConfigMapper configMapper) {
-        this.configMapper = configMapper;
-    }
 
     @Override
     public IPage<Config> queryConfigListByPage(Map param) {
-        JSONObject jsonParam = ToJson.mapToJson(param);
+        JSONObject jsonParam = JsonUtils.mapToJson(param);
         Page<Config> page = new Page<>();
         page.setSize(jsonParam.getLong("size"));
         page.setTotal(jsonParam.getLong("total"));

@@ -10,6 +10,7 @@ import springfox.documentation.swagger.web.SwaggerResourcesProvider;
 import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger.web.UiConfigurationBuilder;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,24 +22,25 @@ import java.util.List;
 @Primary
 public class SwaggerConfig implements SwaggerResourcesProvider {
 
+    private static final String API_URI = "/v3/api-docs";
+
+    @Resource
     private GatewayProperties gatewayProperties;
 
     @Override
     public List<SwaggerResource> get() {
         List<SwaggerResource> resources = new ArrayList<>();
-//        List<RouteDefinition> routes = gatewayProperties.getRoutes();
-//        for (RouteDefinition route : routes) {
-//            resources.add(createSwaggerResource(route.getId(), route.getPredicates().get(1).getName()));
-//        }
-        resources.add(createSwaggerResource("product-manage", "/product/v3/api-docs"));
-        resources.add(createSwaggerResource("system-manage", "/system/v3/api-docs"));
+        List<RouteDefinition> routes = gatewayProperties.getRoutes();
+        for (RouteDefinition route : routes) {
+            resources.add(createSwaggerResource(route.getId()));
+        }
         return resources;
     }
 
-    private SwaggerResource createSwaggerResource(String name, String location) {
+    private SwaggerResource createSwaggerResource(String name) {
         SwaggerResource swaggerResource = new SwaggerResource();
         swaggerResource.setName(name);
-        swaggerResource.setLocation(location);
+        swaggerResource.setLocation("/" + name + API_URI);
         return swaggerResource;
     }
 
@@ -49,4 +51,5 @@ public class SwaggerConfig implements SwaggerResourcesProvider {
                 .defaultModelsExpandDepth(-1)
                 .build();
     }
+
 }

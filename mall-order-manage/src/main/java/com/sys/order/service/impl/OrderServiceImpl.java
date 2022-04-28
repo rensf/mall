@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -24,13 +25,10 @@ import java.util.Map;
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements IOrderService {
 
+    @Resource
     private OrderMapper orderMapper;
+    @Resource
     private RedisTemplate redisTemplate;
-
-    @Autowired
-    public OrderServiceImpl(OrderMapper orderMapper) {
-        this.orderMapper = orderMapper;
-    }
 
     @Override
     public IPage<Order> queryOrderListByPage(Map param) {

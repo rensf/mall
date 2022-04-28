@@ -10,7 +10,7 @@ import java.util.Map;
  * @author rensf
  * @date 2021/6/24 17:55
  */
-public class ToJson {
+public class JsonUtils {
 
     /**
      * Map转换JSONObject

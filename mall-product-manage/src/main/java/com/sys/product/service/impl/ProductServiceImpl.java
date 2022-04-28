@@ -6,16 +6,14 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sys.common.utils.GenerateID;
-import com.sys.common.utils.ToJson;
+import com.sys.common.utils.JsonUtils;
 import com.sys.product.config.MyPropsConfig;
 import com.sys.product.entity.Product;
 import com.sys.product.entity.ProductImage;
 import com.sys.product.entity.ProductProductType;
-import com.sys.product.entity.ProductType;
 import com.sys.product.mapper.ProductImageMapper;
 import com.sys.product.mapper.ProductMapper;
 import com.sys.product.mapper.ProductProductTypeMapper;
-import com.sys.product.mapper.ProductTypeMapper;
 import com.sys.product.service.IProductService;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +22,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.HashMap;
@@ -38,22 +37,18 @@ import java.util.Objects;
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements IProductService {
 
+    @Resource
     private ProductMapper productMapper;
+    @Resource
     private ProductProductTypeMapper productProductTypeMapper;
+    @Resource
     private ProductImageMapper productImageMapper;
+    @Resource
     private MyPropsConfig props;
-
-    @Autowired
-    public ProductServiceImpl(ProductMapper productMapper, ProductProductTypeMapper productProductTypeMapper, ProductImageMapper productImageMapper, MyPropsConfig props) {
-        this.productMapper = productMapper;
-        this.productProductTypeMapper = productProductTypeMapper;
-        this.productImageMapper = productImageMapper;
-        this.props = props;
-    }
 
     @Override
     public IPage<Product> queryProductListByPage(Map<String, Object> param) {
-        JSONObject jsonParam = ToJson.mapToJson(param);
+        JSONObject jsonParam = JsonUtils.mapToJson(param);
         Page<Product> page = new Page<>();
         if (Objects.nonNull(jsonParam.getLong("current")) && Objects.nonNull(jsonParam.getLong("total")) && Objects.nonNull(jsonParam.getLong("size"))) {
             page.setCurrent(jsonParam.getLong("current"));

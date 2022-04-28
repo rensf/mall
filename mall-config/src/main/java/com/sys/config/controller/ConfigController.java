@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -17,15 +18,11 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/config")
-@Api("配置管理")
+@ApiOperation("配置管理")
 public class ConfigController {
 
+    @Resource
     private IConfigService configService;
-
-    @Autowired
-    public ConfigController(IConfigService configService) {
-        this.configService = configService;
-    }
 
     @GetMapping("/queryConfigList")
     @ApiOperation("查询配置列表")

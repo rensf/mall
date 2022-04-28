@@ -9,21 +9,19 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+
 /**
  * @author rensf
  * @date 2021/5/21 11:48
  */
 @RestController
 @RequestMapping("/system")
-@Api("系统管理")
+@Api(tags = "系统管理")
 public class SystemController {
 
+    @Resource
     private IAdminService adminService;
-
-    @Autowired
-    public SystemController(IAdminService adminService) {
-        this.adminService = adminService;
-    }
 
     @GetMapping("/loginByNormal")
     @ApiOperation("用户名密码登录")

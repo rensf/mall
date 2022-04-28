@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/stock")
-@Api("库存管理")
+@Api(tags = "库存管理")
 public class StockController {
 
 }

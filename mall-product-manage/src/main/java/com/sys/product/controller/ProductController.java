@@ -1,21 +1,17 @@
 package com.sys.product.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.sys.common.utils.ToJson;
 import com.sys.common.vo.Result;
 import com.sys.product.entity.Product;
-import com.sys.product.entity.ProductType;
 import com.sys.product.service.IProductService;
-import com.sys.product.service.IProductTypeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,21 +20,15 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/product")
-@Api("产品管理")
+@Api(tags = "产品管理")
 public class ProductController {
 
+    @Resource
     private IProductService productService;
-    private IProductTypeService productTypeService;
-
-    @Autowired
-    public ProductController(IProductService productService, IProductTypeService productTypeService) {
-        this.productService = productService;
-        this.productTypeService = productTypeService;
-    }
 
     @GetMapping("/queryProductList")
     @ApiOperation("查询产品列表")
-    public Result<?> queryProductList(@RequestParam Map<String, Object> param) throws Exception {
+    public Result<IPage<Product>> queryProductList(@RequestParam Map<String, Object> param) throws Exception {
         Result<IPage<Product>> result = new Result<>();
         result.setResult(productService.queryProductListByPage(param));
         return result;
@@ -57,38 +47,6 @@ public class ProductController {
     public Result<Integer> updateProduct(@RequestBody Product product) {
         Result<Integer> result = new Result<>();
         result.setResult(productService.updateProduct(product));
-        return result;
-    }
-
-    @GetMapping("/queryProductTypeList")
-    @ApiOperation("查询产品类型列表")
-    public Result<List<ProductType>> queryProductTypeList(@RequestParam Map<String, Object> param) {
-        Result<List<ProductType>> result = new Result<>();
-        result.setResult(productTypeService.queryProductTypeList(ToJson.mapToJson(param)));
-        return result;
-    }
-
-    @PostMapping("/addProductType")
-    @ApiOperation("添加产品类型")
-    public Result<Integer> addProductType(@RequestBody ProductType type) {
-        Result<Integer> result = new Result<>();
-        result.setResult(productTypeService.addProductType(type));
-        return result;
-    }
-
-    @PutMapping("/updateProductType")
-    @ApiOperation("更新产品类型")
-    public Result<Integer> updateProductType(@RequestBody ProductType type) {
-        Result<Integer> result = new Result<>();
-        result.setResult(productTypeService.updateProductType(type));
-        return result;
-    }
-
-    @DeleteMapping("/deleteProductType")
-    @ApiOperation("删除产品类型")
-    public Result<Integer> deleteProductType(@RequestBody ProductType type) {
-        Result<Integer> result = new Result<>();
-        result.setResult(productTypeService.deleteProductType(type));
         return result;
     }
 

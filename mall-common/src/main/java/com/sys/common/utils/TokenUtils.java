@@ -9,7 +9,7 @@ import java.util.Date;
  * @author rensf
  * @date 2021/7/20 18:45
  */
-public class OperateToken {
+public class TokenUtils {
 
     /**
      * token过期时间 30min

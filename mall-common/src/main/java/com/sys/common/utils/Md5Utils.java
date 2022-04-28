@@ -9,7 +9,7 @@ import java.security.NoSuchAlgorithmException;
  * @author rensf
  * @date 2021/5/21 16:30
  */
-public class Md5Encode {
+public class Md5Utils {
 
     private static final String SECRET_KEY = "mall";
 
@@ -26,7 +26,7 @@ public class Md5Encode {
     }
 
     public static String makePwd(String name, String password) {
-        return Md5Encode.encryption(name.toUpperCase() + password + Md5Encode.SECRET_KEY);
+        return Md5Utils.encryption(name.toUpperCase() + password + Md5Utils.SECRET_KEY);
     }
 
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -22,14 +23,10 @@ import java.util.List;
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class CartServiceImpl extends ServiceImpl<CartProductMapper, CartProduct> implements ICartService {
 
+    @Resource
     private CartProductMapper cartMapper;
+    @Resource
     private RedisTemplate redisTemplate;
-
-    @Autowired
-    public CartServiceImpl(CartProductMapper cartMapper, RedisTemplate redisTemplate) {
-        this.cartMapper = cartMapper;
-        this.redisTemplate = redisTemplate;
-    }
 
     @Override
     public Cart queryCart(String cartId) {

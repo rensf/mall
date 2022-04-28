@@ -2,7 +2,7 @@ package com.sys.user.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sys.common.exception.GlobalException;
-import com.sys.common.utils.OperateToken;
+import com.sys.common.utils.TokenUtils;
 import com.sys.common.vo.Result;
 import com.sys.user.entity.User;
 import com.sys.user.service.IUserService;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 
 /**
@@ -22,15 +23,11 @@ import java.io.IOException;
  */
 @RestController
 @RequestMapping("/user")
-@Api("用户管理")
+@Api(tags = "用户管理")
 public class UserController {
 
+    @Resource
     private IUserService userService;
-
-    @Autowired
-    public UserController(IUserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping("/loginByNormal")
     @ApiOperation("用户名密码登录")
@@ -38,7 +35,7 @@ public class UserController {
         User user = userService.loginByNormal(userName, password);
         // 将用户信息放入json对象中
         JSONObject object = new JSONObject();
-        object.put("token", OperateToken.generateToken(user.getUserId()));
+        object.put("token", TokenUtils.generateToken(user.getUserId()));
         object.put("userId", user.getUserId());
         object.put("userName", user.getUserName());
         object.put("userSex", user.getUserSex());
