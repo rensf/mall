@@ -1,7 +1,7 @@
 package com.sys.product.controller;
 
-import com.sys.common.utils.JsonUtils;
-import com.sys.common.vo.Result;
+import com.sys.common.util.JsonUtils;
+import com.sys.common.result.Result;
 import com.sys.product.entity.ProductType;
 import com.sys.product.service.IProductTypeService;
 import io.swagger.annotations.Api;

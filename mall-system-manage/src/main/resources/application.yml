@@ -1,18 +1,6 @@
-server:
-  port: 8824
-
 spring:
   application:
     name: mall-system-manage
-  redis:
-    host: 127.0.0.1
-    port: 6379
-    password: 123456
-  devtools:
-    livereload:
-      port: 35744
-    restart:
-      enabled: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/mall?serverTimezone=GMT%2B8&characterEncoding=utf-8
@@ -33,21 +21,13 @@ spring:
       max-lifetime: 1800000
       # 数据库连接超时时间
       connection-timeout: 30000
-  cloud:
-    config:
-      name: mall-config
-      discovery:
-        enabled: true
-
-eureka:
-  client:
-    enabled: true
-    serviceUrl:
-      defaultZone: http://127.0.0.1:8810/eureka/
-    instance:
-      prefer-ip-address: true
-      lease-renewal-interval-in-seconds: 10
-      lease-expiration-duration-in-seconds: 30
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
 
 mybatis-plus:
   configuration:
@@ -60,3 +40,13 @@ logging:
 
 props:
   filepath: ./file/
+
+eureka:
+  client:
+    enabled: true
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8810/eureka/
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30

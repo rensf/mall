@@ -4,16 +4,17 @@ import cn.hutool.core.codec.Base64;
 import cn.hutool.extra.qrcode.QrCodeUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.sys.common.constant.RegexConstants;
+import com.sys.common.enums.ResultCodeEnum;
 import com.sys.common.exception.GlobalException;
-import com.sys.common.utils.GenerateID;
-import com.sys.common.utils.Md5Utils;
-import com.sys.common.utils.TokenUtils;
+import com.sys.common.util.IDUtils;
+import com.sys.common.util.MD5Utils;
+import com.sys.common.util.TokenUtils;
 import com.sys.user.entity.Address;
 import com.sys.user.entity.User;
 import com.sys.user.mapper.AddressMapper;
 import com.sys.user.mapper.UserMapper;
 import com.sys.user.service.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -51,7 +52,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public String generateQrcode() throws IOException {
-        String qrcodeId = GenerateID.generateID();
+        String qrcodeId = IDUtils.generateID();
         // redis设置二维码过期时间
         redisTemplate.expire(qrcodeId, 10, TimeUnit.MINUTES);
         BufferedImage bufferedImage = QrCodeUtil.generate(qrcodeId, 100, 100);
@@ -88,18 +89,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public User loginByNormal(String userName, String password) throws GlobalException {
+    public User loginByNormal(User loginInfo) throws GlobalException {
         QueryWrapper<User> qw = new QueryWrapper<>();
-        qw.eq("user_name", userName);
+        if (loginInfo.getUserName().matches(RegexConstants.TEL_REGEX)) {
+            qw.eq("user_tel", loginInfo.getUserName());
+        } else if (loginInfo.getUserName().matches(RegexConstants.EMAIL_REGEX)) {
+            qw.eq("user_email", loginInfo.getUserEmail());
+        } else {
+            qw.eq("user_name", loginInfo.getUserName());
+        }
         qw.eq("flag", 1);
         User user = userMapper.selectOne(qw);
         if (Objects.isNull(user)) {
-            throw new GlobalException("10001", "用户不存在！");
+            throw new GlobalException(ResultCodeEnum.USER_NOT_EXIST);
         } else {
-            if (Md5Utils.makePwd(userName, password).equals(user.getPassword())) {
+            if (MD5Utils.makePwd(loginInfo.getPassword()).equals(user.getPassword())) {
                 return user;
             } else {
-                throw new GlobalException("10000", "用户名或密码输入错误！");
+                throw new GlobalException(ResultCodeEnum.USERNAME_OR_PASSWORD_ERROR);
             }
         }
     }
@@ -121,7 +128,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public Integer addUser(User user) {
-        user.setUserId(GenerateID.generateID());
+        user.setUserId(IDUtils.generateID());
         return userMapper.insert(user);
     }
 

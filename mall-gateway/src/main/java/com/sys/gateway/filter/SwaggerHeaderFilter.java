@@ -15,4 +15,5 @@ public class SwaggerHeaderFilter extends AbstractGatewayFilterFactory {
     public GatewayFilter apply(Object config) {
         return null;
     }
+
 }

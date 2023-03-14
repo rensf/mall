@@ -28,6 +28,10 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         <dependency>
@@ -37,7 +41,7 @@
         </dependency>
         <dependency>
             <groupId>com.sys</groupId>
-            <artifactId>mall-common</artifactId>
+            <artifactId>mall-common-web</artifactId>
             <version>0.0.1</version>
         </dependency>
     </dependencies>

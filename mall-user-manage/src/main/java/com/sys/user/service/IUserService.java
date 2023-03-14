@@ -30,13 +30,12 @@ public interface IUserService extends IService<User> {
     String loginByQrcode(String qrcodeId, String userId);
 
     /**
-     * 用户名密码登录
-     * @param userName
-     * @param password
+     * 普通登录
+     * @param loginInfo
      * @return
      * @throws GlobalException
      */
-    User loginByNormal(String userName, String password) throws GlobalException;
+    User loginByNormal(User loginInfo) throws GlobalException;
 
     /**
      * 分页查询用户列表

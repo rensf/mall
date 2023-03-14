@@ -8,7 +8,6 @@
         <groupId>com.sys</groupId>
         <version>0.0.1</version>
     </parent>
-    <groupId>com.sys</groupId>
     <artifactId>mall-user-manage</artifactId>
     <version>0.0.1</version>
     <name>mall-user-manage</name>
@@ -29,7 +28,7 @@
         </dependency>
         <dependency>
             <groupId>com.sys</groupId>
-            <artifactId>mall-common</artifactId>
+            <artifactId>mall-common-web</artifactId>
             <version>0.0.1</version>
         </dependency>
     </dependencies>

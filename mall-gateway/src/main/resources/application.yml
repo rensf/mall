@@ -8,12 +8,13 @@ spring:
     host: 127.0.0.1
     port: 6379
     password: 123456
-  devtools:
-    livereload:
-      port: 35731
   cloud:
     gateway:
       routes:
+        - id: auth
+          uri: http://127.0.0.1:8828
+          predicates:
+            - Path=/auth/**
         - id: config
           uri: http://127.0.0.1:8812
           predicates:
@@ -46,7 +47,11 @@ eureka:
     enabled: true
     serviceUrl:
       defaultZone: http://127.0.0.1:8810/eureka/
-    instance:
-      prefer-ip-address: true
-      lease-renewal-interval-in-seconds: 10
-      lease-expiration-duration-in-seconds: 30
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
+
+security:
+  ignore-urls:
+    - /auth/oauth/token

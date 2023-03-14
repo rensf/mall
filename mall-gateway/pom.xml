@@ -8,11 +8,10 @@
         <groupId>com.sys</groupId>
         <version>0.0.1</version>
     </parent>
-    <groupId>com.sys</groupId>
     <artifactId>mall-gateway</artifactId>
     <version>0.0.1</version>
     <name>mall-gateway</name>
-    <description>mall-gateway</description>
+    <description>网关</description>
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -21,6 +20,24 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
+        <!--    OAuth2资源服务器    -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-resource-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-jose</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sys</groupId>
+            <artifactId>mall-common-core</artifactId>
+            <version>0.0.1</version>
         </dependency>
     </dependencies>
 

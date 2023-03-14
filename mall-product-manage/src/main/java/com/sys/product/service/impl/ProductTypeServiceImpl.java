@@ -3,18 +3,16 @@ package com.sys.product.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.sys.common.utils.GenerateID;
+import com.sys.common.util.IDUtils;
 import com.sys.product.entity.ProductType;
 import com.sys.product.mapper.ProductTypeMapper;
 import com.sys.product.service.IProductTypeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author rensf
@@ -36,7 +34,7 @@ public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, Produ
 
     @Override
     public Integer addProductType(ProductType type) {
-        type.setProductTypeId(GenerateID.generateID());
+        type.setProductTypeId(IDUtils.generateID());
         return typeMapper.insert(type);
     }
 

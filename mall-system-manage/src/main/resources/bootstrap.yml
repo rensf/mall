@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      uri: http://127.0.0.1:8812/
+      name: mall-system-manage
+      profile: dev
+      label: dev

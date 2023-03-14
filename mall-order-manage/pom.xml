@@ -28,7 +28,7 @@
         </dependency>
         <dependency>
             <groupId>com.sys</groupId>
-            <artifactId>mall-common</artifactId>
+            <artifactId>mall-common-web</artifactId>
             <version>0.0.1</version>
         </dependency>
     </dependencies>

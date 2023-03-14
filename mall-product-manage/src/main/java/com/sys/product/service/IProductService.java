@@ -9,20 +9,22 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 产品 服务接口
  * @author rensf
+ * @date 2021/3/26
  */
 public interface IProductService extends IService<Product> {
 
     /**
      * 分页查询产品列表
-     * @param param
-     * @return
+     *
+     * @param page 分页参数
+     * @param product 产品参数
+     * @return 产品分页列表
      */
-    IPage<Product> queryProductListByPage(Map<String, Object> param);
+    IPage<Product> queryProductListByPage(Page<Product> page, Product product);
 
     /**
      * 查询产品列表

@@ -27,6 +27,10 @@ public class SwaggerConfig implements SwaggerResourcesProvider {
     @Resource
     private GatewayProperties gatewayProperties;
 
+    /**
+     * 从 gateway 配置文件获取路由
+     * @return 结果
+     */
     @Override
     public List<SwaggerResource> get() {
         List<SwaggerResource> resources = new ArrayList<>();

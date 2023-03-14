@@ -1,12 +1,10 @@
 package com.sys.config.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.sys.common.vo.Result;
+import com.sys.common.result.Result;
 import com.sys.config.entity.Config;
 import com.sys.config.service.IConfigService;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -60,7 +58,7 @@ public class ConfigController {
     @ApiOperation("刷新配置信息")
     public Result<Integer> refreshConfig() {
         Result<Integer> result = new Result<>();
-        result.setResult(configService.refreshConfig(null));
+        result.setResult(configService.refreshConfig(""));
         return result;
     }
 

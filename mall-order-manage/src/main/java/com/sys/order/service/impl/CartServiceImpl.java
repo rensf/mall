@@ -1,12 +1,11 @@
 package com.sys.order.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.sys.common.utils.GenerateID;
+import com.sys.common.util.IDUtils;
 import com.sys.order.entity.Cart;
 import com.sys.order.entity.CartProduct;
 import com.sys.order.mapper.CartProductMapper;
 import com.sys.order.service.ICartService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -34,7 +33,7 @@ public class CartServiceImpl extends ServiceImpl<CartProductMapper, CartProduct>
         // 判断购物车ID是否为空
         if (cartId == null || cartId.isEmpty()) {
             // 如果为空，返回空的购物车
-            cartId = GenerateID.generateID();
+            cartId = IDUtils.generateID();
             cart.setCartId(cartId);
         } else {
             // 如果不为空，查询出购物车内商品

@@ -1,12 +1,10 @@
 package com.sys.product.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.sys.common.utils.GenerateID;
-import com.sys.common.utils.JsonUtils;
+import com.sys.common.util.IDUtils;
 import com.sys.product.config.MyPropsConfig;
 import com.sys.product.entity.Product;
 import com.sys.product.entity.ProductImage;
@@ -16,7 +14,6 @@ import com.sys.product.mapper.ProductMapper;
 import com.sys.product.mapper.ProductProductTypeMapper;
 import com.sys.product.service.IProductService;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,10 +25,10 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @author rensf
+ * @date 2021/3/26
  */
 @Service
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
@@ -47,15 +44,8 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     private MyPropsConfig props;
 
     @Override
-    public IPage<Product> queryProductListByPage(Map<String, Object> param) {
-        JSONObject jsonParam = JsonUtils.mapToJson(param);
-        Page<Product> page = new Page<>();
-        if (Objects.nonNull(jsonParam.getLong("current")) && Objects.nonNull(jsonParam.getLong("total")) && Objects.nonNull(jsonParam.getLong("size"))) {
-            page.setCurrent(jsonParam.getLong("current"));
-            page.setTotal(jsonParam.getLong("total"));
-            page.setSize(jsonParam.getLong("size"));
-        }
-        return productMapper.queryProductListByPage(page, jsonParam);
+    public IPage<Product> queryProductListByPage(Page<Product> page, Product product) {
+        return productMapper.queryProductListByPage(page, product);
     }
 
     @Override
@@ -65,7 +55,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 
     @Override
     public Integer addProduct(Product product) {
-        product.setProductId(GenerateID.generateID());
+        product.setProductId(IDUtils.generateID());
         insertProductProductType(product);
         insertProductImage(product);
         return productMapper.insert(product);
@@ -89,7 +79,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 
     @Override
     public String uploadProductImage(MultipartFile image) throws IOException {
-        String imageId = GenerateID.generateID();
+        String imageId = IDUtils.generateID();
         String imageName = image.getOriginalFilename();
         String imageType = imageName.substring(imageName.indexOf("."));
         String newName = imageId + imageType;
@@ -121,7 +111,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         String[] typeIds = product.getTypeIds();
         for (String typeId : typeIds) {
             ProductProductType productProductType = new ProductProductType();
-            productProductType.setProductTypeId(GenerateID.generateID());
+            productProductType.setProductTypeId(IDUtils.generateID());
             productProductType.setProductId(product.getProductId());
             productProductType.setProductTypeId(typeId);
             productProductTypeMapper.insert(productProductType);
@@ -135,7 +125,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         String[] images = product.getImages();
         for (String image : images) {
             ProductImage productImage = new ProductImage();
-            productImage.setProductImageId(GenerateID.generateID());
+            productImage.setProductImageId(IDUtils.generateID());
             productImage.setProductId(product.getProductId());
             productImage.setProductImage(image);
             productImageMapper.insert(productImage);
@@ -144,7 +134,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         String[] homeImages = product.getHomeImages();
         for (String homeImage : homeImages) {
             ProductImage productImage = new ProductImage();
-            productImage.setProductImageId(GenerateID.generateID());
+            productImage.setProductImageId(IDUtils.generateID());
             productImage.setProductId(product.getProductId());
             productImage.setProductImage(homeImage);
             productImage.setImagePosition("home");

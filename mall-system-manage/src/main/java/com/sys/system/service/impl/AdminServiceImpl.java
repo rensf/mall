@@ -2,10 +2,12 @@ package com.sys.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.sys.common.dto.AdminAuthDTO;
+import com.sys.common.enums.ResultCodeEnum;
 import com.sys.common.exception.GlobalException;
-import com.sys.common.utils.GenerateID;
-import com.sys.common.utils.Md5Utils;
-import com.sys.common.utils.TokenUtils;
+import com.sys.common.util.IDUtils;
+import com.sys.common.util.MD5Utils;
+import com.sys.common.util.TokenUtils;
 import com.sys.system.entity.Admin;
 import com.sys.system.mapper.AdminMapper;
 import com.sys.system.service.IAdminService;
@@ -29,8 +31,11 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
 
     @Resource
     private AdminMapper adminMapper;
-    @Autowired
-    private StringRedisTemplate redisTemplate;
+
+    @Override
+    public AdminAuthDTO getAdminByAdminName(String adminName) {
+        return adminMapper.getAdminByAdminName(adminName);
+    }
 
     @Override
     public Admin loginByNormal(Admin loginInfo) throws Exception {
@@ -39,24 +44,23 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         qw.eq("admin_name", loginInfo.getAdminName());
         Admin admin = adminMapper.selectOne(qw);
         if (Objects.isNull(admin)) {
-            throw new GlobalException("10001", "用户不存在！");
+            throw new GlobalException(ResultCodeEnum.USER_NOT_EXIST);
         }
-        if (Md5Utils.makePwd(loginInfo.getAdminName(), loginInfo.getPassword()).equals(admin.getPassword())) {
+        if (MD5Utils.makePwd(loginInfo.getPassword()).equals(admin.getPassword())) {
             // 不返回密码
             admin.setPassword("");
             // 设置token
             String token = TokenUtils.generateToken(admin.getAdminId());
             admin.setToken(token);
-            redisTemplate.expire(token, 30, TimeUnit.MINUTES);
             return admin;
         } else {
-            throw new GlobalException("10000", "用户名或密码错误！");
+            throw new GlobalException(ResultCodeEnum.USERNAME_OR_PASSWORD_ERROR);
         }
     }
 
     @Override
     public Integer addAdmin(Admin admin) {
-        admin.setAdminId(GenerateID.generateID());
+        admin.setAdminId(IDUtils.generateID());
         return adminMapper.insert(admin);
     }
 

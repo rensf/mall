@@ -5,7 +5,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.sys.common.utils.JsonUtils;
+import com.sys.common.util.JsonUtils;
+import com.sys.config.config.RefreshBusHandler;
 import com.sys.config.entity.Config;
 import com.sys.config.mapper.ConfigMapper;
 import com.sys.config.service.IConfigService;
@@ -13,7 +14,6 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +34,9 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigMapper, Config> impleme
 
     @Resource
     private ConfigMapper configMapper;
+
+    @Resource
+    private RefreshBusHandler refreshBusHandler;
 
     @Override
     public IPage<Config> queryConfigListByPage(Map param) {
@@ -66,6 +69,8 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigMapper, Config> impleme
 
     @Override
     public Integer refreshConfig(String application) {
+//        refreshBusHandler.busRefresh();
+//        return 0;
         StringBuilder url = new StringBuilder("http://127.0.0.1:8812/actuator/busrefresh/");
         if (null != application && !application.isEmpty()) {
             url.append(application);

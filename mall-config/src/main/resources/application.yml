@@ -8,9 +8,6 @@ spring:
     host: 127.0.0.1
     port: 6379
     password: 123456
-  devtools:
-    livereload:
-      port: 35732
   profiles:
     active: jdbc
   cloud:
@@ -32,10 +29,10 @@ eureka:
     enabled: true
     serviceUrl:
       defaultZone: http://127.0.0.1:8810/eureka/
-    instance:
-      prefer-ip-address: true
-      lease-renewal-interval-in-seconds: 10
-      lease-expiration-duration-in-seconds: 30
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
 
 mybatis-plus:
   configuration:

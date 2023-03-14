@@ -1,17 +1,16 @@
 package com.sys.product.mapper;
 
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sys.product.entity.Product;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 /**
  * @author rensf
+ * @date 2021/3/26
  */
 @Mapper
 @Repository
@@ -21,7 +20,7 @@ public interface ProductMapper extends BaseMapper<Product> {
      * 分页查询产品列表
      *
      * @param page
-     * @param param
+     * @param product
      * @return
      */
     @Select("<script>" +
@@ -53,11 +52,14 @@ public interface ProductMapper extends BaseMapper<Product> {
             "and e.image_position is null " +
             "where " +
             "a.flag = 1 " +
+            "<if test=\"product.productFirst != null\"> " +
+            "and a.product_first = #{product.productFirst} " +
+            "</if> " +
             "group by " +
             "a.product_id " +
             "order by " +
             "a.product_id desc " +
             "</script>")
-    IPage<Product> queryProductListByPage(Page<Product> page, @Param("param") JSONObject param);
+    IPage<Product> queryProductListByPage(Page<Product> page, Product product);
 
 }

@@ -1,23 +1,27 @@
 package com.sys.product.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.sys.common.vo.Result;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.sys.common.result.Result;
 import com.sys.product.entity.Product;
 import com.sys.product.service.IProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Map;
 
 /**
+ * 产品 控制器
+ *
  * @author rensf
  * @date 2021/3/26
  */
+@RefreshScope
 @RestController
 @RequestMapping("/product")
 @Api(tags = "产品管理")
@@ -26,11 +30,18 @@ public class ProductController {
     @Resource
     private IProductService productService;
 
+    /**
+     * 分页查询产品列表
+     *
+     * @param page 分页参数
+     * @param product 产品参数
+     * @return 产品分页列表
+     */
     @GetMapping("/queryProductList")
     @ApiOperation("查询产品列表")
-    public Result<IPage<Product>> queryProductList(@RequestParam Map<String, Object> param) throws Exception {
+    public Result<IPage<Product>> queryProductList(Page<Product> page, Product product) {
         Result<IPage<Product>> result = new Result<>();
-        result.setResult(productService.queryProductListByPage(param));
+        result.setResult(productService.queryProductListByPage(page, product));
         return result;
     }
 

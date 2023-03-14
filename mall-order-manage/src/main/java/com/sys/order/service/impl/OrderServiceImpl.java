@@ -2,12 +2,11 @@ package com.sys.order.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.sys.common.utils.GenerateID;
+import com.sys.common.util.IDUtils;
 import com.sys.order.entity.Order;
 import com.sys.order.entity.OrderProduct;
 import com.sys.order.mapper.OrderMapper;
 import com.sys.order.service.IOrderService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -42,7 +41,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Override
     public Integer addOrder(Order order) {
-        order.setOrderId(GenerateID.generateID());
+        order.setOrderId(IDUtils.generateID());
         return orderMapper.insert(order);
     }
 

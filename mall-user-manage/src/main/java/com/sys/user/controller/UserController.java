@@ -2,13 +2,12 @@ package com.sys.user.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sys.common.exception.GlobalException;
-import com.sys.common.utils.TokenUtils;
-import com.sys.common.vo.Result;
+import com.sys.common.util.TokenUtils;
+import com.sys.common.result.Result;
 import com.sys.user.entity.User;
 import com.sys.user.service.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,9 +29,9 @@ public class UserController {
     private IUserService userService;
 
     @GetMapping("/loginByNormal")
-    @ApiOperation("用户名密码登录")
-    public Result<Object> loginByNormal(String userName, String password) throws GlobalException {
-        User user = userService.loginByNormal(userName, password);
+    @ApiOperation("普通登录")
+    public Result<Object> loginByNormal(User loginInfo) throws GlobalException {
+        User user = userService.loginByNormal(loginInfo);
         // 将用户信息放入json对象中
         JSONObject object = new JSONObject();
         object.put("token", TokenUtils.generateToken(user.getUserId()));

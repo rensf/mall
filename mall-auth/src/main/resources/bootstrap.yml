@@ -1,0 +1,10 @@
+server:
+  port: 8828
+
+spring:
+  cloud:
+    config:
+      uri: http://127.0.0.1:8812/
+      name: mall-auth
+      profile: dev
+      label: dev

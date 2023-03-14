@@ -1,6 +1,6 @@
 package com.sys.order.controller;
 
-import com.sys.common.vo.Result;
+import com.sys.common.result.Result;
 import com.sys.order.entity.CartProduct;
 import com.sys.order.service.ICartService;
 import io.swagger.annotations.Api;
@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
+ * 购物车 控制器
  * @author rensf
- * @date 2021/6/8 20:24
+ * @date 2021/6/8
  */
 @RestController
 @RequestMapping("/cart")
