@@ -89,26 +89,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public User loginByNormal(User loginInfo) throws GlobalException {
+    public User loginByNormal(String loginInfo) {
         QueryWrapper<User> qw = new QueryWrapper<>();
-        if (loginInfo.getUserName().matches(RegexConstants.TEL_REGEX)) {
-            qw.eq("user_tel", loginInfo.getUserName());
-        } else if (loginInfo.getUserName().matches(RegexConstants.EMAIL_REGEX)) {
-            qw.eq("user_email", loginInfo.getUserEmail());
+        if (loginInfo.matches(RegexConstants.TEL_REGEX)) {
+            qw.eq("user_tel", loginInfo);
+        } else if (loginInfo.matches(RegexConstants.EMAIL_REGEX)) {
+            qw.eq("user_email", loginInfo);
         } else {
-            qw.eq("user_name", loginInfo.getUserName());
+            qw.eq("user_name", loginInfo);
         }
         qw.eq("flag", 1);
-        User user = userMapper.selectOne(qw);
-        if (Objects.isNull(user)) {
-            throw new GlobalException(ResultCodeEnum.USER_NOT_EXIST);
-        } else {
-            if (MD5Utils.makePwd(loginInfo.getPassword()).equals(user.getPassword())) {
-                return user;
-            } else {
-                throw new GlobalException(ResultCodeEnum.USERNAME_OR_PASSWORD_ERROR);
-            }
-        }
+        return userMapper.selectOne(qw);
     }
 
     @Override

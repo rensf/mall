@@ -20,8 +20,6 @@ public class Result<T> implements Serializable {
 
     private String msg = "操作成功！";
 
-    private Long timestamp = System.currentTimeMillis();
-
     private T result;
 
     public static <T> Result<T> error(String code, String msg) {

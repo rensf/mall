@@ -35,7 +35,7 @@ public interface IUserService extends IService<User> {
      * @return
      * @throws GlobalException
      */
-    User loginByNormal(User loginInfo) throws GlobalException;
+    User loginByNormal(String loginInfo);
 
     /**
      * 分页查询用户列表

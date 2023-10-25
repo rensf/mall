@@ -1,6 +1,7 @@
 package com.sys.user.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.sys.common.dto.UserAuthDTO;
 import com.sys.common.exception.GlobalException;
 import com.sys.common.util.TokenUtils;
 import com.sys.common.result.Result;
@@ -8,10 +9,8 @@ import com.sys.user.entity.User;
 import com.sys.user.service.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.BeanUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -30,17 +29,11 @@ public class UserController {
 
     @GetMapping("/loginByNormal")
     @ApiOperation("普通登录")
-    public Result<Object> loginByNormal(User loginInfo) throws GlobalException {
-        User user = userService.loginByNormal(loginInfo);
-        // 将用户信息放入json对象中
-        JSONObject object = new JSONObject();
-        object.put("token", TokenUtils.generateToken(user.getUserId()));
-        object.put("userId", user.getUserId());
-        object.put("userName", user.getUserName());
-        object.put("userSex", user.getUserSex());
-        object.put("userTel", user.getUserTel());
-        object.put("userEmail", user.getUserEmail());
-        return Result.success(object);
+    public Result<UserAuthDTO> loginByNormal(@RequestParam String userName) {
+        User user = userService.loginByNormal(userName);
+        UserAuthDTO result = new UserAuthDTO();
+        BeanUtils.copyProperties(user, result);
+        return Result.success(result);
     }
 
     @GetMapping("/generateQrcode")

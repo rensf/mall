@@ -1,4 +1,4 @@
-package com.sys.auth.security.detail.userdetail;
+package com.sys.auth.security.detail.sysadmindetail;
 
 import com.sys.auth.api.AuthClientFeign;
 import com.sys.common.dto.AdminAuthDTO;
@@ -13,6 +13,8 @@ import javax.annotation.Resource;
 import java.util.Objects;
 
 /**
+ * 获取管理员信息服务
+ *
  * @author rensf
  * @date 2023/1/13
  */

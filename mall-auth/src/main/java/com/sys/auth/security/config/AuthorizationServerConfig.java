@@ -2,8 +2,10 @@ package com.sys.auth.security.config;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sys.auth.security.detail.clientdetail.ClientDetailsServiceImpl;
-import com.sys.auth.security.detail.userdetail.SysAdminDetails;
-import com.sys.auth.security.detail.userdetail.SysAdminDetailsServiceImpl;
+import com.sys.auth.security.detail.sysadmindetail.SysAdminDetails;
+import com.sys.auth.security.detail.sysadmindetail.SysAdminDetailsServiceImpl;
+import com.sys.auth.security.detail.sysuserdetail.SysUserDetailsServiceImpl;
+import com.sys.auth.security.provider.SysTokenGranter;
 import com.sys.auth.security.refresh.PreAuthenticatedUserDetailsServiceImpl;
 import com.sys.common.constant.SecurityConstants;
 import com.sys.common.enums.ResultCodeEnum;
@@ -51,6 +53,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private final AuthenticationManager authenticationManager;
     private final ClientDetailsServiceImpl clientDetailsService;
     private final SysAdminDetailsServiceImpl sysAdminDetailsService;
+    private final SysUserDetailsServiceImpl sysUserDetailsService;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -68,7 +71,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         tokenEnhancers.add(jwtAccessTokenConverter());
         tokenEnhancerChain.setTokenEnhancers(tokenEnhancers);
         endpoints.tokenStore(jwtTokenStore());
+
         List<TokenGranter> granterList = new ArrayList<>(Collections.singletonList(endpoints.getTokenGranter()));
+        granterList.add(new SysTokenGranter(endpoints.getTokenServices(), endpoints.getClientDetailsService(), endpoints.getOAuth2RequestFactory(), authenticationManager));
+
         CompositeTokenGranter compositeTokenGranter = new CompositeTokenGranter(granterList);
         endpoints.authenticationManager(authenticationManager)
             .accessTokenConverter(jwtAccessTokenConverter())
@@ -101,11 +107,18 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         tokenServices.setSupportRefreshToken(true);
         tokenServices.setClientDetailsService(clientDetailsService);
         tokenServices.setTokenEnhancer(tokenEnhancerChain);
+
+        // 多用户体系下，客户端ID和业务处理器的映射关系
         Map<String, UserDetailsService> clientUserDetailsServiceMap = new HashMap<>();
         clientUserDetailsServiceMap.put(SecurityConstants.ADMIN_CLIENT_ID, sysAdminDetailsService);
+        clientUserDetailsServiceMap.put(SecurityConstants.WEB_CLIENT_ID, sysUserDetailsService);
+
+        // 重写预认证身份提供器，可根据客户端ID和认证方式区分用户体系
         PreAuthenticatedAuthenticationProvider provider = new PreAuthenticatedAuthenticationProvider();
         provider.setPreAuthenticatedUserDetailsService(new PreAuthenticatedUserDetailsServiceImpl<>(clientUserDetailsServiceMap));
         tokenServices.setAuthenticationManager(new ProviderManager(provider));
+
+        tokenServices.setReuseRefreshToken(true);
         return tokenServices;
     }
 

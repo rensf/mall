@@ -51,7 +51,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-
     public Integer grabOrder(Order order) {
         redisTemplate.opsForValue().setIfAbsent("", "");
         return null;

@@ -14,6 +14,8 @@ public interface SecurityConstants {
 
     String ADMIN_CLIENT_ID = "mall-admin";
 
+    String WEB_CLIENT_ID = "mall-web";
+
     String REFRESH_TOKEN_KEY = "refresh-token";
 
     String AUTHENTICATION_IDENTITY_KEY = "authenticationIdentity";

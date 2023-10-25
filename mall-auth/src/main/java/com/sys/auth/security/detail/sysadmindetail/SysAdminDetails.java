@@ -1,4 +1,4 @@
-package com.sys.auth.security.detail.userdetail;
+package com.sys.auth.security.detail.sysadmindetail;
 
 import com.sys.common.constant.GlobalConstants;
 import com.sys.common.dto.AdminAuthDTO;
@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
+ * 管理员信息
+ *
  * @author rensf
  * @date 2023/1/13
  */

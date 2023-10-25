@@ -56,11 +56,11 @@ public interface IProductService extends IService<Product> {
 
     /**
      * 上传产品图片
-     * @param file
+     * @param image
      * @return
      * @throws IOException
      */
-    String uploadProductImage(MultipartFile file) throws IOException;
+    String uploadProductImage(MultipartFile image) throws IOException;
 
     /**
      * 删除产品图片
