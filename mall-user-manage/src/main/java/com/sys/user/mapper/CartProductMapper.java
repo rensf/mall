@@ -1,7 +1,7 @@
-package com.sys.order.mapper;
+package com.sys.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.sys.order.entity.CartProduct;
+import com.sys.user.entity.CartProduct;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

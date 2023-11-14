@@ -24,7 +24,7 @@ public class SysUserAuthenticationProvider implements AuthenticationProvider {
         SysUserAuthenticationToken authenticationToken = (SysUserAuthenticationToken) authentication;
         String userName = (String) authenticationToken.getPrincipal();
         UserDetails userDetails = ((SysUserDetailsServiceImpl) userDetailsService).loadUserByUsername(userName);
-        SysUserAuthenticationToken result = new SysUserAuthenticationToken(userDetails, authentication.getCredentials(), new HashSet<>());
+        SysUserAuthenticationToken result = new SysUserAuthenticationToken(userDetails, authentication.getCredentials(), userDetails.getAuthorities());
         result.setDetails(authentication.getDetails());
         return result;
     }

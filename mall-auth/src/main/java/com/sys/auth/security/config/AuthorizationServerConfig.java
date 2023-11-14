@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.sys.auth.security.detail.clientdetail.ClientDetailsServiceImpl;
 import com.sys.auth.security.detail.sysadmindetail.SysAdminDetails;
 import com.sys.auth.security.detail.sysadmindetail.SysAdminDetailsServiceImpl;
+import com.sys.auth.security.detail.sysuserdetail.SysUserDetails;
 import com.sys.auth.security.detail.sysuserdetail.SysUserDetailsServiceImpl;
 import com.sys.auth.security.provider.SysTokenGranter;
 import com.sys.auth.security.refresh.PreAuthenticatedUserDetailsServiceImpl;
@@ -151,7 +152,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             if (principal instanceof SysAdminDetails) {
                 SysAdminDetails sysUserDetails = (SysAdminDetails) principal;
                 additionalInfo.put("userId", sysUserDetails.getUserId());
-                additionalInfo.put("username", sysUserDetails.getUsername());
+            }
+            if (principal instanceof SysUserDetails) {
+                SysUserDetails sysUserDetails = (SysUserDetails) principal;
+                additionalInfo.put("userId", sysUserDetails.getUserId());
             }
             ((DefaultOAuth2AccessToken) assessToken).setAdditionalInformation(additionalInfo);
             return assessToken;

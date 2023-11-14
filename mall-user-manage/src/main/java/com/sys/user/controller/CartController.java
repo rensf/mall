@@ -1,14 +1,11 @@
-package com.sys.order.controller;
+package com.sys.user.controller;
 
 import com.sys.common.result.Result;
-import com.sys.order.entity.CartProduct;
-import com.sys.order.service.ICartService;
+import com.sys.user.entity.CartProduct;
+import com.sys.user.service.ICartService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -31,9 +28,9 @@ public class CartController {
         return Result.success(cartService.queryCart(cartId));
     }
 
-    @PutMapping("/addCart")
+    @PostMapping("/addCart")
     @ApiOperation("添加购物车")
-    public Result<Object> addCart(CartProduct cartProduct) {
+    public Result<Object> addCart(@RequestBody CartProduct cartProduct) {
         return Result.success(cartService.addCart(cartProduct));
     }
 

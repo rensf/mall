@@ -1,5 +1,7 @@
 package com.sys.common.util;
 
+import com.sys.common.constant.SecurityConstants;
+
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -10,8 +12,6 @@ import java.security.NoSuchAlgorithmException;
  * @date 2021/5/21 16:30
  */
 public class MD5Utils {
-
-    private static final String SECRET_KEY = "{mall}";
 
     private static String encryption(String str) {
         try {
@@ -26,7 +26,7 @@ public class MD5Utils {
     }
 
     public static String makePwd(String password) {
-        return MD5Utils.encryption(password + MD5Utils.SECRET_KEY);
+        return MD5Utils.encryption(password + SecurityConstants.SECRET_KEY);
     }
 
 }

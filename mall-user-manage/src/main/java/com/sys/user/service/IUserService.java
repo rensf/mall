@@ -38,6 +38,12 @@ public interface IUserService extends IService<User> {
     User loginByNormal(String loginInfo);
 
     /**
+     * 获取登录用户信息
+     * @return
+     */
+    User getLoginUserInfo();
+
+    /**
      * 分页查询用户列表
      * @return
      */

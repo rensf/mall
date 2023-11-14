@@ -1,4 +1,4 @@
-package com.sys.order.entity;
+package com.sys.user.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -26,9 +26,9 @@ public class CartProduct implements Serializable {
     private String cartProductId;
 
     /**
-     * 购物车ID
+     * 用户ID
      */
-    private String cartId;
+    private String userId;
 
     /**
      * 产品ID

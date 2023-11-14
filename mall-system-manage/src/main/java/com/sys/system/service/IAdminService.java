@@ -18,14 +18,6 @@ public interface IAdminService extends IService<Admin> {
     AdminAuthDTO getAdminByAdminName(String adminName);
 
     /**
-     * 用户名密码登录
-     * @param loginInfo
-     * @exception Exception
-     * @return
-     */
-    Admin loginByNormal(Admin loginInfo) throws Exception;
-
-    /**
      * 添加管理员
      * @param admin
      * @return

@@ -29,39 +29,15 @@ import java.util.concurrent.TimeUnit;
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements IAdminService {
 
-    @Resource
-    private AdminMapper adminMapper;
-
     @Override
     public AdminAuthDTO getAdminByAdminName(String adminName) {
-        return adminMapper.getAdminByAdminName(adminName);
-    }
-
-    @Override
-    public Admin loginByNormal(Admin loginInfo) throws Exception {
-        QueryWrapper<Admin> qw = new QueryWrapper<>();
-        qw.eq("flag", 1);
-        qw.eq("admin_name", loginInfo.getAdminName());
-        Admin admin = adminMapper.selectOne(qw);
-        if (Objects.isNull(admin)) {
-            throw new GlobalException(ResultCodeEnum.USER_NOT_EXIST);
-        }
-        if (MD5Utils.makePwd(loginInfo.getPassword()).equals(admin.getPassword())) {
-            // 不返回密码
-            admin.setPassword("");
-            // 设置token
-            String token = TokenUtils.generateToken(admin.getAdminId());
-            admin.setToken(token);
-            return admin;
-        } else {
-            throw new GlobalException(ResultCodeEnum.USERNAME_OR_PASSWORD_ERROR);
-        }
+        return this.baseMapper.getAdminByAdminName(adminName);
     }
 
     @Override
     public Integer addAdmin(Admin admin) {
         admin.setAdminId(IDUtils.generateID());
-        return adminMapper.insert(admin);
+        return this.baseMapper.insert(admin);
     }
 
 }

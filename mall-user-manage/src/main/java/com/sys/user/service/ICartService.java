@@ -1,8 +1,8 @@
-package com.sys.order.service;
+package com.sys.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.sys.order.entity.Cart;
-import com.sys.order.entity.CartProduct;
+import com.sys.user.entity.Cart;
+import com.sys.user.entity.CartProduct;
 
 /**
  * @author rensf

@@ -13,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
@@ -47,6 +48,12 @@ public class UserController {
     public Result loginByQrcode() {
         Result result = new Result();
         return result;
+    }
+
+    @GetMapping("/getLoginUserInfo")
+    @ApiOperation("获取登录用户信息")
+    public Result getLoginUserInfo() {
+        return Result.success(userService.getLoginUserInfo());
     }
 
     @GetMapping("/queryUserList")

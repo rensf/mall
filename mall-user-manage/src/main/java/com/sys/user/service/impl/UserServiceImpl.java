@@ -2,6 +2,7 @@ package com.sys.user.service.impl;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.extra.qrcode.QrCodeUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sys.common.constant.RegexConstants;
@@ -100,6 +101,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
         qw.eq("flag", 1);
         return userMapper.selectOne(qw);
+    }
+
+    @Override
+    public User getLoginUserInfo() {
+        return this.getOne(new LambdaQueryWrapper<User>()
+            .eq(User::getUserId, TokenUtils.getJwtPayload().getString("userId"))
+            .select(
+                User::getUserId,
+                User::getUserName
+            ));
     }
 
     @Override

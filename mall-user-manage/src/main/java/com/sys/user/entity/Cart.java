@@ -1,4 +1,4 @@
-package com.sys.order.entity;
+package com.sys.user.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;

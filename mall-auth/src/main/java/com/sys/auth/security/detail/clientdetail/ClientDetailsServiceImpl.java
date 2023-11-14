@@ -38,7 +38,7 @@ public class ClientDetailsServiceImpl implements ClientDetailsService {
                 client.getAuthorities(),
                 client.getRedirectUri()
             );
-            clientDetails.setClientSecret(PasswordEncodeEnum.NOOP.getPrefix() + client.getClientSecret());
+            clientDetails.setClientSecret(PasswordEncodeEnum.NOOP.getPrefix () + client.getClientSecret());
             clientDetails.setAccessTokenValiditySeconds(client.getAccessTokenValidity());
             clientDetails.setRefreshTokenValiditySeconds(client.getRefreshTokenValidity());
             return clientDetails;

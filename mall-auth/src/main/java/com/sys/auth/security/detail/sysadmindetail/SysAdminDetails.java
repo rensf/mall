@@ -1,6 +1,7 @@
 package com.sys.auth.security.detail.sysadmindetail;
 
 import com.sys.common.constant.GlobalConstants;
+import com.sys.common.constant.SecurityConstants;
 import com.sys.common.dto.AdminAuthDTO;
 import com.sys.common.enums.PasswordEncodeEnum;
 import lombok.Data;
@@ -32,7 +33,7 @@ public class SysAdminDetails implements UserDetails {
     public SysAdminDetails(AdminAuthDTO admin) {
         this.setUserId(admin.getAdminId());
         this.setUsername(admin.getAdminName());
-        this.setPassword(PasswordEncodeEnum.MD5.getPrefix() + "{mall}" + admin.getPassword());
+        this.setPassword(PasswordEncodeEnum.MD5.getPrefix() + SecurityConstants.SECRET_KEY + admin.getPassword());
         this.setEnabled(GlobalConstants.STATUS_TRUE.equals(admin.getFlag()));
         if (!CollectionUtils.isEmpty(admin.getRoles())) {
             admin.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role)));

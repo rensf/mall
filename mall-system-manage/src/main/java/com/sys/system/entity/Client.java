@@ -72,17 +72,19 @@ public class Client {
     /**
      * 回调地址
      */
-
+    @TableField("redirect_uri")
     private String redirectUri;
 
     /**
      * 是否自动放行
      */
+    @TableField("auto_approve")
     private Boolean autoApprove;
 
     /**
      * 生效标志
      */
+    @TableField("flag")
     private Integer flag = 0;
 
 }
