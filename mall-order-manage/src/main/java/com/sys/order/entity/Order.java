@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author rensf
@@ -51,5 +52,10 @@ public class Order implements Serializable {
      * 生效标志
      */
     private Integer flag = 1;
+
+    /**
+     * 订单商品列表
+     */
+    private List<OrderProduct> orderProductList;
 
 }

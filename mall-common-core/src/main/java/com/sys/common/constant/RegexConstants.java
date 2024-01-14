@@ -1,6 +1,8 @@
 package com.sys.common.constant;
 
 /**
+ * 正则表达式常量
+ *
  * @author rensf
  * @date 2022/10/21
  */

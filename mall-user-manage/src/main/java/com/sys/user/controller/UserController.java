@@ -5,6 +5,7 @@ import com.sys.common.dto.UserAuthDTO;
 import com.sys.common.exception.GlobalException;
 import com.sys.common.util.TokenUtils;
 import com.sys.common.result.Result;
+import com.sys.user.entity.Address;
 import com.sys.user.entity.User;
 import com.sys.user.service.IUserService;
 import io.swagger.annotations.Api;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author rensf
@@ -35,6 +37,13 @@ public class UserController {
         UserAuthDTO result = new UserAuthDTO();
         BeanUtils.copyProperties(user, result);
         return Result.success(result);
+    }
+
+    @GetMapping("/queryAddressListByUserId")
+    @ApiOperation("查询地址列表通过用户ID")
+    public Result<List<Address>> queryAddressListByUserId(String userId) {
+        List<Address> addressList = userService.queryAddressListByUserId(userId);
+        return Result.success(addressList);
     }
 
     @GetMapping("/generateQrcode")

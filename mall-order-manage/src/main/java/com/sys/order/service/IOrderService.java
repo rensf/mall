@@ -29,10 +29,9 @@ public interface IOrderService extends IService<Order> {
 
     /**
      * 添加订单
-     * @param order
      * @return
      */
-    Integer addOrder(Order order);
+    String addOrder();
 
     /**
      * 修改订单状态

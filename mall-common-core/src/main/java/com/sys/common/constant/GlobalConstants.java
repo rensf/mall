@@ -1,7 +1,7 @@
 package com.sys.common.constant;
 
 /**
- * 全局变量
+ * 全局常量
  *
  * @author rensf
  * @date 2023/1/16

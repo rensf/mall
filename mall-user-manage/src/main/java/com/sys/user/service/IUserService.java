@@ -50,11 +50,11 @@ public interface IUserService extends IService<User> {
     List<User> queryUserListByPage();
 
     /**
-     * 查询详细地址通过用户ID
-     * @param user
-     * @return
+     * 查询地址列表通过用户ID
+     * @param userId 用户ID
+     * @return List<Address> 地址列表
      */
-    List<Address> queryAddressByUserId(User user);
+    List<Address> queryAddressListByUserId(String userId);
 
     /**
      * 新建用户

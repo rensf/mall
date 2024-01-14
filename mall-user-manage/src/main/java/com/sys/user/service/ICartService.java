@@ -1,8 +1,9 @@
 package com.sys.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.sys.user.entity.Cart;
 import com.sys.user.entity.CartProduct;
+
+import java.util.List;
 
 /**
  * @author rensf
@@ -12,10 +13,9 @@ public interface ICartService extends IService<CartProduct> {
 
     /**
      * 查询购物车
-     * @param cartId
      * @return
      */
-    Cart queryCart(String cartId);
+    List<CartProduct> queryCart();
 
     /**
      * 产品加入购物车

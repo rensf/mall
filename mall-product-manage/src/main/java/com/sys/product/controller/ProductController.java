@@ -45,6 +45,19 @@ public class ProductController {
         return result;
     }
 
+    /**
+     * 根据产品ID查询产品信息
+     * @param productId 产品ID
+     * @return 产品信息
+     */
+    @GetMapping("/queryProductById")
+    @ApiOperation("根据产品ID查询产品信息")
+    public Result<Product> queryProductById(String productId) {
+        Result<Product> result = new Result<>();
+        result.setResult(productService.getById(productId));
+        return result;
+    }
+
     @PostMapping("/addProduct")
     @ApiOperation("添加产品")
     public Result<Integer> addProduct(@RequestBody Product product) {

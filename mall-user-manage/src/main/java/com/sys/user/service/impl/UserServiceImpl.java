@@ -16,10 +16,12 @@ import com.sys.user.entity.User;
 import com.sys.user.mapper.AddressMapper;
 import com.sys.user.mapper.UserMapper;
 import com.sys.user.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
@@ -121,9 +123,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public List<Address> queryAddressByUserId(User user) {
+    public List<Address> queryAddressListByUserId(String userId) {
         QueryWrapper<Address> qw = new QueryWrapper<>();
-        qw.eq("user_id", user.getUserId());
+        qw.eq("user_id", userId);
         qw.eq("flag", 1);
         return addressMapper.selectList(qw);
     }

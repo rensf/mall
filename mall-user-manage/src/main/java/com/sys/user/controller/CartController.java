@@ -24,8 +24,8 @@ public class CartController {
 
     @GetMapping("/queryCartList")
     @ApiOperation("查询购物车")
-    public Result<Object> queryCartList(String cartId) {
-        return Result.success(cartService.queryCart(cartId));
+    public Result<Object> queryCartList() {
+        return Result.success(cartService.queryCart());
     }
 
     @PostMapping("/addCart")

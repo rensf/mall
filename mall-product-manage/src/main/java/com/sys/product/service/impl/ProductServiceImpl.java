@@ -31,7 +31,6 @@ import java.util.Map;
  * @date 2021/3/26
  */
 @Service
-@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements IProductService {
 
     @Resource
@@ -54,6 +53,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Integer addProduct(Product product) {
         product.setProductId(IDUtils.generateID());
         insertProductProductType(product);
@@ -62,6 +62,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Integer updateProduct(Product product) {
         insertProductProductType(product);
         insertProductImage(product);
@@ -78,6 +79,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public String uploadProductImage(MultipartFile image) throws IOException {
         String imageId = IDUtils.generateID();
         String imageName = image.getOriginalFilename();
@@ -94,6 +96,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Integer deleteProductImage(String imageName) {
         File file = new File(props.getFilepath() + imageName);
         file.delete();

@@ -2,15 +2,14 @@ package com.sys.order.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.sys.common.constant.BusinessConstants;
 import com.sys.common.util.IDUtils;
 import com.sys.order.entity.Order;
 import com.sys.order.entity.OrderProduct;
 import com.sys.order.mapper.OrderMapper;
 import com.sys.order.service.IOrderService;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -21,13 +20,12 @@ import java.util.Map;
  * @date 2021/5/8 17:15
  */
 @Service
-@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements IOrderService {
 
     @Resource
     private OrderMapper orderMapper;
     @Resource
-    private RedisTemplate redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
 
     @Override
     public IPage<Order> queryOrderListByPage(Map param) {
@@ -40,9 +38,11 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-    public Integer addOrder(Order order) {
-        order.setOrderId(IDUtils.generateID());
-        return orderMapper.insert(order);
+    public String addOrder() {
+        // 生成订单ID，将其存入redis，防止重复提交
+        String orderId = IDUtils.generateID();
+        stringRedisTemplate.opsForValue().set(BusinessConstants.ORDER_TOKEN_PREFIX + orderId, orderId);
+        return orderId;
     }
 
     @Override
@@ -52,7 +52,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Override
     public Integer grabOrder(Order order) {
-        redisTemplate.opsForValue().setIfAbsent("", "");
         return null;
     }
 

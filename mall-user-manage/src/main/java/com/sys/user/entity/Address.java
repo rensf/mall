@@ -46,6 +46,16 @@ public class Address {
     private String address;
 
     /**
+     * 联系人姓名
+     */
+    private String concatName;
+
+    /**
+     * 联系人电话
+     */
+    private String concatTel;
+
+    /**
      * 生效标志
      */
     private Integer flag = 1;

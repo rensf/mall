@@ -1,7 +1,7 @@
 package com.sys.common.constant;
 
 /**
- * 安全认证变量
+ * 安全认证常量
  *
  * @author rensf
  * @date 2022/12/27
