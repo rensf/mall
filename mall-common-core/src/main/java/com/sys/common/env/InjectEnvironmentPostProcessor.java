@@ -9,8 +9,9 @@ import java.util.Properties;
 
 /**
  * 初始化配置
+ *
  * @author rensf
- * @date 2022/8/16 12:49
+ * @date 2022/8/16
  */
 public class InjectEnvironmentPostProcessor implements EnvironmentPostProcessor {
 

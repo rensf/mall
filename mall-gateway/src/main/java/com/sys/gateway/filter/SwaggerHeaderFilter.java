@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author rensf
- * @date 2022/3/30 16:18
+ * @date 2022/3/30
  */
 @Component
 public class SwaggerHeaderFilter extends AbstractGatewayFilterFactory {

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author rensf
- * @date 2021/5/21 11:46
+ * @date 2021/5/21
  */
 @Configuration
 public class MybatisPlusConfig {

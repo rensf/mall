@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * @author rensf
- * @date 2021/5/8 17:01
+ * @date 2021/5/8
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {

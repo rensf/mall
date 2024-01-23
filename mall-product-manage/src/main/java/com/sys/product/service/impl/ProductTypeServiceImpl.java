@@ -15,10 +15,11 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
+ * 产品类型 服务层
  * @author rensf
+ * @date 2024/1/23
  */
 @Service
-@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, ProductType> implements IProductTypeService {
 
     @Resource
@@ -33,17 +34,20 @@ public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, Produ
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Integer addProductType(ProductType type) {
         type.setProductTypeId(IDUtils.generateID());
         return typeMapper.insert(type);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Integer updateProductType(ProductType type) {
         return typeMapper.updateById(type);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Integer deleteProductType(ProductType type) {
         type.setFlag(0);
         return typeMapper.updateById(type);

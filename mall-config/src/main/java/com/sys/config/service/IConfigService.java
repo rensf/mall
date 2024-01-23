@@ -7,8 +7,10 @@ import com.sys.config.entity.Config;
 import java.util.Map;
 
 /**
+ * 配置 服务接口
+ *
  * @author rensf
- * @date 2021/5/13 11:29
+ * @date 2021/5/13
  */
 public interface IConfigService extends IService<Config> {
 

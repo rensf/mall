@@ -8,6 +8,8 @@ import lombok.Data;
 import java.util.List;
 
 /**
+ * 权限 实体
+ *
  * @author rensf
  * @date 2023/10/26
  */

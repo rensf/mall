@@ -1,4 +1,4 @@
-package com.sys.system.entity;
+package com.sys.auth.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;

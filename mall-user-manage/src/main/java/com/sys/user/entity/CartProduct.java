@@ -9,8 +9,10 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 
 /**
+ * 购物车产品 实体
+ *
  * @author rensf
- * @date 2021/8/12 15:53
+ * @date 2021/8/12
  */
 @Data
 @Component

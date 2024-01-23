@@ -7,8 +7,10 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
+ * 返回结果包装类
+ *
  * @author rensf
- * @date 2021/6/24 15:32
+ * @date 2021/6/24
  * @param <T>
  */
 @Data

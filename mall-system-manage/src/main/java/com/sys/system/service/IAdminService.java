@@ -5,8 +5,10 @@ import com.sys.common.dto.AdminAuthDTO;
 import com.sys.system.entity.Admin;
 
 /**
+ * 系统管理员 服务接口
+ *
  * @author rensf
- * @date 2021/5/21 14:51
+ * @date 2021/5/21
  */
 public interface IAdminService extends IService<Admin> {
 

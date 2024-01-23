@@ -7,6 +7,8 @@ import lombok.Data;
 import org.springframework.stereotype.Component;
 
 /**
+ * 角色 实体
+ *
  * @author rensf
  * @date 2023/3/7
  */

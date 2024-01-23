@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author rensf
- * @date 2022/8/26 17:36
+ * @date 2022/8/26
  */
 @Configuration
 @EnableConfigurationProperties(BusProperties.class)

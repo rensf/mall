@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @author rensf
- * @date 2022/3/23 18:05
+ * @date 2022/3/23
  */
 @Configuration
 @Primary

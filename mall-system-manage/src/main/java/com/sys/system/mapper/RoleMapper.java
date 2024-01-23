@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
+ * 角色 映射层
  * @author rensf
  * @date 2023/3/8
  */
@@ -22,17 +23,17 @@ public interface RoleMapper extends BaseMapper<Role> {
      * @return 角色编码集合
      */
     @Select("select " +
-        "tsr.role_code " +
-        "from " +
-        "td_sys_admin tsa " +
-        "left join tr_sys_admin_role tsar " +
-        "on " +
-        "tsa.admin_id = tsar.admin_id " +
-        "left join td_sys_role tsr " +
-        "on " +
-        "tsar.role_id = tsr.role_id " +
-        "where tsa.flag = 1 " +
-        "and tsa.admin_name = #{adminName}")
+            "tsr.role_code " +
+            "from " +
+            "td_sys_admin tsa " +
+            "left join tr_sys_admin_role tsar " +
+            "on " +
+            "tsa.admin_id = tsar.admin_id " +
+            "left join td_sys_role tsr " +
+            "on " +
+            "tsar.role_id = tsr.role_id " +
+            "where tsa.flag = 1 " +
+            "and tsa.admin_name = #{adminName}")
     List<String> getCodeByName(String adminName);
 
 }

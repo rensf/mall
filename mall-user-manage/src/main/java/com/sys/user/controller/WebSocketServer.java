@@ -17,7 +17,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  * @author rensf
- * @date 2021/7/14 16:19
+ * @date 2021/7/14
  */
 @ServerEndpoint("/webSocket/{qrcodeId}")
 @Component

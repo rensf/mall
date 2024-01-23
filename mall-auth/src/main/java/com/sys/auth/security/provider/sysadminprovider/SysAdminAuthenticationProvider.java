@@ -1,6 +1,5 @@
 package com.sys.auth.security.provider.sysadminprovider;
 
-import com.sys.auth.security.detail.sysadmindetail.SysAdminDetailsServiceImpl;
 import lombok.Data;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;

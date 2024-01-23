@@ -1,9 +1,9 @@
-package com.sys.system.service.impl;
+package com.sys.auth.sevice.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.sys.system.entity.Client;
-import com.sys.system.mapper.ClientMapper;
-import com.sys.system.service.IClientService;
+import com.sys.auth.entity.Client;
+import com.sys.auth.mapper.ClientMapper;
+import com.sys.auth.sevice.IClientService;
 import org.springframework.stereotype.Service;
 
 /**

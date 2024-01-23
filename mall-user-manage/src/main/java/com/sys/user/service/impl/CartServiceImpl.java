@@ -17,8 +17,10 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
+ * 购物车 服务层
+ *
  * @author rensf
- * @date 2021/6/8 20:20
+ * @date 2021/6/8
  */
 @Service
 public class CartServiceImpl extends ServiceImpl<CartProductMapper, CartProduct> implements ICartService {

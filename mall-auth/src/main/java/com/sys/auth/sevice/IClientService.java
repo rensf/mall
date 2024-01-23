@@ -1,7 +1,7 @@
-package com.sys.system.service;
+package com.sys.auth.sevice;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.sys.system.entity.Client;
+import com.sys.auth.entity.Client;
 
 /**
  * @author rensf

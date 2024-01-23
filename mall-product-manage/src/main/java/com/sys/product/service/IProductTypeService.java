@@ -9,7 +9,9 @@ import java.util.Map;
 
 /**
  * 产品类型 服务接口
+ *
  * @author rensf
+ * @date 2024/1/23
  */
 public interface IProductTypeService extends IService<ProductType> {
 

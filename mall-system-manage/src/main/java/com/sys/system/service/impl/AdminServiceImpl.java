@@ -22,11 +22,12 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 系统管理员 服务层
+ *
  * @author rensf
- * @date 2021/5/21 14:52
+ * @date 2021/5/21
  */
 @Service
-@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements IAdminService {
 
     @Override
@@ -35,6 +36,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Integer addAdmin(Admin admin) {
         admin.setAdminId(IDUtils.generateID());
         return this.baseMapper.insert(admin);

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
+ * 权限 映射层
+ *
  * @author rensf
  * @date 2023/10/26
  */
@@ -29,20 +31,19 @@ public interface PermissionMapper extends BaseMapper<Permission> {
         @Result(column = "permission_btn", property = "permissionBtn", jdbcType = JdbcType.VARCHAR),
         @Result(column = "role_code", property = "roles", jdbcType = JdbcType.ARRAY, many = @Many(select = "com.sys.system.mapper.RoleMapper.getCodeByName"))
     })
-    @Select("<script>" +
-        "select " +
-        "a.permission_id, " +
-        "a.permission_name, " +
-        "a.menu_id, " +
-        "a.permission_url, " +
-        "a.permission_btn, " +
-        "c.role_code " +
-        "from " +
-        "td_sys_permission a " +
-        "left join tr_sys_permission_role b on a.permission_id = b.permission_id " +
-        "left join td_sys_role c on b.role_id = c.role_id " +
-        "where a.flag = 1 " +
-        "</script>")
+    @Select("select " +
+            "a.permission_id, " +
+            "a.permission_name, " +
+            "a.menu_id, " +
+            "a.permission_url, " +
+            "a.permission_btn, " +
+            "c.role_code " +
+            "from " +
+            "td_sys_permission a " +
+            "left join tr_sys_permission_role b on a.permission_id = b.permission_id " +
+            "left join td_sys_role c on b.role_id = c.role_id " +
+            "where " +
+            "a.flag = 1 ")
     List<Permission> listPermRoles();
 
 }

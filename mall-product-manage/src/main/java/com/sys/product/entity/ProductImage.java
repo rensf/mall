@@ -9,7 +9,9 @@ import java.io.Serializable;
 
 /**
  * 产品图片
+ *
  * @author rensf
+ * @date 2024/1/23
  */
 @Data
 @Component

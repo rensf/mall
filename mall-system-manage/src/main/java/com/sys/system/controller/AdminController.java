@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 /**
+ * 系统管理员 控制层
+ *
  * @author rensf
- * @date 2021/5/21 11:48
+ * @date 2021/5/21
  */
 @RestController
 @RequestMapping("/admin")

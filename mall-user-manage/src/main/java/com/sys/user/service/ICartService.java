@@ -6,8 +6,10 @@ import com.sys.user.entity.CartProduct;
 import java.util.List;
 
 /**
+ * 购物车 服务接口
+ *
  * @author rensf
- * @date 2021/6/8 20:18
+ * @date 2021/6/8
  */
 public interface ICartService extends IService<CartProduct> {
 

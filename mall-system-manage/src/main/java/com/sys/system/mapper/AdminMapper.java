@@ -10,8 +10,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
+ * 系统管理员 映射层
+ *
  * @author rensf
- * @date 2021/5/21 15:05
+ * @date 2021/5/21
  */
 @Mapper
 @Repository

@@ -11,7 +11,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 /**
  * @author rensf
- * @date 2021/5/12 18:04
+ * @date 2021/5/12
  */
 @Configuration
 public class SwaggerConfig {

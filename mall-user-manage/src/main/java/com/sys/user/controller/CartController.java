@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 /**
- * 购物车 控制器
+ * 购物车 控制层
+ *
  * @author rensf
  * @date 2021/6/8
  */

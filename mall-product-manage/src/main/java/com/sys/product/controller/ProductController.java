@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 产品 控制器
+ * 产品 控制层
  *
  * @author rensf
  * @date 2021/3/26
@@ -54,7 +54,7 @@ public class ProductController {
     @ApiOperation("根据产品ID查询产品信息")
     public Result<Product> queryProductById(String productId) {
         Result<Product> result = new Result<>();
-        result.setResult(productService.getById(productId));
+        result.setResult(productService.queryProductById(productId));
         return result;
     }
 

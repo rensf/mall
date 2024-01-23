@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 订单 服务接口
+ *
  * @author rensf
- * @date 2021/5/8 17:05
+ * @date 2021/5/8
  */
 public interface IOrderService extends IService<Order> {
 
@@ -32,6 +34,13 @@ public interface IOrderService extends IService<Order> {
      * @return
      */
     String addOrder();
+
+    /**
+     * 确认订单
+     * @param order 订单信息
+     * @return 确认结果
+     */
+    Integer confirmOrder(Order order);
 
     /**
      * 修改订单状态

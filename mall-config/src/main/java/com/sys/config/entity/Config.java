@@ -8,8 +8,10 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 
 /**
+ * 配置 实体
+ *
  * @author rensf
- * @date 2021/5/13 11:35
+ * @date 2021/5/13
  */
 @Data
 @Component

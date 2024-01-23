@@ -7,7 +7,7 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 
 /**
  * @author rensf
- * @date 2021/5/10 14:09
+ * @date 2021/5/10
  */
 @SpringBootApplication
 @EnableEurekaClient

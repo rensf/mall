@@ -6,13 +6,13 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 /**
+ * 用户 映射层
+ *
  * @author rensf
- * @date 2021/6/4 17:11
+ * @date 2021/6/4
  */
 @Mapper
 @Repository
 public interface UserMapper extends BaseMapper<User> {
-
-
 
 }

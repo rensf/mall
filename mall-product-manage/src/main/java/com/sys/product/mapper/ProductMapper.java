@@ -9,6 +9,8 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 /**
+ * 产品 映射层
+ *
  * @author rensf
  * @date 2021/3/26
  */
@@ -61,5 +63,38 @@ public interface ProductMapper extends BaseMapper<Product> {
             "a.product_id desc " +
             "</script>")
     IPage<Product> queryProductListByPage(Page<Product> page, Product product);
+
+    @Select("select " +
+            "a.*, " +
+            "group_concat(c.product_type_id)        as typeId, " +
+            "group_concat(c.product_type_name)      as typeName, " +
+            "group_concat(distinct d.product_image) as homeImage, " +
+            "group_concat(distinct e.product_image) as image " +
+            "from td_b_product a " +
+            "left join tr_b_product_product_type b " +
+            "on " +
+            "a.product_id = b.product_id " +
+            "and b.flag = 1 " +
+            "left join td_b_product_type c " +
+            "on " +
+            "b.product_type_id = c.product_type_id " +
+            "and c.flag = 1 " +
+            "left join td_b_product_image d " +
+            "on " +
+            "a.product_id = d.product_id " +
+            "and d.flag = 1 " +
+            "and d.image_position = 'home' " +
+            "left join td_b_product_image e " +
+            "on " +
+            "a.product_id = e.product_id " +
+            "and e.flag = 1 " +
+            "and e.image_position is null " +
+            "where a.flag = 1 " +
+            "and a.product_id = #{productId} " +
+            "group by " +
+            "a.product_id " +
+            "order by " +
+            "a.product_id desc ")
+    Product queryProductById(String productId);
 
 }

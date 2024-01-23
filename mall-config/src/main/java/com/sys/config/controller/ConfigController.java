@@ -11,8 +11,10 @@ import javax.annotation.Resource;
 import java.util.Map;
 
 /**
+ * 配置 控制层
+ *
  * @author rensf
- * @date 2021/5/12 17:26
+ * @date 2021/5/12
  */
 @RestController
 @RequestMapping("/config")

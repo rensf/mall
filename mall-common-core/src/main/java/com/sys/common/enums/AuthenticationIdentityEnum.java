@@ -4,6 +4,7 @@ import lombok.Getter;
 
 /**
  * 身份认证标识枚举
+ *
  * @author rensf
  * @date 2023/2/17
  */

@@ -9,8 +9,10 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * 用户 服务接口
+ *
  * @author rensf
- * @date 2021/6/4 17:10
+ * @date 2021/6/4
  */
 public interface IUserService extends IService<User> {
 

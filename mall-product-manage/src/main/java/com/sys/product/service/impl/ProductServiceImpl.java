@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 产品 服务层
+ *
  * @author rensf
  * @date 2021/3/26
  */
@@ -48,8 +50,8 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     @Override
-    public List<Product> queryProductList() {
-        return null;
+    public Product queryProductById(String productId) {
+        return productMapper.queryProductById(productId);
     }
 
     @Override

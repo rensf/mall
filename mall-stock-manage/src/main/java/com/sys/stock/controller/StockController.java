@@ -5,8 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * 库存 控制层
+ *
  * @author rensf
- * @date 2021/5/17 16:49
+ * @date 2021/5/17
  */
 @RestController
 @RequestMapping("/stock")

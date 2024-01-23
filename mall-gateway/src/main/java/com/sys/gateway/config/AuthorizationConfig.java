@@ -40,7 +40,7 @@ import java.util.Objects;
  * 鉴权配置
  *
  * @author rensf
- * @date 2022/6/15 23:19
+ * @date 2022/6/15
  */
 @ConfigurationProperties(prefix = "security")
 @RequiredArgsConstructor

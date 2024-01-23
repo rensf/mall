@@ -6,8 +6,10 @@ import lombok.Data;
 import org.springframework.stereotype.Component;
 
 /**
+ * 用户 实体
+ *
  * @author rensf
- * @date 2021/5/10 16:27
+ * @date 2021/5/10
  */
 @Data
 @Component

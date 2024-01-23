@@ -34,11 +34,12 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 用户 服务层
+ *
  * @author rensf
- * @date 2021/6/4 17:10
+ * @date 2021/6/4
  */
 @Service
-@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
     @Resource
@@ -131,6 +132,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Integer addUser(User user) {
         user.setUserId(IDUtils.generateID());
         return userMapper.insert(user);

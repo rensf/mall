@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * 产品 服务接口
+ *
  * @author rensf
  * @date 2021/3/26
  */
@@ -27,45 +28,45 @@ public interface IProductService extends IService<Product> {
     IPage<Product> queryProductListByPage(Page<Product> page, Product product);
 
     /**
-     * 查询产品列表
-     * @return
+     * 根据产品ID查询产品信息
+     * @return 产品信息
      */
-    List<Product> queryProductList();
+    Product queryProductById(String productId);
 
     /**
      * 添加产品
-     * @param product
-     * @return
+     * @param product 产品信息
+     * @return 结果
      */
     Integer addProduct(Product product);
 
     /**
-     * 更新产品信息
-     * @param product
-     * @return
+     * 更新产品
+     * @param product 产品信息
+     * @return 结果
      */
     Integer updateProduct(Product product);
 
     /**
      * 预览产品图片
-     * @param imageName
-     * @param response
-     * @throws IOException
+     * @param imageName 图片名称
+     * @param response 响应
+     * @throws IOException IO异常
      */
     void viewProductImage(String imageName, HttpServletResponse response) throws IOException;
 
     /**
      * 上传产品图片
-     * @param image
-     * @return
-     * @throws IOException
+     * @param image 图片
+     * @return 结果
+     * @throws IOException IO异常
      */
     String uploadProductImage(MultipartFile image) throws IOException;
 
     /**
      * 删除产品图片
-     * @param imageName
-     * @return
+     * @param imageName 图片名称
+     * @return 结果
      */
     Integer deleteProductImage(String imageName);
 

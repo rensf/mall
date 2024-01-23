@@ -8,8 +8,9 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 
 /**
  * 鉴权模块启动类
+ *
  * @author rensf
- * @date 2022/12/26 16:43
+ * @date 2022/12/26
  */
 @SpringBootApplication
 @EnableEurekaClient

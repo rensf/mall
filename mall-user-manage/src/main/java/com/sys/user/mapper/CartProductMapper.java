@@ -10,8 +10,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
+ * 购物车产品 映射层
+ *
  * @author rensf
- * @date 2021/6/8 20:20
+ * @date 2021/6/8
  */
 @Mapper
 @Repository
@@ -20,24 +22,24 @@ public interface CartProductMapper extends BaseMapper<CartProduct> {
     /**
      * 通过购物车Id查询其下产品列表
      *
-     * @param cartId
+     * @param userId
      * @return
      */
-    @Select("SELECT \n" +
-            "  a.cart_id \n" +
-            "  b.product_id \n" +
-            "  b.product_name \n" +
-            "  b.product_model \n" +
-            "  b.product_unit \n" +
-            "  b.product_price \n" +
-            "  b.product_discount_price \n" +
-            "FROM\n" +
-            "  tr_b_cart_product a \n" +
-            "  LEFT JOIN td_b_product b \n" +
-            "    ON a.`product_id` = b.`product_id` \n" +
-            "WHERE a.`flag` = 1 \n" +
-            "  AND b.`flag` = 1 \n" +
-            "  AND a.`cart_id` = #{cartId} ")
-    List<CartProduct> queryProductByCartId(@Param("cartId") String cartId);
+    @Select("SELECT " +
+            "a.user_id, " +
+            "b.product_id, " +
+            "b.product_name, " +
+            "b.product_model, " +
+            "b.product_unit, " +
+            "b.product_price, " +
+            "b.product_discount_price " +
+            "FROM " +
+            "tr_b_cart_product a " +
+            "LEFT JOIN td_b_product b " +
+            "ON a.`product_id` = b.`product_id` " +
+            "WHERE a.`flag` = 1 " +
+            "AND b.`flag` = 1 " +
+            "AND a.`user_id` = #{userId} ")
+    List<CartProduct> queryProductByCartId(@Param("userId") String userId);
 
 }

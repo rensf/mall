@@ -1,6 +1,6 @@
 package com.sys.auth.security.detail.sysadmindetail;
 
-import com.sys.auth.api.AuthClientFeign;
+import com.sys.auth.api.AuthSystemFeign;
 import com.sys.common.dto.AdminAuthDTO;
 import com.sys.common.result.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -23,12 +23,12 @@ import java.util.Objects;
 public class SysAdminDetailsServiceImpl implements UserDetailsService {
 
     @Resource
-    private AuthClientFeign authClientFeign;
+    private AuthSystemFeign authSystemFeign;
 
     @Override
     public UserDetails loadUserByUsername(String adminName) throws UsernameNotFoundException {
         SysAdminDetails adminDetails = null;
-        Result<AdminAuthDTO> result = authClientFeign.getAdminByAdminName(adminName);
+        Result<AdminAuthDTO> result = authSystemFeign.getAdminByAdminName(adminName);
         if (Result.isSuccess(result)) {
             AdminAuthDTO admin = result.getResult();
             if (Objects.nonNull(admin)) {

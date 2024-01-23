@@ -6,8 +6,9 @@ import java.io.Serializable;
 
 /**
  * @author rensf
- * @date 2022/6/18 15:50
+ * @date 2022/6/18
  */
+@Getter
 public enum ResultCodeEnum implements Serializable {
 
     // 调取成功
@@ -25,9 +26,7 @@ public enum ResultCodeEnum implements Serializable {
     // 客户端认证失败
     CLIENT_AUTHENTICATION_FAILED("10005", "客户端认证失败！");
 
-    @Getter
     private String code;
-    @Getter
     private String message;
 
     ResultCodeEnum(String code, String message) {

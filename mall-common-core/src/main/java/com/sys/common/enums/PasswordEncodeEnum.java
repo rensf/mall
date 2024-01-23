@@ -4,6 +4,7 @@ import lombok.Getter;
 
 /**
  * 密码编码
+ *
  * @author rensf
  * @date 2023/1/5
  */

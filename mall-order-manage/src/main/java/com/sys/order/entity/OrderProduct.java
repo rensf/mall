@@ -7,8 +7,10 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 
 /**
+ * 订单产品 实体
+ *
  * @author rensf
- * @date 2021/6/8 11:33
+ * @date 2021/6/8
  */
 @Data
 @Component

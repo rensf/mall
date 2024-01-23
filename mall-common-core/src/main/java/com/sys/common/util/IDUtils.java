@@ -6,7 +6,7 @@ import java.util.Random;
 
 /**
  * @author rensf
- * @date 2021/5/10 9:23
+ * @date 2021/5/10
  */
 public class IDUtils {
 

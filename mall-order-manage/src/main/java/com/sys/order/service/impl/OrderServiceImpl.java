@@ -16,8 +16,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 订单 服务层
+ *
  * @author rensf
- * @date 2021/5/8 17:15
+ * @date 2021/5/8
  */
 @Service
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements IOrderService {
@@ -43,6 +45,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         String orderId = IDUtils.generateID();
         stringRedisTemplate.opsForValue().set(BusinessConstants.ORDER_TOKEN_PREFIX + orderId, orderId);
         return orderId;
+    }
+
+    @Override
+    public Integer confirmOrder(Order order) {
+        // 确认订单，将其插入数据库中
+        return orderMapper.insert(order);
     }
 
     @Override

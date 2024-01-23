@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.sys.system.entity.Permission;
 
 /**
+ * 权限 服务接口
+ *
  * @author rensf
  * @date 2023/10/26
  */

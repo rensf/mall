@@ -1,7 +1,7 @@
-package com.sys.system.mapper;
+package com.sys.auth.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.sys.system.entity.Client;
+import com.sys.auth.entity.Client;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

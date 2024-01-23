@@ -13,8 +13,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 产品类型 控制层
+ *
  * @author rensf
- * @date 2022/4/28 16:24
+ * @date 2022/4/28
  */
 @RestController
 @RequestMapping("/productType")

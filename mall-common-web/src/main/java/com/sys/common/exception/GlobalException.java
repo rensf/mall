@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  * @author rensf
- * @date 2021/5/8 17:00
+ * @date 2021/5/8
  */
 @Getter
 public class GlobalException extends Exception implements Serializable {

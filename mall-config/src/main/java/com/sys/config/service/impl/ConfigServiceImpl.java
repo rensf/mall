@@ -25,8 +25,10 @@ import java.net.URISyntaxException;
 import java.util.Map;
 
 /**
+ * 配置 服务层
+ *
  * @author rensf
- * @date 2021/5/13 11:31
+ * @date 2021/5/13
  */
 @Service
 @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
