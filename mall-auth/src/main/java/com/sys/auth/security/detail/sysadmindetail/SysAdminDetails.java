@@ -1,9 +1,9 @@
 package com.sys.auth.security.detail.sysadmindetail;
 
-import com.sys.common.constant.GlobalConstants;
-import com.sys.common.constant.SecurityConstants;
-import com.sys.common.dto.AdminAuthDTO;
-import com.sys.common.enums.PasswordEncodeEnum;
+import com.sys.common.core.constant.GlobalConstants;
+import com.sys.common.core.constant.SecurityConstants;
+import com.sys.common.web.dto.AdminAuthDTO;
+import com.sys.common.core.enums.PasswordEncodeEnum;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -36,7 +36,7 @@ public class SysAdminDetails implements UserDetails {
         this.setPassword(PasswordEncodeEnum.MD5.getPrefix() + SecurityConstants.SECRET_KEY + admin.getPassword());
         this.setEnabled(GlobalConstants.STATUS_TRUE.equals(admin.getFlag()));
         if (!CollectionUtils.isEmpty(admin.getRoles())) {
-            admin.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role)));
+            admin.getRoles().forEach(role -> this.authorities.add(new SimpleGrantedAuthority(role)));
         }
     }
 

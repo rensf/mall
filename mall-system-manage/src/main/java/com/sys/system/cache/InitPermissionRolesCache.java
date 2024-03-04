@@ -4,6 +4,7 @@ import com.sys.system.service.IPermissionService;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * 初始化权限角色缓存
@@ -19,7 +20,7 @@ public class InitPermissionRolesCache implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        permissionService.refreshPermRolesRules();
+        Assert.isTrue(permissionService.refreshPermRolesRules(), "初始化权限角色缓存失败！");
     }
 
 }

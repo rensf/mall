@@ -1,7 +1,7 @@
 package com.sys.config.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.sys.common.result.Result;
+import com.sys.common.core.result.Result;
 import com.sys.config.entity.Config;
 import com.sys.config.service.IConfigService;
 import io.swagger.annotations.ApiOperation;

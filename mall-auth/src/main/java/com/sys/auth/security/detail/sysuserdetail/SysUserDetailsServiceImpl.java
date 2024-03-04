@@ -1,8 +1,8 @@
 package com.sys.auth.security.detail.sysuserdetail;
 
 import com.sys.auth.api.AuthUserFeign;
-import com.sys.common.dto.UserAuthDTO;
-import com.sys.common.result.Result;
+import com.sys.common.web.dto.UserAuthDTO;
+import com.sys.common.core.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

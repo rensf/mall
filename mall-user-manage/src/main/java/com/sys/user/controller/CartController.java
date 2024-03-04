@@ -1,6 +1,6 @@
 package com.sys.user.controller;
 
-import com.sys.common.result.Result;
+import com.sys.common.core.result.Result;
 import com.sys.user.entity.CartProduct;
 import com.sys.user.service.ICartService;
 import io.swagger.annotations.Api;

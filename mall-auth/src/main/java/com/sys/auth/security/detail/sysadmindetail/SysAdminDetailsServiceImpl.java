@@ -1,8 +1,8 @@
 package com.sys.auth.security.detail.sysadmindetail;
 
 import com.sys.auth.api.AuthSystemFeign;
-import com.sys.common.dto.AdminAuthDTO;
-import com.sys.common.result.Result;
+import com.sys.common.web.dto.AdminAuthDTO;
+import com.sys.common.core.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

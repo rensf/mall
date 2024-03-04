@@ -3,7 +3,7 @@ package com.sys.system.service.impl;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.sys.common.constant.GlobalConstants;
+import com.sys.common.core.constant.GlobalConstants;
 import com.sys.system.entity.Permission;
 import com.sys.system.mapper.PermissionMapper;
 import com.sys.system.service.IPermissionService;
@@ -27,10 +27,10 @@ import java.util.stream.Collectors;
 public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permission> implements IPermissionService {
 
     @Resource
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Override
-    public boolean refreshPermRolesRules() {
+    public Boolean refreshPermRolesRules() {
         // 先清除已缓存的权限角色集合
         redisTemplate.delete(Arrays.asList(GlobalConstants.URL_PERM_ROLES_KEY, GlobalConstants.BTN_PERM_ROLES_KEY));
         // 查询权限角色集合

@@ -12,12 +12,8 @@
     <artifactId>mall-system-manage</artifactId>
     <version>0.0.1</version>
     <name>mall-system-manage</name>
-    <description>mall-system-manage</description>
+    <description>系统管理</description>
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
@@ -31,9 +27,9 @@
             <artifactId>spring-cloud-starter-bus-amqp</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.4.2</version>
+            <groupId>com.sys</groupId>
+            <artifactId>mall-common-mybatis</artifactId>
+            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.sys</groupId>

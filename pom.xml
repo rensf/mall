@@ -20,6 +20,8 @@
         <module>mall-system-manage</module>
         <module>mall-common-core</module>
         <module>mall-common-web</module>
+        <module>mall-common-mybatis</module>
+        <module>mall-common-rabbitmq</module>
     </modules>
     <groupId>com.sys</groupId>
     <artifactId>mall</artifactId>

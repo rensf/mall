@@ -1,7 +1,7 @@
 package com.sys.auth.controller;
 
 import com.sys.auth.util.RequestUtils;
-import com.sys.common.result.Result;
+import com.sys.common.core.result.Result;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

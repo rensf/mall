@@ -4,9 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.sys.common.util.IDUtils;
+import com.sys.common.core.util.IDUtils;
 import com.sys.product.config.MyPropsConfig;
 import com.sys.product.entity.Product;
+import com.sys.product.entity.ProductAttr;
 import com.sys.product.entity.ProductImage;
 import com.sys.product.entity.ProductProductType;
 import com.sys.product.mapper.ProductImageMapper;
@@ -23,7 +24,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -107,6 +107,11 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         ProductImage productImage = new ProductImage();
         productImage.setFlag(0);
         return productImageMapper.update(productImage, uw);
+    }
+
+    @Override
+    public Boolean addProductAttr(ProductAttr productAttr) {
+        return null;
     }
 
     private void insertProductProductType(Product product) {

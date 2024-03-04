@@ -23,7 +23,7 @@ public class SysAdminAuthenticationProvider implements AuthenticationProvider {
         SysAdminAuthenticationToken authenticationToken = (SysAdminAuthenticationToken) authentication;
         String userName = (String) authenticationToken.getPrincipal();
         UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
-        SysAdminAuthenticationToken result = new SysAdminAuthenticationToken(userDetails, authentication.getCredentials(), new HashSet<>());
+        SysAdminAuthenticationToken result = new SysAdminAuthenticationToken(userDetails, authentication.getCredentials(), userDetails.getAuthorities());
         result.setDetails(authentication.getDetails());
         return result;
     }

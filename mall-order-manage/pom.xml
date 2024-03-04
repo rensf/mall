@@ -11,20 +11,16 @@
     <artifactId>mall-order-manage</artifactId>
     <version>0.0.1</version>
     <name>mall-order-manage</name>
-    <description>mall-order-manage</description>
+    <description>订单管理</description>
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.4.2</version>
+            <groupId>com.sys</groupId>
+            <artifactId>mall-common-mybatis</artifactId>
+            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.sys</groupId>

@@ -2,7 +2,7 @@ package com.sys.auth.security.provider;
 
 import com.sys.auth.security.provider.sysadminprovider.SysAdminAuthenticationToken;
 import com.sys.auth.security.provider.sysuserprovider.SysUserAuthenticationToken;
-import com.sys.common.constant.SecurityConstants;
+import com.sys.common.core.constant.SecurityConstants;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.common.exceptions.InvalidGrantException;

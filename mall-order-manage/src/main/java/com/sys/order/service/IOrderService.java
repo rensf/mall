@@ -31,7 +31,7 @@ public interface IOrderService extends IService<Order> {
 
     /**
      * 添加订单
-     * @return
+     * @return 订单ID
      */
     String addOrder();
 
@@ -40,7 +40,7 @@ public interface IOrderService extends IService<Order> {
      * @param order 订单信息
      * @return 确认结果
      */
-    Integer confirmOrder(Order order);
+    Boolean confirmOrder(Order order);
 
     /**
      * 修改订单状态

@@ -3,7 +3,7 @@ package com.sys.product.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.sys.common.util.IDUtils;
+import com.sys.common.core.util.IDUtils;
 import com.sys.product.entity.ProductType;
 import com.sys.product.mapper.ProductTypeMapper;
 import com.sys.product.service.IProductTypeService;

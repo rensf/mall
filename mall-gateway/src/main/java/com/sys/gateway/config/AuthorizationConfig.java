@@ -3,7 +3,7 @@ package com.sys.gateway.config;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.io.IoUtil;
-import com.sys.common.enums.ResultCodeEnum;
+import com.sys.common.core.enums.ResultCodeEnum;
 import com.sys.gateway.constant.AuthorizeConstants;
 import com.sys.gateway.manager.AuthorizationManager;
 import com.sys.gateway.util.ResponseUtils;

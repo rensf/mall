@@ -1,10 +1,7 @@
 package com.sys.user.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.sys.common.dto.UserAuthDTO;
-import com.sys.common.exception.GlobalException;
-import com.sys.common.util.TokenUtils;
-import com.sys.common.result.Result;
+import com.sys.common.web.dto.UserAuthDTO;
+import com.sys.common.core.result.Result;
 import com.sys.user.entity.Address;
 import com.sys.user.entity.User;
 import com.sys.user.service.IUserService;
@@ -14,7 +11,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 

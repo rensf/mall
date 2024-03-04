@@ -3,7 +3,7 @@ package com.sys.user.service.impl;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.sys.common.util.TokenUtils;
+import com.sys.common.web.util.TokenUtils;
 import com.sys.user.entity.CartProduct;
 import com.sys.user.mapper.CartProductMapper;
 import com.sys.user.mapper.UserMapper;
@@ -24,11 +24,6 @@ import java.util.List;
  */
 @Service
 public class CartServiceImpl extends ServiceImpl<CartProductMapper, CartProduct> implements ICartService {
-
-    @Resource
-    private UserMapper userMapper;
-    @Resource
-    private RedisTemplate redisTemplate;
 
     @Override
     public List<CartProduct> queryCart() {

@@ -1,8 +1,8 @@
 package com.sys.gateway.util;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sys.common.enums.ResultCodeEnum;
-import com.sys.common.result.Result;
+import com.sys.common.core.enums.ResultCodeEnum;
+import com.sys.common.core.result.Result;
 import org.apache.http.HttpHeaders;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;

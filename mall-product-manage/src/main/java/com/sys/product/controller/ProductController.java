@@ -2,8 +2,9 @@ package com.sys.product.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.sys.common.result.Result;
+import com.sys.common.core.result.Result;
 import com.sys.product.entity.Product;
+import com.sys.product.entity.ProductAttr;
 import com.sys.product.service.IProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,7 +22,6 @@ import java.io.IOException;
  * @author rensf
  * @date 2021/3/26
  */
-@RefreshScope
 @RestController
 @RequestMapping("/product")
 @Api(tags = "产品管理")

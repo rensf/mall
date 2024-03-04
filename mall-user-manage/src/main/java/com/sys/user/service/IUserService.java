@@ -1,7 +1,7 @@
 package com.sys.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.sys.common.exception.GlobalException;
+import com.sys.common.web.exception.GlobalException;
 import com.sys.user.entity.Address;
 import com.sys.user.entity.User;
 

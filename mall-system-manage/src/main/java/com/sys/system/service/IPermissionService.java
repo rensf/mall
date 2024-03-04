@@ -13,8 +13,8 @@ public interface IPermissionService extends IService<Permission> {
 
     /**
      * 刷新Redis缓存中
-     * @return
+     * @return 结果
      */
-    boolean refreshPermRolesRules();
+    Boolean refreshPermRolesRules();
 
 }

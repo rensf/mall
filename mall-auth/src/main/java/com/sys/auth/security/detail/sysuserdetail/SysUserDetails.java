@@ -1,9 +1,9 @@
 package com.sys.auth.security.detail.sysuserdetail;
 
-import com.sys.common.constant.GlobalConstants;
-import com.sys.common.constant.SecurityConstants;
-import com.sys.common.dto.UserAuthDTO;
-import com.sys.common.enums.PasswordEncodeEnum;
+import com.sys.common.core.constant.GlobalConstants;
+import com.sys.common.core.constant.SecurityConstants;
+import com.sys.common.web.dto.UserAuthDTO;
+import com.sys.common.core.enums.PasswordEncodeEnum;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 
 /**
  * 用户信息

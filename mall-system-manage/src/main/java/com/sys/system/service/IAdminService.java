@@ -1,7 +1,7 @@
 package com.sys.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.sys.common.dto.AdminAuthDTO;
+import com.sys.common.web.dto.AdminAuthDTO;
 import com.sys.system.entity.Admin;
 
 /**
@@ -26,4 +26,9 @@ public interface IAdminService extends IService<Admin> {
      */
     Integer addAdmin(Admin admin);
 
+    /**
+     * 获取登录管理员信息
+     * @return 管理员信息
+     */
+    Admin getLoginAdminInfo();
 }

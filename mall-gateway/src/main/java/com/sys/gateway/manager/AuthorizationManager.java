@@ -2,8 +2,8 @@ package com.sys.gateway.manager;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;
-import com.sys.common.constant.GlobalConstants;
-import com.sys.common.constant.SecurityConstants;
+import com.sys.common.core.constant.GlobalConstants;
+import com.sys.common.core.constant.SecurityConstants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -50,31 +50,44 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
         if (HttpMethod.OPTIONS.equals(request.getMethod())) {
             return Mono.just(new AuthorizationDecision(true));
         }
-        PathMatcher pathMatcher = new AntPathMatcher();
-        String path = request.getMethodValue() + ":" + request.getURI();
-
+        // 获取token
         String token = request.getHeaders().getFirst(SecurityConstants.AUTHORIZATION_KEY);
         if (StrUtil.isNotBlank(token) && StrUtil.startWithIgnoreCase(token, SecurityConstants.JWT_PREFIX)) {
+            PathMatcher pathMatcher = new AntPathMatcher();
+            String path = request.getMethodValue() + ":" + request.getURI().getPath();
+
             Map<String, Object> urlPermRolesMap = redisTemplate.opsForHash().entries(GlobalConstants.URL_PERM_ROLES_KEY);
+
+            // 是否需要鉴权
+            boolean ifAuthenticated = false;
 
             List<String> authorizedRoles = new ArrayList<>();
             for (Map.Entry<String, Object> permRoles : urlPermRolesMap.entrySet()) {
                 String perm = permRoles.getKey();
                 if (pathMatcher.match(path, perm)) {
                     authorizedRoles.addAll(Convert.toList(String.class, permRoles.getValue()));
+                    if (!ifAuthenticated) {
+                        ifAuthenticated = true;
+                    }
                 }
+            }
+
+            if (!ifAuthenticated) {
+                return Mono.just(new AuthorizationDecision(true));
             }
 
             return mono.filter(Authentication::isAuthenticated)
                 .flatMapIterable(Authentication::getAuthorities)
                 .map(GrantedAuthority::getAuthority)
                 .any(authority -> {
+                    log.info("鉴权：用户角色：{}，访问路径：{}", authority, path);
                     String roleCode = StrUtil.removePrefix(authority, SecurityConstants.AUTHORITY_PREFIX);
                     if (GlobalConstants.USER_ROLE.equals(roleCode)) {
                         return true;
                     }
                     return authorizedRoles.contains(roleCode);
-                }).map(AuthorizationDecision::new)
+                })
+                .map(AuthorizationDecision::new)
                 .defaultIfEmpty(new AuthorizationDecision(false));
         } else {
             return Mono.just(new AuthorizationDecision(false));

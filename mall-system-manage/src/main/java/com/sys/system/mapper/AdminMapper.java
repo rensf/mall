@@ -1,13 +1,11 @@
 package com.sys.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.sys.common.dto.AdminAuthDTO;
+import com.sys.common.web.dto.AdminAuthDTO;
 import com.sys.system.entity.Admin;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * 系统管理员 映射层

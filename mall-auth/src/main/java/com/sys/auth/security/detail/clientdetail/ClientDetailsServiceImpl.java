@@ -2,7 +2,7 @@ package com.sys.auth.security.detail.clientdetail;
 
 import com.sys.auth.entity.Client;
 import com.sys.auth.sevice.IClientService;
-import com.sys.common.enums.PasswordEncodeEnum;
+import com.sys.common.core.enums.PasswordEncodeEnum;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;

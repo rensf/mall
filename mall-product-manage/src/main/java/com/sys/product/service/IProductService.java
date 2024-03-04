@@ -4,11 +4,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sys.product.entity.Product;
+import com.sys.product.entity.ProductAttr;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * 产品 服务接口
@@ -69,5 +69,12 @@ public interface IProductService extends IService<Product> {
      * @return 结果
      */
     Integer deleteProductImage(String imageName);
+
+    /**
+     * 添加产品属性
+     * @param productAttr 产品属性
+     * @return 结果
+     */
+    Boolean addProductAttr(ProductAttr productAttr);
 
 }

@@ -11,7 +11,7 @@
     <artifactId>mall-user-manage</artifactId>
     <version>0.0.1</version>
     <name>mall-user-manage</name>
-    <description>mall-user-manage</description>
+    <description>用户管理</description>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -22,9 +22,9 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.4.2</version>
+            <groupId>com.sys</groupId>
+            <artifactId>mall-common-mybatis</artifactId>
+            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.sys</groupId>

@@ -1,9 +1,6 @@
 package com.sys.auth.security.refresh;
 
 import com.sys.auth.util.RequestUtils;
-import com.sys.common.constant.SecurityConstants;
-import com.sys.common.enums.ResultCodeEnum;
-import com.sys.common.exception.GlobalException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.core.Authentication;

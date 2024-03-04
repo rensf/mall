@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.sys.common.util.JsonUtils;
+import com.sys.common.core.util.JsonUtils;
 import com.sys.config.config.RefreshBusHandler;
 import com.sys.config.entity.Config;
 import com.sys.config.mapper.ConfigMapper;

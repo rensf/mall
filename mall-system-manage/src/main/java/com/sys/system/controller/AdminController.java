@@ -1,12 +1,11 @@
 package com.sys.system.controller;
 
-import com.sys.common.dto.AdminAuthDTO;
-import com.sys.common.result.Result;
+import com.sys.common.web.dto.AdminAuthDTO;
+import com.sys.common.core.result.Result;
 import com.sys.system.entity.Admin;
 import com.sys.system.service.IAdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -29,6 +28,12 @@ public class AdminController {
     @ApiOperation("通过用户名获取用户")
     public Result<AdminAuthDTO> getAdminByAdminName(@RequestParam String adminName) {
         return Result.success(adminService.getAdminByAdminName(adminName));
+    }
+
+    @GetMapping("/getLoginAdminInfo")
+    @ApiOperation("获取登录管理员信息")
+    public Result<Admin> getLoginAdminInfo() {
+        return Result.success(adminService.getLoginAdminInfo());
     }
 
     @PostMapping("/addAdmin")
