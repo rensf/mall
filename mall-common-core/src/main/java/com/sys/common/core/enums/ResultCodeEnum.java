@@ -5,6 +5,8 @@ import lombok.Getter;
 import java.io.Serializable;
 
 /**
+ * 结果编码
+ *
  * @author rensf
  * @date 2022/6/18
  */
@@ -26,8 +28,8 @@ public enum ResultCodeEnum implements Serializable {
     // 客户端认证失败
     CLIENT_AUTHENTICATION_FAILED("10005", "客户端认证失败！");
 
-    private String code;
-    private String message;
+    private final String code;
+    private final String message;
 
     ResultCodeEnum(String code, String message) {
         this.code = code;

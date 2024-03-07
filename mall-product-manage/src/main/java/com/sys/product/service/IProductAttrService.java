@@ -14,11 +14,11 @@ import java.util.List;
 public interface IProductAttrService extends IService<ProductAttr> {
 
     /**
-     * 添加产品属性
+     * 添加或删除产品属性
      * @param productAttrList 产品属性列表
      * @return 结果
      */
-    Boolean addProductAttr(List<ProductAttr> productAttrList);
+    Boolean addOrDelProductAttr(String productId, List<ProductAttr> productAttrList);
 
     /**
      * 查询产品属性

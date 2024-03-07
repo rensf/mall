@@ -3,6 +3,8 @@ package com.sys.common.core.enums;
 import lombok.Getter;
 
 /**
+ * 订单状态
+ *
  * @author rensf
  * @date 2022/10/8
  */
@@ -22,9 +24,9 @@ public enum OrderStatusEnum {
     // 售后
     AFTER_SALES(601, "售后");
 
-    private Integer code;
+    private final Integer code;
 
-    private String text;
+    private final String text;
 
     OrderStatusEnum(Integer code, String text) {
         this.code = code;

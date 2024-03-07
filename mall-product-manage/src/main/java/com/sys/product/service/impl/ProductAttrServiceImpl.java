@@ -27,9 +27,10 @@ public class ProductAttrServiceImpl extends ServiceImpl<ProductAttrMapper, Produ
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public Boolean addProductAttr(List<ProductAttr> productAttrList) {
-        String productId = productAttrList.get(0).getProductId();
+    public Boolean addOrDelProductAttr(String productId, List<ProductAttr> productAttrList) {
+        // 删除原有数据
         this.remove(new LambdaQueryWrapper<ProductAttr>().eq(ProductAttr::getProductId, productId));
+        // 组装新产品属性数据
         List<ProductAttr> newProductAttrList = productAttrList.stream()
             .flatMap(productAttr -> productAttr.getProductAttrValues().stream()
                 .map(productAttrValue -> {
@@ -38,10 +39,12 @@ public class ProductAttrServiceImpl extends ServiceImpl<ProductAttrMapper, Produ
                     newProductAttr.setProductId(productId);
                     newProductAttr.setProductAttrName(productAttr.getProductAttrName());
                     newProductAttr.setProductAttrValue(productAttrValue);
+                    newProductAttr.setWidget(productAttr.getWidget());
                     return newProductAttr;
                 })
             )
             .collect(Collectors.toList());
+        // 批量添加
         return this.saveBatch(newProductAttrList);
     }
 

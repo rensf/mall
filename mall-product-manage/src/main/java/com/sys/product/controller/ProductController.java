@@ -52,26 +52,25 @@ public class ProductController {
      */
     @GetMapping("/queryProductById")
     @ApiOperation("根据产品ID查询产品信息")
-    public Result<Product> queryProductById(String productId) {
-        Result<Product> result = new Result<>();
-        result.setResult(productService.queryProductById(productId));
-        return result;
+    public Result<Product> queryProductById(@RequestParam String productId) {
+        return Result.success(productService.queryProductById(productId));
     }
 
     @PostMapping("/addProduct")
     @ApiOperation("添加产品")
-    public Result<Integer> addProduct(@RequestBody Product product) {
-        Result<Integer> result = new Result<>();
-        result.setResult(productService.addProduct(product));
-        return result;
+    public Result<Boolean> addProduct(@RequestBody Product product) {
+        return Result.success(productService.addProduct(product));
+    }
+
+    @DeleteMapping("/delProduct/{productId}")
+    public Result<Boolean> delProduct(@PathVariable String productId) {
+        return Result.success(productService.delProduct(productId));
     }
 
     @PutMapping("/updateProduct")
     @ApiOperation("更新产品信息")
-    public Result<Integer> updateProduct(@RequestBody Product product) {
-        Result<Integer> result = new Result<>();
-        result.setResult(productService.updateProduct(product));
-        return result;
+    public Result<Boolean> updateProduct(@RequestBody Product product) {
+        return Result.success(productService.updateProduct(product));
     }
 
     @GetMapping("/viewProductImage/{imageName}")
@@ -82,18 +81,14 @@ public class ProductController {
 
     @PostMapping("/uploadProductImage")
     @ApiOperation("上传产品图片")
-    public Result uploadProductImage(@RequestBody MultipartFile file) throws IOException {
-        Result result = new Result();
-        result.setResult(productService.uploadProductImage(file));
-        return result;
+    public Result<String> uploadProductImage(@RequestBody MultipartFile file) throws IOException {
+        return Result.success(productService.uploadProductImage(file));
     }
 
     @DeleteMapping("/deleteProductImage/{imageName}")
     @ApiOperation("删除产品图片")
-    public Result deleteProductImage(@PathVariable("imageName") String imageName) {
-        Result result = new Result();
-        result.setResult(productService.deleteProductImage(imageName));
-        return result;
+    public Result<Integer> deleteProductImage(@PathVariable("imageName") String imageName) {
+        return Result.success(productService.deleteProductImage(imageName));
     }
 
 }

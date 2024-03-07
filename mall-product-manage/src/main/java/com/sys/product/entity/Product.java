@@ -8,6 +8,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 产品 实体
@@ -70,51 +71,39 @@ public class Product implements Serializable {
     private Integer flag = 1;
 
     /**
-     * 类型
-     */
-    @TableField(exist = false)
-    private String typeName;
-
-    /**
      * 类型ID
      */
     @TableField(exist = false)
-    private String typeId;
+    private List<String> typeIds;
 
     /**
-     * 类型ID集合
+     * 类型名称
      */
     @TableField(exist = false)
-    private String[] typeIds;
+    private List<String> typeNames;
 
     /**
      * 图片ID
      */
     @TableField(exist = false)
-    private String image;
-
-    /**
-     * 图片ID集合
-     */
-    @TableField(exist = false)
-    private String[] images;
+    private List<String> images;
 
     /**
      * 首页图片ID
      */
     @TableField(exist = false)
-    private String homeImage;
-
-    /**
-     * 首页图片ID集合
-     */
-    @TableField(exist = false)
-    private String[] homeImages;
+    private List<String> homeImages;
 
     /**
      * 购买数量
      */
     @TableField(exist = false)
     private int nums;
+
+    /**
+     * 产品属性
+     */
+    @TableField(exist = false)
+    private List<ProductAttr> productAttrs;
 
 }

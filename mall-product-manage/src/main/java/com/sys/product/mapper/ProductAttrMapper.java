@@ -23,10 +23,12 @@ public interface ProductAttrMapper extends BaseMapper<ProductAttr> {
     @Select("select " +
             "product_id, " +
             "product_attr_name, " +
+            "widget, " +
             "group_concat(product_attr_value) as product_attr_values " +
             "from " +
             "td_b_product_attr tbpa " +
             "where tbpa.flag = 1 " +
+            "and tbpa.product_id = #{productId} " +
             "group by " +
             "tbpa.product_id, tbpa.product_attr_name ")
     @Result(property = "productAttrValues", column = "product_attr_values", typeHandler = StringToListTypeHandler.class)

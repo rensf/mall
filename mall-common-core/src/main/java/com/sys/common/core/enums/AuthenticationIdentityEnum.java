@@ -3,11 +3,12 @@ package com.sys.common.core.enums;
 import lombok.Getter;
 
 /**
- * 身份认证标识枚举
+ * 身份认证标识
  *
  * @author rensf
  * @date 2023/2/17
  */
+@Getter
 public enum AuthenticationIdentityEnum {
 
     // 用户名方式
@@ -15,11 +16,8 @@ public enum AuthenticationIdentityEnum {
     // 手机号方式
     MOBILE("mobile", "手机号");
 
-    @Getter
-    private String value;
-
-    @Getter
-    private String label;
+    private final String value;
+    private final String label;
 
     AuthenticationIdentityEnum(String value, String label) {
         this.value = value;

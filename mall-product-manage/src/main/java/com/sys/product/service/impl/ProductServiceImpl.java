@@ -1,5 +1,6 @@
 package com.sys.product.service.impl;
 
+import cn.hutool.core.lang.Assert;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -24,6 +25,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,8 +38,6 @@ import java.util.Map;
 public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements IProductService {
 
     @Resource
-    private ProductMapper productMapper;
-    @Resource
     private ProductProductTypeMapper productProductTypeMapper;
     @Resource
     private ProductImageMapper productImageMapper;
@@ -46,29 +46,34 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
 
     @Override
     public IPage<Product> queryProductListByPage(Page<Product> page, Product product) {
-        return productMapper.queryProductListByPage(page, product);
+        return this.baseMapper.queryProductListByPage(page, product);
     }
 
     @Override
     public Product queryProductById(String productId) {
-        return productMapper.queryProductById(productId);
+        return this.baseMapper.queryProductById(productId);
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public Integer addProduct(Product product) {
+    public Boolean addProduct(Product product) {
         product.setProductId(IDUtils.generateID());
         insertProductProductType(product);
         insertProductImage(product);
-        return productMapper.insert(product);
+        return this.save(product);
+    }
+
+    @Override
+    public Boolean delProduct(String productId) {
+        return this.removeById(productId);
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public Integer updateProduct(Product product) {
+    public Boolean updateProduct(Product product) {
         insertProductProductType(product);
         insertProductImage(product);
-        return productMapper.updateById(product);
+        return this.updateById(product);
     }
 
     @Override
@@ -109,16 +114,11 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         return productImageMapper.update(productImage, uw);
     }
 
-    @Override
-    public Boolean addProductAttr(ProductAttr productAttr) {
-        return null;
-    }
-
     private void insertProductProductType(Product product) {
         Map<String, Object> cond = new HashMap<>();
         cond.put("product_id", product.getProductId());
         productProductTypeMapper.deleteByMap(cond);
-        String[] typeIds = product.getTypeIds();
+        List<String> typeIds = product.getTypeIds();
         for (String typeId : typeIds) {
             ProductProductType productProductType = new ProductProductType();
             productProductType.setProductTypeId(IDUtils.generateID());
@@ -132,7 +132,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         Map<String, Object> cond = new HashMap<>();
         cond.put("product_id", product.getProductId());
         productImageMapper.deleteByMap(cond);
-        String[] images = product.getImages();
+        List<String> images = product.getImages();
         for (String image : images) {
             ProductImage productImage = new ProductImage();
             productImage.setProductImageId(IDUtils.generateID());
@@ -141,7 +141,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
             productImageMapper.insert(productImage);
         }
 
-        String[] homeImages = product.getHomeImages();
+        List<String> homeImages = product.getHomeImages();
         for (String homeImage : homeImages) {
             ProductImage productImage = new ProductImage();
             productImage.setProductImageId(IDUtils.generateID());

@@ -29,6 +29,7 @@ public interface IProductService extends IService<Product> {
 
     /**
      * 根据产品ID查询产品信息
+     * @param productId 产品ID
      * @return 产品信息
      */
     Product queryProductById(String productId);
@@ -38,14 +39,21 @@ public interface IProductService extends IService<Product> {
      * @param product 产品信息
      * @return 结果
      */
-    Integer addProduct(Product product);
+    Boolean addProduct(Product product);
+
+    /**
+     * 删除产品
+     * @param productId 产品ID
+     * @return 结果
+     */
+    Boolean delProduct(String productId);
 
     /**
      * 更新产品
      * @param product 产品信息
      * @return 结果
      */
-    Integer updateProduct(Product product);
+    Boolean updateProduct(Product product);
 
     /**
      * 预览产品图片
@@ -69,12 +77,5 @@ public interface IProductService extends IService<Product> {
      * @return 结果
      */
     Integer deleteProductImage(String imageName);
-
-    /**
-     * 添加产品属性
-     * @param productAttr 产品属性
-     * @return 结果
-     */
-    Boolean addProductAttr(ProductAttr productAttr);
 
 }

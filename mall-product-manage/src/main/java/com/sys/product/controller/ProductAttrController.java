@@ -26,14 +26,14 @@ public class ProductAttrController {
     private IProductAttrService productAttrService;
 
     /**
-     * 添加产品属性
+     * 添加或删除产品属性
      * @param productAttrList 产品属性列表
      * @return 结果
      */
-    @PostMapping("/addProductAttr")
-    @ApiOperation("添加产品属性")
-    public Result<Boolean> addProductAttr(@RequestBody List<ProductAttr> productAttrList) {
-        return Result.success(productAttrService.addProductAttr(productAttrList));
+    @PostMapping("/addOrDelProductAttr/{productId}")
+    @ApiOperation("添加或删除产品属性")
+    public Result<Boolean> addOrDelProductAttr(@PathVariable String productId, @RequestBody List<ProductAttr> productAttrList) {
+        return Result.success(productAttrService.addOrDelProductAttr(productId, productAttrList));
     }
 
     /**

@@ -3,6 +3,7 @@ package com.sys.product.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.sys.common.core.enums.WidgetTypeEnum;
 import lombok.Data;
 import org.apache.ibatis.annotations.Result;
 import org.springframework.stereotype.Component;
@@ -43,6 +44,11 @@ public class ProductAttr implements Serializable {
      * 产品属性值
      */
     private String productAttrValue;
+
+    /**
+     * 控件类型
+     */
+    private Integer widget = 1;
 
     /**
      * 生效标志
