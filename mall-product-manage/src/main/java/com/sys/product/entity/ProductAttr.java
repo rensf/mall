@@ -3,9 +3,7 @@ package com.sys.product.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.sys.common.core.enums.WidgetTypeEnum;
 import lombok.Data;
-import org.apache.ibatis.annotations.Result;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
