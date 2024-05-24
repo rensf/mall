@@ -1,9 +1,12 @@
 package com.sys.user.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * 用户 实体
@@ -51,5 +54,11 @@ public class User {
      * 生效标志
      */
     private Integer flag = 1;
+
+    /**
+     * 地址列表
+     */
+    @TableField(exist = false)
+    private List<Address> addresses;
 
 }

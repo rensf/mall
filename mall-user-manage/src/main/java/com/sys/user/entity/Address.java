@@ -58,6 +58,11 @@ public class Address {
     private String concatTel;
 
     /**
+     * 是否默认（0：否，1：是）
+     */
+    private Integer defaulted = 0;
+
+    /**
      * 生效标志
      */
     private Integer flag = 1;

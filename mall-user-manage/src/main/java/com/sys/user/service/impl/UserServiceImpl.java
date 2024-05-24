@@ -98,17 +98,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             qw.eq("user_name", loginInfo);
         }
         qw.eq("flag", 1);
-        return userMapper.selectOne(qw);
+        return this.baseMapper.selectOne(qw);
     }
 
     @Override
     public User getLoginUserInfo() {
-        return this.getOne(new LambdaQueryWrapper<User>()
-            .eq(User::getUserId, TokenUtils.getJwtPayload().getString("userId"))
-            .select(
-                User::getUserId,
-                User::getUserName
-            ));
+        return this.baseMapper.queryUserById(TokenUtils.getJwtPayload().getString("userId"));
     }
 
     @Override

@@ -46,7 +46,7 @@ public class UserController {
 
     @GetMapping("/generateQrcode")
     @ApiOperation("生成二维码")
-    public Result<Object> generateQrcode() throws IOException {
+    public Result<String> generateQrcode() throws IOException {
         return Result.success(userService.generateQrcode());
     }
 
@@ -59,7 +59,7 @@ public class UserController {
 
     @GetMapping("/getLoginUserInfo")
     @ApiOperation("获取登录用户信息")
-    public Result getLoginUserInfo() {
+    public Result<User> getLoginUserInfo() {
         return Result.success(userService.getLoginUserInfo());
     }
 
@@ -72,7 +72,7 @@ public class UserController {
 
     @PostMapping("/addUser")
     @ApiOperation("新增用户")
-    public Result<Object> addUser(User user) {
+    public Result<Integer> addUser(User user) {
         return Result.success(userService.addUser(user));
     }
 
