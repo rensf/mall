@@ -59,7 +59,10 @@ public interface ProductMapper extends BaseMapper<Product> {
             "where " +
             "a.flag = 1 " +
             "<if test='product.productFirst == 1'> " +
-            "   and a.product_first = #{product.productFirst} " +
+            "    and a.product_first = #{product.productFirst} " +
+            "</if> " +
+            "<if test='product.productTypeId != null and product.productTypeId != \"\"'> " +
+            "    and c.product_type_id = #{product.productTypeId} " +
             "</if> " +
             "group by " +
             "a.product_id " +

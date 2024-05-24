@@ -57,6 +57,6 @@ public class ProductAttr implements Serializable {
      * 产品属性值列表
      */
     @TableField(exist = false)
-    private List<String> productAttrValues;
+    private List<String> productAttrValueList;
 
 }

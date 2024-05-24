@@ -25,6 +25,6 @@ public interface IProductAttrService extends IService<ProductAttr> {
      * @param productId 产品ID
      * @return 产品属性列表
      */
-    List<ProductAttr> queryProductAttrs(String productId);
+    List<ProductAttr> queryProductAttrList(String productId);
 
 }

@@ -9,7 +9,9 @@ import com.sys.product.service.IProductAttrService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +31,7 @@ public class ProductAttrServiceImpl extends ServiceImpl<ProductAttrMapper, Produ
         this.remove(new LambdaQueryWrapper<ProductAttr>().eq(ProductAttr::getProductId, productId));
         // 组装新产品属性数据
         List<ProductAttr> newProductAttrList = productAttrList.stream()
-            .flatMap(productAttr -> productAttr.getProductAttrValues().stream()
+            .flatMap(productAttr -> productAttr.getProductAttrValueList().stream()
                 .map(productAttrValue -> {
                     ProductAttr newProductAttr = new ProductAttr();
                     newProductAttr.setProductAttrId(IDUtils.generateID());
@@ -46,8 +48,8 @@ public class ProductAttrServiceImpl extends ServiceImpl<ProductAttrMapper, Produ
     }
 
     @Override
-    public List<ProductAttr> queryProductAttrs(String productId) {
-        return this.baseMapper.queryProductAttrs(productId);
+    public List<ProductAttr> queryProductAttrList(String productId) {
+        return this.baseMapper.queryProductAttrList(productId);
     }
 
 }

@@ -29,33 +29,25 @@ public class ProductTypeController {
     @GetMapping("/queryProductTypeList")
     @ApiOperation("查询产品类型列表")
     public Result<List<ProductType>> queryProductTypeList(@RequestParam Map<String, Object> param) {
-        Result<List<ProductType>> result = new Result<>();
-        result.setResult(productTypeService.queryProductTypeList(JsonUtils.mapToJson(param)));
-        return result;
+        return Result.success(productTypeService.queryProductTypeList(JsonUtils.mapToJson(param)));
     }
 
     @PostMapping("/addProductType")
     @ApiOperation("添加产品类型")
     public Result<Integer> addProductType(@RequestBody ProductType type) {
-        Result<Integer> result = new Result<>();
-        result.setResult(productTypeService.addProductType(type));
-        return result;
+        return Result.success(productTypeService.addProductType(type));
     }
 
     @PutMapping("/updateProductType")
     @ApiOperation("更新产品类型")
     public Result<Integer> updateProductType(@RequestBody ProductType type) {
-        Result<Integer> result = new Result<>();
-        result.setResult(productTypeService.updateProductType(type));
-        return result;
+        return Result.success(productTypeService.updateProductType(type));
     }
 
     @DeleteMapping("/deleteProductType")
     @ApiOperation("删除产品类型")
     public Result<Integer> deleteProductType(@RequestBody ProductType type) {
-        Result<Integer> result = new Result<>();
-        result.setResult(productTypeService.deleteProductType(type));
-        return result;
+        return Result.success(productTypeService.deleteProductType(type));
     }
 
 }

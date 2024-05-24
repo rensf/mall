@@ -31,7 +31,7 @@ public interface ProductAttrMapper extends BaseMapper<ProductAttr> {
             "and tbpa.product_id = #{productId} " +
             "group by " +
             "tbpa.product_id, tbpa.product_attr_name ")
-    @Result(property = "productAttrValues", column = "product_attr_values", typeHandler = StringToListTypeHandler.class)
-    List<ProductAttr> queryProductAttrs(String productId);
+    @Result(property = "productAttrValueList", column = "product_attr_values", typeHandler = StringToListTypeHandler.class)
+    List<ProductAttr> queryProductAttrList(String productId);
 
 }

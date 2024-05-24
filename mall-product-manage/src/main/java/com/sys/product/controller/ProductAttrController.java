@@ -40,10 +40,10 @@ public class ProductAttrController {
      * @param productId 产品ID
      * @return 产品属性列表
      */
-    @GetMapping("/queryProductAttrs")
+    @GetMapping("/queryProductAttrList")
     @ApiOperation("查询产品属性")
-    public Result<List<ProductAttr>> queryProductAttrs(@RequestParam String productId) {
-        return Result.success(productAttrService.queryProductAttrs(productId));
+    public Result<List<ProductAttr>> queryProductAttrList(@RequestParam String productId) {
+        return Result.success(productAttrService.queryProductAttrList(productId));
     }
 
 }

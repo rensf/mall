@@ -62,6 +62,11 @@ public class ProductController {
         return Result.success(productService.addProduct(product));
     }
 
+    /**
+     * 删除产品
+     * @param productId 产品ID
+     * @return 是否删除成功
+     */
     @DeleteMapping("/delProduct/{productId}")
     public Result<Boolean> delProduct(@PathVariable String productId) {
         return Result.success(productService.delProduct(productId));

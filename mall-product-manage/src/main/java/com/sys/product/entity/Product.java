@@ -51,7 +51,7 @@ public class Product implements Serializable {
     private String productPrice;
 
     /**
-     * 优惠价格
+     * 折扣价格
      */
     private String productDiscountPrice;
 
@@ -105,5 +105,11 @@ public class Product implements Serializable {
      */
     @TableField(exist = false)
     private List<ProductAttr> productAttrs;
+
+    /**
+     * 产品类型ID
+     */
+    @TableField(exist = false)
+    private String productTypeId;
 
 }
