@@ -7,15 +7,15 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 
 /**
- * 订单产品 实体
+ * 订单明细 实体
  *
  * @author rensf
  * @date 2021/6/8
  */
 @Data
 @Component
-@TableName("tr_b_order_product")
-public class OrderProduct implements Serializable {
+@TableName("td_b_order_item")
+public class OrderItem implements Serializable {
 
     private static final long serialVersionUID = -6143703231552744819L;
 

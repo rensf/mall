@@ -3,7 +3,7 @@ package com.sys.order.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sys.order.entity.Order;
-import com.sys.order.entity.OrderProduct;
+import com.sys.order.entity.OrderItem;
 
 import java.util.List;
 import java.util.Map;
@@ -27,13 +27,13 @@ public interface IOrderService extends IService<Order> {
      * 根据订单 Id查询订单详情
      * @return
      */
-    List<OrderProduct> queryOrderProductByOrderId();
+    List<OrderItem> queryOrderItemListByOrderId();
 
     /**
      * 添加订单
      * @return 订单ID
      */
-    String addOrder();
+    Order addOrder();
 
     /**
      * 确认订单

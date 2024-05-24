@@ -1,7 +1,7 @@
 package com.sys.order.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.sys.order.entity.OrderProduct;
+import com.sys.order.entity.OrderItem;
 
 /**
  * 订单产品 服务接口
@@ -9,5 +9,5 @@ import com.sys.order.entity.OrderProduct;
  * @author rensf
  * @date 2024/1/29
  */
-public interface IOrderProductService extends IService<OrderProduct> {
+public interface IOrderItemService extends IService<OrderItem> {
 }

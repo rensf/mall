@@ -1,7 +1,7 @@
 package com.sys.order.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.sys.order.entity.OrderProduct;
+import com.sys.order.entity.OrderItem;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -13,5 +13,5 @@ import org.springframework.stereotype.Repository;
  */
 @Mapper
 @Repository
-public interface OrderProductMapper extends BaseMapper<OrderProduct> {
+public interface OrderItemMapper extends BaseMapper<OrderItem> {
 }

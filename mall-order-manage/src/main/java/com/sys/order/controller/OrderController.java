@@ -26,7 +26,7 @@ public class OrderController {
 
     @GetMapping("/addOrder")
     @ApiOperation("添加订单")
-    public Result<String> addOrder() {
+    public Result<Order> addOrder() {
         return Result.success(orderService.addOrder());
     }
 

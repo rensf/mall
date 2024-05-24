@@ -1,5 +1,6 @@
 package com.sys.order.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -7,6 +8,7 @@ import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -58,6 +60,13 @@ public class Order implements Serializable {
     /**
      * 订单商品列表
      */
-    private List<OrderProduct> orderProductList;
+    @TableField(exist = false)
+    private List<OrderItem> orderItems;
+
+    /**
+     * 预计送达日期
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate esArrivalDate;
 
 }
