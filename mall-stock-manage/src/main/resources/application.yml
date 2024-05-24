@@ -4,17 +4,15 @@ server:
 spring:
   application:
     name: mall-stock-manage
-  profiles:
-    active: dev
   redis:
     host: 127.0.0.1
-    prot: 6379
+    port: 6379
     password: 123456
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${mysql-url}/mall?serverTimezone=GMT%2B8&characterEncoding=utf-8
+    url: jdbc:mysql://127.0.0.1:3306/mall?serverTimezone=GMT%2B8&characterEncoding=utf-8
     username: root
-    password: 263661
+    password: '263661'
     hikari:
       # 最小空闲连接数
       minimum-idle: 5
@@ -30,20 +28,6 @@ spring:
       max-lifetime: 1800000
       # 数据库连接超时时间
       connection-timeout: 30000
-  # springboot2.4版本配置文件加载升级，传统方法引入 spring-cloud-starter-bootstrap，
-  # 在 bootstrap.yml文件中加载 spring-cloud-config 配置，以下为
-  config:
-    import: optional:configserver:http://127.0.0.1:8812/
-  cloud:
-    config:
-      profile: dev
-      label: master
-    bus:
-      trace:
-        enabled: true
-  rabbitmq:
-    host: 127.0.0.1
-    port: 5672
 
 eureka:
   client:

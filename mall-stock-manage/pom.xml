@@ -27,9 +27,9 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.4.2</version>
+            <groupId>com.sys</groupId>
+            <artifactId>mall-common-mybatis</artifactId>
+            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.sys</groupId>
