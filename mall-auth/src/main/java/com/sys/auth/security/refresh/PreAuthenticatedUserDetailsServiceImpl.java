@@ -1,6 +1,7 @@
 package com.sys.auth.security.refresh;
 
 import com.sys.auth.util.RequestUtils;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.core.Authentication;
@@ -19,6 +20,7 @@ import java.util.Objects;
  * @date 2023/2/15
  */
 @Slf4j
+@NoArgsConstructor
 public class PreAuthenticatedUserDetailsServiceImpl<T extends Authentication> implements AuthenticationUserDetailsService<T>, InitializingBean {
 
     /**
@@ -41,6 +43,7 @@ public class PreAuthenticatedUserDetailsServiceImpl<T extends Authentication> im
     /**
      * 重写PreAuthenticatedAuthenticationProvider的preAuthenticatedUserDetailsService属性，
      * 可根据客户端和认证方式选择用户服务UserDetailService获取用户信息UserDetail
+     *
      * @param authentication 身份认证信息
      * @return 用户信息
      * @throws UsernameNotFoundException 用户名不存在异常

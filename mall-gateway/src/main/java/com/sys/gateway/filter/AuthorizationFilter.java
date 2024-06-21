@@ -27,9 +27,9 @@ public class AuthorizationFilter implements GlobalFilter, Ordered {
     @SneakyThrows
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-
+        // 获取当前请求
         ServerHttpRequest request = exchange.getRequest();
-
+        // 从请求头部获取token
         String token = request.getHeaders().getFirst(SecurityConstants.AUTHORIZATION_KEY);
         if (StrUtil.isBlank(token) || !StrUtil.startWithIgnoreCase(token, SecurityConstants.JWT_PREFIX)) {
             return chain.filter(exchange);

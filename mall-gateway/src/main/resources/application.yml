@@ -42,6 +42,11 @@ spring:
       default-filters:
         - StripPrefix=1
 
+logging:
+  level:
+    com.sys.auth: debug
+    com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver: WARN
+
 eureka:
   client:
     enabled: true

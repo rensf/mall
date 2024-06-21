@@ -22,7 +22,6 @@ public class ResponseUtils {
     public static Mono<Void> writeErrorInfo(ServerHttpResponse response, ResultCodeEnum resultCode) {
         switch (resultCode) {
             case ACCESS_UNAUTHORIZED:
-                break;
             case TOKEN_INVALID_OR_EXPIRED:
                 response.setStatusCode(HttpStatus.UNAUTHORIZED);
                 break;

@@ -77,8 +77,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             } else {
 
             }
-            // 生成token，存入redis
-            String token = TokenUtils.generateToken(userId);
             // 将token和user传回前台，并进行页面跳转
             return null;
         } else {

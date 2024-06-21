@@ -14,6 +14,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
+ * 自定义token授权器
+ *
  * @author rensf
  * @date 2023/10/25
  */
