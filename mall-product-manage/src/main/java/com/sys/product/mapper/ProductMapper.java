@@ -64,6 +64,9 @@ public interface ProductMapper extends BaseMapper<Product> {
             "<if test='product.productTypeId != null and product.productTypeId != \"\"'> " +
             "    and c.product_type_id = #{product.productTypeId} " +
             "</if> " +
+            "<if test='product.productName != null and product.productName != \"\"'> " +
+            "    and a.product_name like concat('%', #{product.productName}, '%') " +
+            "</if> " +
             "group by " +
             "a.product_id " +
             "order by " +
