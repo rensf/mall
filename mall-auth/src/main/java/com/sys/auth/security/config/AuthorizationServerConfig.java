@@ -119,7 +119,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         PreAuthenticatedAuthenticationProvider provider = new PreAuthenticatedAuthenticationProvider();
         provider.setPreAuthenticatedUserDetailsService(new PreAuthenticatedUserDetailsServiceImpl<>(clientUserDetailsServiceMap));
         tokenServices.setAuthenticationManager(new ProviderManager(provider));
-        tokenServices.setReuseRefreshToken(true);
         return tokenServices;
     }
 

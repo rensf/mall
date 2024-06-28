@@ -3,6 +3,7 @@ package com.sys.gateway.config;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.io.IoUtil;
+import com.sys.common.core.constant.SecurityConstants;
 import com.sys.common.core.enums.ResultCodeEnum;
 import com.sys.gateway.constant.AuthorizeConstants;
 import com.sys.gateway.manager.AuthorizationManager;
@@ -17,10 +18,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.oauth2.core.OAuth2Error;
+import org.springframework.security.oauth2.core.OAuth2TokenValidatorResult;
 import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.oauth2.server.resource.authentication.ReactiveJwtAuthenticationConverterAdapter;
@@ -35,6 +40,7 @@ import java.security.interfaces.RSAPublicKey;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 鉴权配置
@@ -50,6 +56,7 @@ import java.util.Objects;
 public class AuthorizationConfig {
 
     private final AuthorizationManager authorizationManager;
+    private final RedisTemplate<String, String> redisTemplate;
 
     @Setter
     private List<String> ignoreUrls;
@@ -60,8 +67,7 @@ public class AuthorizationConfig {
             log.error("从配置中心获取白名单失败！");
         }
         http.oauth2ResourceServer()
-            .jwt().jwtAuthenticationConverter(jwtAuthenticationConverter())
-            .publicKey(rsaPublicKey());
+            .jwt().jwtDecoder(jwtDecoder()).jwtAuthenticationConverter(jwtAuthenticationConverter());
         http.oauth2ResourceServer()
             .authenticationEntryPoint(authenticationEntryPoint());
         // 白名单放行
@@ -76,6 +82,21 @@ public class AuthorizationConfig {
             .authenticationEntryPoint(authenticationEntryPoint())
             .and().csrf().disable();
         return http.build();
+    }
+
+    /**
+     * 重定义JWT解码器
+     */
+    public NimbusReactiveJwtDecoder jwtDecoder() {
+        NimbusReactiveJwtDecoder jwtDecoder = new NimbusReactiveJwtDecoder(rsaPublicKey());
+        jwtDecoder.setJwtValidator((jwt) -> {
+            String key = SecurityConstants.TOKEN_KEY + ":" + jwt.getClaim("userId");
+            if (Boolean.FALSE.equals(redisTemplate.expire(key, SecurityConstants.TOKEN_EXPIRE, TimeUnit.SECONDS))) {
+                return OAuth2TokenValidatorResult.failure(new OAuth2Error("Jwt is expired !"));
+            }
+            return OAuth2TokenValidatorResult.success();
+        });
+        return jwtDecoder;
     }
 
     /**

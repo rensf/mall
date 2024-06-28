@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+客户端 -> AuthController: /oauth/token
+AuthController -> TokenEndpoint: postAccessToken()
+TokenEndpoint -> AbstractTokenGranter: grant()
+AbstractTokenGranter -> SysTokenServices: createAccessToken()
+SysTokenServices -> Redis: accessToken.jti\n过期时间30分钟
+SysTokenServices -> AbstractTokenGranter: accessToken
+AbstractTokenGranter -> TokenEndpoint: getAccessTokenResponse()
+TokenEndpoint -> AuthController: response()
+AuthController -> 客户端: accessToken
+
+@enduml

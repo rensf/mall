@@ -47,24 +47,4 @@ public class RequestUtils {
         return clientId;
     }
 
-    /**
-     * 解析JWT获取获取身份认证标识
-     *
-     * @return 身份认证标识
-     */
-    @SneakyThrows
-    public static String getAuthenticationIdentity() {
-        HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
-        String refreshToken = request.getParameter(SecurityConstants.REFRESH_TOKEN_KEY);
-
-        String payload = String.valueOf(JWSObject.parse(refreshToken).getPayload());
-        JSONObject jsonObject = new JSONObject().getJSONObject(payload);
-
-        String authenticationIdentity = jsonObject.getString(SecurityConstants.AUTHENTICATION_IDENTITY_KEY);
-        if (StrUtil.isBlank(authenticationIdentity)) {
-            authenticationIdentity = AuthenticationIdentityEnum.USERNAME.getValue();
-        }
-        return authenticationIdentity;
-    }
-
 }

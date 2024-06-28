@@ -28,9 +28,15 @@ public interface SecurityConstants {
 
     String WEB_CLIENT_ID = "mall-web";
 
-    String REFRESH_TOKEN_KEY = "refresh-token";
+    /**
+     * redis token key
+     */
+    String TOKEN_KEY = "token";
 
-    String AUTHENTICATION_IDENTITY_KEY = "authenticationIdentity";
+    /**
+     * redis token expire
+     */
+    Integer TOKEN_EXPIRE = 1800;
 
     String JWT_PAYLOAD_KEY = "payload";
 
