@@ -31,9 +31,16 @@ public interface ProductMapper extends BaseMapper<Product> {
      */
     @Select("<script>" +
             "select " +
-            "a.*, " +
-            "group_concat(c.product_type_id)        as type_ids, " +
-            "group_concat(c.product_type_name)      as type_names, " +
+            "a.product_id, " +
+            "a.product_name, " +
+            "a.product_model, " +
+            "a.product_unit, " +
+            "a.product_price, " +
+            "a.product_discount_price, " +
+            "a.product_detail, " +
+            "a.product_first, " +
+            "group_concat(c.product_type_id) as type_ids, " +
+            "group_concat(c.product_type_name) as type_names, " +
             "group_concat(distinct d.product_image) as home_images, " +
             "group_concat(distinct e.product_image) as images " +
             "from " +
@@ -84,9 +91,16 @@ public interface ProductMapper extends BaseMapper<Product> {
      * @return 结果
      */
     @Select("select " +
-            "a.*, " +
-            "group_concat(c.product_type_id)        as type_ids, " +
-            "group_concat(c.product_type_name)      as type_names, " +
+            "a.product_id, " +
+            "a.product_name, " +
+            "a.product_model, " +
+            "a.product_unit, " +
+            "a.product_price, " +
+            "a.product_discount_price, " +
+            "a.product_detail, " +
+            "a.product_first, " +
+            "group_concat(c.product_type_id) as type_ids, " +
+            "group_concat(c.product_type_name) as type_names, " +
             "group_concat(distinct d.product_image) as home_images, " +
             "group_concat(distinct e.product_image) as images " +
             "from td_b_product a " +

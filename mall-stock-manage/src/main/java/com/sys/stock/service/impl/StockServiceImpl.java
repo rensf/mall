@@ -1,5 +1,7 @@
 package com.sys.stock.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sys.common.core.util.IDUtils;
 import com.sys.stock.entity.Stock;
@@ -20,6 +22,11 @@ import java.util.stream.Collectors;
  */
 @Service
 public class StockServiceImpl extends ServiceImpl<StockMapper, Stock> implements IStockService {
+
+    @Override
+    public IPage<Stock> queryStockList(Page<Stock> page, Stock stock) {
+        return this.baseMapper.queryStockList(page, stock);
+    }
 
     @Override
     public List<Stock> querySpecList(String productId) {

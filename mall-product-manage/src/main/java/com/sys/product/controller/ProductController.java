@@ -4,11 +4,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sys.common.core.result.Result;
 import com.sys.product.entity.Product;
-import com.sys.product.entity.ProductAttr;
 import com.sys.product.service.IProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -40,9 +38,7 @@ public class ProductController {
     @GetMapping("/queryProductList")
     @ApiOperation("查询产品列表")
     public Result<IPage<Product>> queryProductList(Page<Product> page, Product product) {
-        Result<IPage<Product>> result = new Result<>();
-        result.setResult(productService.queryProductListByPage(page, product));
-        return result;
+        return Result.success(productService.queryProductListByPage(page, product));
     }
 
     /**

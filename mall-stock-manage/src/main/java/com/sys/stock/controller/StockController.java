@@ -26,14 +26,22 @@ public class StockController {
     @Resource
     private IStockService stockService;
 
+    /**
+     * 分页查询库存列表
+     *
+     * @param page 分页参数
+     * @param stock 库存参数
+     * @return 库存分页列表
+     */
     @GetMapping("/queryStockList")
     @ApiOperation("查询库存列表")
-    public Result<IPage<Stock>> queryStockList(Page<Stock> page) {
-        return Result.success(stockService.page(page));
+    public Result<IPage<Stock>> queryStockList(Page<Stock> page, Stock stock) {
+        return Result.success(stockService.queryStockList(page, stock));
     }
 
     /**
      * 查询规格列表
+     *
      * @param productId 产品ID
      * @return 规格列表
      */
@@ -45,6 +53,7 @@ public class StockController {
 
     /**
      * 保存库存
+     *
      * @param stockList 库存列表
      * @return 结果
      */

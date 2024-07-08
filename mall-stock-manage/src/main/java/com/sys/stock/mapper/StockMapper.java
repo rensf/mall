@@ -1,6 +1,7 @@
 package com.sys.stock.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.sys.common.mybatis.handler.StringToListTypeHandler;
 import com.sys.stock.entity.Stock;
 import org.apache.ibatis.annotations.Mapper;
@@ -20,6 +21,16 @@ import java.util.List;
 @Repository
 public interface StockMapper extends BaseMapper<Stock> {
 
+    @Select("<script>" +
+            "select " +
+            "   tbs.stock_id " +
+            "from td_b_stock tbs" +
+            "where tbs.flag = 1 " +
+            "<if test='stock.stockName != null and stock.stockName != \"\"'> " +
+            "   and tbs.stock_name like concat('%', #{stock.stockName}, '%') " +
+            "</if> " +
+            "</script>")
+    IPage<Stock> queryStockList(IPage<Stock> page, Stock stock);
 
     @Select("select " +
             "group_concat(tbpa.product_attr_id) as product_attr_ids, " +
