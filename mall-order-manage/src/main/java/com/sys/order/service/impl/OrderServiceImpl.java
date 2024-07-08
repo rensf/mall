@@ -1,6 +1,7 @@
 package com.sys.order.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sys.common.core.constant.BusinessConstants;
 import com.sys.common.core.enums.OrderStatusEnum;
@@ -40,8 +41,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     private IOrderItemService orderItemService;
 
     @Override
-    public IPage<Order> queryOrderListByPage(Map param) {
-        return null;
+    public IPage<Order> queryOrderListByPage(Page<Order> page, Order order) {
+        return this.baseMapper.queryOrderListByPage(page, order);
     }
 
     @Override

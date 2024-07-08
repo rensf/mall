@@ -1,5 +1,7 @@
 package com.sys.order.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sys.common.core.result.Result;
 import com.sys.order.entity.Order;
 import com.sys.order.service.IOrderService;
@@ -24,6 +26,19 @@ public class OrderController {
     @Resource
     private IOrderService orderService;
 
+    /**
+     * 分页查询订单列表
+     *
+     * @param page 分页参数
+     * @param order 订单参数
+     * @return 订单分页列表
+     */
+    @GetMapping("/queryOrderList")
+    @ApiOperation("查询订单")
+    public Result<IPage<Order>> queryOrderList(Page<Order> page, Order order) {
+        return Result.success(orderService.queryOrderListByPage(page, order));
+    }
+
     @GetMapping("/addOrder")
     @ApiOperation("添加订单")
     public Result<Order> addOrder() {
@@ -34,12 +49,6 @@ public class OrderController {
     @ApiOperation("确认订单")
     public Result<Boolean> confirmOrder(@RequestBody Order order) {
         return Result.success(orderService.confirmOrder(order));
-    }
-
-    @GetMapping("/queryOrder")
-    @ApiOperation("查询订单")
-    public Result<List<Order>> queryOrder() {
-        return null;
     }
 
     @PostMapping("/grabOrder")

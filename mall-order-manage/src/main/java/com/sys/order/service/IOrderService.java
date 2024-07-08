@@ -1,12 +1,12 @@
 package com.sys.order.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.sys.order.entity.Order;
 import com.sys.order.entity.OrderItem;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 订单 服务接口
@@ -18,10 +18,12 @@ public interface IOrderService extends IService<Order> {
 
     /**
      * 分页查询订单列表
-     * @param param
-     * @return
+     *
+     * @param page 分页参数
+     * @param order 订单参数
+     * @return 订单分页列表
      */
-    IPage<Order> queryOrderListByPage(Map param);
+    IPage<Order> queryOrderListByPage(Page<Order> page, Order order);
 
     /**
      * 根据订单 Id查询订单详情
