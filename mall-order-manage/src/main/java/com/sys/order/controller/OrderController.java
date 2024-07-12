@@ -39,7 +39,7 @@ public class OrderController {
         return Result.success(orderService.queryOrderListByPage(page, order));
     }
 
-    @GetMapping("/addOrder")
+    @PostMapping("/addOrder")
     @ApiOperation("添加订单")
     public Result<Order> addOrder() {
         return Result.success(orderService.addOrder());

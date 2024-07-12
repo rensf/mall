@@ -8,6 +8,7 @@ import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -37,15 +38,58 @@ public class Order implements Serializable {
     private String orderNo;
 
     /**
-     * 订单地址ID
+     * 订单金额
      */
-    private String addressId;
+    private BigDecimal orderAmount;
+
+    /**
+     * 优惠金额
+     */
+    private BigDecimal couponAmount;
+
+    /**
+     * 运输金额
+     */
+    private BigDecimal carriageAmount;
+
+    /**
+     * 支付金额
+     */
+    private BigDecimal payAmount;
+
+    /**
+     * 支付类型
+     */
+    private Integer payType;
 
     /**
      * 订单时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime orderTime;
+
+    /**
+     * 支付时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime payTime;
+
+    /**
+     * 发货时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime deliveryTime;
+
+    /**
+     * 收货时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime receiveTime;
+
+    /**
+     * 订单地址ID
+     */
+    private String addressId;
 
     /**
      * 订单状态
