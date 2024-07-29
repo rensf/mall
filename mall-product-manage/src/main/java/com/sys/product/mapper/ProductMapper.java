@@ -39,10 +39,10 @@ public interface ProductMapper extends BaseMapper<Product> {
             "a.product_discount_price, " +
             "a.product_detail, " +
             "a.product_first, " +
-            "group_concat(c.product_type_id) as type_ids, " +
-            "group_concat(c.product_type_name) as type_names, " +
-            "group_concat(distinct d.product_image) as home_images, " +
-            "group_concat(distinct e.product_image) as images " +
+            "group_concat(c.product_type_id) as type_id_list, " +
+            "group_concat(c.product_type_name) as type_name_list, " +
+            "group_concat(distinct d.product_image) as home_image_list, " +
+            "group_concat(distinct e.product_image) as image_list " +
             "from " +
             "td_b_product a " +
             "left join tr_b_product_product_type b " +
@@ -79,10 +79,10 @@ public interface ProductMapper extends BaseMapper<Product> {
             "order by " +
             "a.product_id desc " +
             "</script>")
-    @Result(property = "typeIds", column = "type_ids", typeHandler = StringToListTypeHandler.class)
-    @Result(property = "typeNames", column = "type_names", typeHandler = StringToListTypeHandler.class)
-    @Result(property = "homeImages", column = "home_images", typeHandler = StringToListTypeHandler.class)
-    @Result(property = "images", column = "images", typeHandler = StringToListTypeHandler.class)
+    @Result(property = "typeIdList", column = "type_id_list", typeHandler = StringToListTypeHandler.class)
+    @Result(property = "typeNameList", column = "type_name_list", typeHandler = StringToListTypeHandler.class)
+    @Result(property = "homeImageList", column = "home_image_list", typeHandler = StringToListTypeHandler.class)
+    @Result(property = "imageList", column = "image_list", typeHandler = StringToListTypeHandler.class)
     IPage<Product> queryProductListByPage(Page<Product> page, Product product);
 
     /**
@@ -99,10 +99,10 @@ public interface ProductMapper extends BaseMapper<Product> {
             "a.product_discount_price, " +
             "a.product_detail, " +
             "a.product_first, " +
-            "group_concat(c.product_type_id) as type_ids, " +
-            "group_concat(c.product_type_name) as type_names, " +
-            "group_concat(distinct d.product_image) as home_images, " +
-            "group_concat(distinct e.product_image) as images " +
+            "group_concat(c.product_type_id) as type_id_list, " +
+            "group_concat(c.product_type_name) as type_name_list, " +
+            "group_concat(distinct d.product_image) as home_image_list, " +
+            "group_concat(distinct e.product_image) as image_list " +
             "from td_b_product a " +
             "left join tr_b_product_product_type b " +
             "on " +
@@ -128,11 +128,11 @@ public interface ProductMapper extends BaseMapper<Product> {
             "a.product_id " +
             "order by " +
             "a.product_id desc ")
-    @Result(property = "typeIds", column = "type_ids", typeHandler = StringToListTypeHandler.class)
-    @Result(property = "typeNames", column = "type_names", typeHandler = StringToListTypeHandler.class)
-    @Result(property = "homeImages", column = "home_images", typeHandler = StringToListTypeHandler.class)
-    @Result(property = "images", column = "images", typeHandler = StringToListTypeHandler.class)
-    @Result(property = "productAttrs", column = "product_id", jdbcType = JdbcType.ARRAY, many = @Many(select = "com.sys.product.mapper.ProductAttrMapper.queryProductAttrs"))
+    @Result(property = "typeIdList", column = "type_id_list", typeHandler = StringToListTypeHandler.class)
+    @Result(property = "typeNameList", column = "type_name_list", typeHandler = StringToListTypeHandler.class)
+    @Result(property = "homeImageList", column = "home_image_list", typeHandler = StringToListTypeHandler.class)
+    @Result(property = "imageList", column = "image_list", typeHandler = StringToListTypeHandler.class)
+    @Result(property = "productAttrList", column = "product_id", jdbcType = JdbcType.ARRAY, many = @Many(select = "com.sys.product.mapper.ProductAttrMapper.queryProductAttrList"))
     Product queryProductById(String productId);
 
 }
