@@ -1,6 +1,5 @@
 package com.sys.product.service.impl;
 
-import cn.hutool.core.lang.Assert;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -8,7 +7,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sys.common.core.util.IDUtils;
 import com.sys.product.config.MyPropsConfig;
 import com.sys.product.entity.Product;
-import com.sys.product.entity.ProductAttr;
 import com.sys.product.entity.ProductImage;
 import com.sys.product.entity.ProductProductType;
 import com.sys.product.mapper.ProductImageMapper;
@@ -19,6 +17,7 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -86,10 +85,10 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public String uploadProductImage(MultipartFile image) throws IOException {
         String imageId = IDUtils.generateID();
         String imageName = image.getOriginalFilename();
+        Assert.notNull(imageName, "图片名称不能为空");
         String imageType = imageName.substring(imageName.indexOf("."));
         String newName = imageId + imageType;
         File newFile = new File(props.getFilepath());
@@ -115,11 +114,13 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     private void insertProductProductType(Product product) {
+        // 删除原有产品类型
         Map<String, Object> cond = new HashMap<>();
         cond.put("product_id", product.getProductId());
         productProductTypeMapper.deleteByMap(cond);
-        List<String> typeIds = product.getTypeIds();
-        for (String typeId : typeIds) {
+        // 插入新的产品类型
+        List<String> typeIdList = product.getTypeIdList();
+        for (String typeId : typeIdList) {
             ProductProductType productProductType = new ProductProductType();
             productProductType.setProductTypeId(IDUtils.generateID());
             productProductType.setProductId(product.getProductId());
@@ -129,20 +130,22 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     }
 
     private void insertProductImage(Product product) {
+        // 删除原有产品图片
         Map<String, Object> cond = new HashMap<>();
         cond.put("product_id", product.getProductId());
         productImageMapper.deleteByMap(cond);
-        List<String> images = product.getImages();
-        for (String image : images) {
+        // 插入新的产品图片
+        List<String> imageList = product.getImageList();
+        for (String image : imageList) {
             ProductImage productImage = new ProductImage();
             productImage.setProductImageId(IDUtils.generateID());
             productImage.setProductId(product.getProductId());
             productImage.setProductImage(image);
             productImageMapper.insert(productImage);
         }
-
-        List<String> homeImages = product.getHomeImages();
-        for (String homeImage : homeImages) {
+        // 插入新的产品首页图片
+        List<String> homeImageList = product.getHomeImageList();
+        for (String homeImage : homeImageList) {
             ProductImage productImage = new ProductImage();
             productImage.setProductImageId(IDUtils.generateID());
             productImage.setProductId(product.getProductId());

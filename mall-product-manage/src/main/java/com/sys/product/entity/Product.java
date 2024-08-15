@@ -74,25 +74,25 @@ public class Product implements Serializable {
      * 类型ID
      */
     @TableField(exist = false)
-    private List<String> typeIds;
+    private List<String> typeIdList;
 
     /**
      * 类型名称
      */
     @TableField(exist = false)
-    private List<String> typeNames;
+    private List<String> typeNameList;
 
     /**
      * 图片ID
      */
     @TableField(exist = false)
-    private List<String> images;
+    private List<String> imageList;
 
     /**
      * 首页图片ID
      */
     @TableField(exist = false)
-    private List<String> homeImages;
+    private List<String> homeImageList;
 
     /**
      * 购买数量
@@ -104,7 +104,7 @@ public class Product implements Serializable {
      * 产品属性
      */
     @TableField(exist = false)
-    private List<ProductAttr> productAttrs;
+    private List<ProductAttr> productAttrList;
 
     /**
      * 产品类型ID

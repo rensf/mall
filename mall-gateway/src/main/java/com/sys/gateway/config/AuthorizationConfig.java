@@ -90,8 +90,9 @@ public class AuthorizationConfig {
     public NimbusReactiveJwtDecoder jwtDecoder() {
         NimbusReactiveJwtDecoder jwtDecoder = new NimbusReactiveJwtDecoder(rsaPublicKey());
         jwtDecoder.setJwtValidator((jwt) -> {
-            String key = SecurityConstants.TOKEN_KEY + ":" + jwt.getClaim("userId");
+            String key = SecurityConstants.TOKEN_KEY + ":" + jwt.getClaim("user_name");
             if (Boolean.FALSE.equals(redisTemplate.expire(key, SecurityConstants.TOKEN_EXPIRE, TimeUnit.SECONDS))) {
+                log.error("token已过期！");
                 return OAuth2TokenValidatorResult.failure(new OAuth2Error("Jwt is expired !"));
             }
             return OAuth2TokenValidatorResult.success();

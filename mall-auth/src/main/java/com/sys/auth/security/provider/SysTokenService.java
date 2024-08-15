@@ -59,7 +59,6 @@ public class SysTokenService extends DefaultTokenServices {
         // 将accessToken的jti存入redis，30分钟过期
         String key = SecurityConstants.TOKEN_KEY + ":" + authentication.getName();
         redisTemplate.opsForValue().set(key, value, SecurityConstants.TOKEN_EXPIRE, TimeUnit.SECONDS);
-
         return accessToken;
     }
 
