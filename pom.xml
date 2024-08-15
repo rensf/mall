@@ -12,6 +12,7 @@
     <modules>
         <module>mall-eureka</module>
         <module>mall-gateway</module>
+        <module>mall-auth</module>
         <module>mall-product-manage</module>
         <module>mall-config</module>
         <module>mall-order-manage</module>
