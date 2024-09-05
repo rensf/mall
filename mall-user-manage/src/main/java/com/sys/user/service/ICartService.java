@@ -14,16 +14,25 @@ import java.util.List;
 public interface ICartService extends IService<CartProduct> {
 
     /**
-     * 查询购物车
-     * @return
+     * 查询购物车产品列表
+     *
+     * @return 购物车产品列表
      */
-    List<CartProduct> queryCart();
+    List<CartProduct> queryCartProductList();
 
     /**
-     * 产品加入购物车
-     * @param cartProduct
-     * @return
+     * 添加购物车产品
+     *
+     * @param cartProduct 购物车产品
+     * @return 结果
      */
-    Integer addCart(CartProduct cartProduct);
+    Integer addCartProduct(CartProduct cartProduct);
+
+    /**
+     * 删除购物车产品
+     *
+     * @return 结果
+     */
+    Integer delCartProduct(CartProduct cartProduct);
 
 }

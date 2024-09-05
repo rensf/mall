@@ -77,4 +77,10 @@ public class CartProduct implements Serializable {
     @TableField(exist = false)
     private String productDiscountPrice;
 
+    /**
+     * 产品图片
+     */
+    @TableField(exist = false)
+    private String productImage;
+
 }

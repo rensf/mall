@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 购物车 控制层
@@ -23,16 +24,22 @@ public class CartController {
     @Resource
     private ICartService cartService;
 
-    @GetMapping("/queryCartList")
-    @ApiOperation("查询购物车")
-    public Result<Object> queryCartList() {
-        return Result.success(cartService.queryCart());
+    @GetMapping("/queryCartProductList")
+    @ApiOperation("查询购物车产品列表")
+    public Result<List<CartProduct>> queryCartProductList() {
+        return Result.success(cartService.queryCartProductList());
     }
 
-    @PostMapping("/addCart")
-    @ApiOperation("添加购物车")
-    public Result<Object> addCart(@RequestBody CartProduct cartProduct) {
-        return Result.success(cartService.addCart(cartProduct));
+    @PostMapping("/addCartProduct")
+    @ApiOperation("添加购物车产品")
+    public Result<Integer> addCartProduct(@RequestBody CartProduct cartProduct) {
+        return Result.success(cartService.addCartProduct(cartProduct));
+    }
+
+    @DeleteMapping("/delCartProduct")
+    @ApiOperation("删除购物车产品")
+    public Result<Integer> delCartProduct(@RequestBody CartProduct cartProduct) {
+        return Result.success(cartService.delCartProduct(cartProduct));
     }
 
 }

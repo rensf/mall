@@ -34,6 +34,7 @@ public interface UserMapper extends BaseMapper<User> {
             "td_b_user tbu " +
             "where tbu.flag = 1 " +
             "and tbu.user_id = #{userId}")
+    @Result(column = "user_id", property = "userId")
     @Result(column = "user_id", property = "addresses", jdbcType = JdbcType.ARRAY, many = @Many(select = "com.sys.user.mapper.AddressMapper.queryAddressListByUserId"))
     User queryUserById(String userId);
 
