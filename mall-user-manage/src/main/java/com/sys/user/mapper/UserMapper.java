@@ -21,8 +21,8 @@ public interface UserMapper extends BaseMapper<User> {
 
     /**
      * 根据用户id查询用户信息
-     * @param userId
-     * @return
+     * @param userId 用户id
+     * @return 用户信息
      */
     @Select("select " +
             "tbu.user_id, " +
