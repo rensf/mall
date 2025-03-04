@@ -52,6 +52,11 @@ public class ProductController {
         return Result.success(productService.queryProductById(productId));
     }
 
+    /**
+     * 添加产品
+     * @param product 产品
+     * @return 是否添加成功
+     */
     @PostMapping("/addProduct")
     @ApiOperation("添加产品")
     public Result<Boolean> addProduct(@RequestBody Product product) {

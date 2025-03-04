@@ -33,6 +33,11 @@ public class CartProduct implements Serializable {
     private String userId;
 
     /**
+     * 库存ID
+     */
+    private String stockId;
+
+    /**
      * 产品ID
      */
     private String productId;

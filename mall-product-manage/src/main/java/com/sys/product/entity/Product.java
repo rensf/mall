@@ -112,4 +112,22 @@ public class Product implements Serializable {
     @TableField(exist = false)
     private String productTypeId;
 
+    /**
+     * 库存ID
+     */
+    @TableField(exist = false)
+    private String stockId;
+
+    /**
+     * 库存规格
+     */
+    @TableField(exist = false)
+    private String stockSpecs;
+
+    /**
+     * 库存单位
+     */
+    @TableField(exist = false)
+    private String stockUnit;
+
 }

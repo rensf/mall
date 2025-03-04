@@ -31,53 +31,39 @@ public interface ProductMapper extends BaseMapper<Product> {
      */
     @Select("<script>" +
             "select " +
-            "a.product_id, " +
-            "a.product_name, " +
-            "a.product_model, " +
-            "a.product_unit, " +
-            "a.product_price, " +
-            "a.product_discount_price, " +
-            "a.product_detail, " +
-            "a.product_first, " +
-            "group_concat(c.product_type_id) as type_id_list, " +
-            "group_concat(c.product_type_name) as type_name_list, " +
-            "group_concat(distinct d.product_image) as home_image_list, " +
-            "group_concat(distinct e.product_image) as image_list " +
-            "from " +
-            "td_b_product a " +
-            "left join tr_b_product_product_type b " +
-            "on " +
-            "a.product_id = b.product_id " +
-            "and b.flag = 1 " +
-            "left join td_b_product_type c " +
-            "on " +
-            "b.product_type_id = c.product_type_id " +
-            "and c.flag = 1 " +
-            "left join td_b_product_image d " +
-            "on " +
-            "a.product_id = d.product_id " +
-            "and d.flag = 1 " +
-            "and d.image_position = 'home' " +
-            "left join td_b_product_image e " +
-            "on " +
-            "a.product_id = e.product_id " +
-            "and e.flag = 1 " +
-            "and e.image_position is null " +
-            "where " +
-            "a.flag = 1 " +
+            "tbp.product_id, " +
+            "tbp.product_name, " +
+            "tbp.product_model, " +
+            "tbp.product_unit, " +
+            "tbp.product_price, " +
+            "tbp.product_discount_price, " +
+            "tbp.product_detail, " +
+            "tbp.product_first, " +
+            "group_concat(tbpt.product_type_id) as type_id_list, " +
+            "group_concat(tbpt.product_type_name) as type_name_list, " +
+            "group_concat(distinct tbpia.product_image) as home_image_list, " +
+            "group_concat(distinct tbpib.product_image) as image_list, " +
+            "tbs.stock_id, " +
+            "tbs.stock_specs, " +
+            "tbs.stock_unit " +
+            "from td_b_product tbp " +
+            "left join tr_b_product_product_type tbppt on tbp.product_id = tbppt.product_id and tbppt.flag = 1 " +
+            "left join td_b_product_type tbpt on tbppt.product_type_id = tbpt.product_type_id and tbpt.flag = 1 " +
+            "left join td_b_product_image tbpia on tbp.product_id = tbpia.product_id and tbpia.flag = 1 and tbpia.image_position = 'home' " +
+            "left join td_b_product_image tbpib on tbp.product_id = tbpib.product_id and tbpib.flag = 1 and tbpib.image_position is null " +
+            "left join td_b_stock tbs on tbp.product_id = tbs.product_id and tbs.flag = 1 and tbs.sort_num = 1 " +
+            "where tbp.flag = 1 " +
             "<if test='product.productFirst == 1'> " +
-            "    and a.product_first = #{product.productFirst} " +
+            "    and tbp.product_first = #{product.productFirst} " +
             "</if> " +
             "<if test='product.productTypeId != null and product.productTypeId != \"\"'> " +
-            "    and c.product_type_id = #{product.productTypeId} " +
+            "    and tbpt.product_type_id = #{product.productTypeId} " +
             "</if> " +
             "<if test='product.productName != null and product.productName != \"\"'> " +
-            "    and a.product_name like concat('%', #{product.productName}, '%') " +
+            "    and tbp.product_name like concat('%', #{product.productName}, '%') " +
             "</if> " +
-            "group by " +
-            "a.product_id " +
-            "order by " +
-            "a.product_id desc " +
+            "group by tbp.product_id " +
+            "order by tbp.product_id desc " +
             "</script>")
     @Result(property = "typeIdList", column = "type_id_list", typeHandler = StringToListTypeHandler.class)
     @Result(property = "typeNameList", column = "type_name_list", typeHandler = StringToListTypeHandler.class)
@@ -87,47 +73,36 @@ public interface ProductMapper extends BaseMapper<Product> {
 
     /**
      * 通过产品ID查询产品信息
+     *
      * @param productId 产品ID
      * @return 结果
      */
     @Select("select " +
-            "a.product_id, " +
-            "a.product_name, " +
-            "a.product_model, " +
-            "a.product_unit, " +
-            "a.product_price, " +
-            "a.product_discount_price, " +
-            "a.product_detail, " +
-            "a.product_first, " +
-            "group_concat(c.product_type_id) as type_id_list, " +
-            "group_concat(c.product_type_name) as type_name_list, " +
-            "group_concat(distinct d.product_image) as home_image_list, " +
-            "group_concat(distinct e.product_image) as image_list " +
-            "from td_b_product a " +
-            "left join tr_b_product_product_type b " +
-            "on " +
-            "a.product_id = b.product_id " +
-            "and b.flag = 1 " +
-            "left join td_b_product_type c " +
-            "on " +
-            "b.product_type_id = c.product_type_id " +
-            "and c.flag = 1 " +
-            "left join td_b_product_image d " +
-            "on " +
-            "a.product_id = d.product_id " +
-            "and d.flag = 1 " +
-            "and d.image_position = 'home' " +
-            "left join td_b_product_image e " +
-            "on " +
-            "a.product_id = e.product_id " +
-            "and e.flag = 1 " +
-            "and e.image_position is null " +
-            "where a.flag = 1 " +
-            "and a.product_id = #{productId} " +
-            "group by " +
-            "a.product_id " +
-            "order by " +
-            "a.product_id desc ")
+            "tbp.product_id, " +
+            "tbp.product_name, " +
+            "tbp.product_model, " +
+            "tbp.product_unit, " +
+            "tbp.product_price, " +
+            "tbp.product_discount_price, " +
+            "tbp.product_detail, " +
+            "tbp.product_first, " +
+            "group_concat(tbpt.product_type_id) as type_id_list, " +
+            "group_concat(tbpt.product_type_name) as type_name_list, " +
+            "group_concat(distinct tbpia.product_image) as home_image_list, " +
+            "group_concat(distinct tbpib.product_image) as image_list, " +
+            "tbs.stock_id, " +
+            "tbs.stock_specs, " +
+            "tbs.stock_unit " +
+            "from td_b_product tbp " +
+            "left join tr_b_product_product_type tbppt on tbp.product_id = tbppt.product_id and tbppt.flag = 1 " +
+            "left join td_b_product_type tbpt on tbppt.product_type_id = tbpt.product_type_id and tbpt.flag = 1 " +
+            "left join td_b_product_image tbpia on tbp.product_id = tbpia.product_id and tbpia.flag = 1 and tbpia.image_position = 'home' " +
+            "left join td_b_product_image tbpib on tbp.product_id = tbpib.product_id and tbpib.flag = 1 and tbpib.image_position is null " +
+            "left join td_b_stock tbs on tbp.product_id = tbs.product_id and tbs.flag = 1 and tbs.sort_num = 1 " +
+            "where tbp.flag = 1 " +
+            "and tbp.product_id = #{productId} " +
+            "group by tbp.product_id " +
+            "order by tbp.product_id desc ")
     @Result(property = "typeIdList", column = "type_id_list", typeHandler = StringToListTypeHandler.class)
     @Result(property = "typeNameList", column = "type_name_list", typeHandler = StringToListTypeHandler.class)
     @Result(property = "homeImageList", column = "home_image_list", typeHandler = StringToListTypeHandler.class)
